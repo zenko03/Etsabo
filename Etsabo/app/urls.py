@@ -15,10 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from views import message_test
+
+# Import des views (Controllers)
+from .views import chat
 
 app_name = "etsabo"
 
 urlpatterns = [
-    path('message_test/', message_test)
+    path('chat/', chat.chat, name='chat'),
+    path('chat/conversation/', chat.get_current_conversation, name='conversation'),
+    path('chat/send/', chat.envoyer_message, name='send')
 ]
