@@ -17,12 +17,13 @@ from django.contrib import admin
 from django.urls import path
 
 # Import des views (Controllers)
-from .views import chat
+from .views import chat, localisation
 
 app_name = "etsabo"
 
 urlpatterns = [
     path('chat/', chat.chat, name='chat'),
     path('chat/conversation/', chat.get_current_conversation, name='conversation'),
-    path('chat/send/', chat.envoyer_message, name='send')
+    path('chat/send/', chat.envoyer_message, name='send'),
+    path('localisation/pharmacie/', localisation.pharmacie, name='localisation_pharmacie')
 ]

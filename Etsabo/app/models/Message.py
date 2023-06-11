@@ -5,7 +5,7 @@ from .. import models as model
 class Message(models.Model):
     medecin = models.ForeignKey("Medecin", on_delete=models.CASCADE)
     patient = models.ForeignKey("Patient", on_delete=models.CASCADE)
-    type = models.IntegerField
+    type = models.IntegerField(default=0)
     contenus = models.CharField(max_length=500)
     date_envoie = models.DateField(auto_now=True) 
 

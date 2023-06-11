@@ -8,8 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Test</title>
 
-    <script src="{% static 'jquery/jquery-3.7.0.min.js' %}" defer></script>
-    <script src="{% static 'js/Chat/chat.js' %}" defer></script>
+    <script src="{% static 'jquery/jquery-3.7.0.min.js' %}"></script>
 </head>
 <body>
     <div class="conversation-container" data-estPatient="0">
@@ -17,7 +16,7 @@
         <template data-senderContainer>
             <div class="sender-message">
                 <p class="info-sender">
-                    Nom - Date
+                    Nom - Date - Sent
                 </p>
         
                 <p class="message">
@@ -29,7 +28,7 @@
         <template data-receiverContainer>
             <div class="receiver-message">
                 <p class="info-receiver">
-                    Nom - Date
+                    Nom - Date - Received
                 </p>
         
                 <p class="message">
@@ -39,4 +38,10 @@
         </template>
     </div>
 </body>
+
+<script>
+    var csrfToken = '{{ csrf_token }}';
+</script>
+<script src="{% static 'js/Chat/chat.js' %}"></script>
+
 </html>
