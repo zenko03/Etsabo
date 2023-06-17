@@ -7,4 +7,5 @@ from .Ordonnance import Ordonnance
 from .Patient import Patient
 from .Rdv import Rdv
 from .Specialite import Specialite
+from .Publicite import Publicite
 

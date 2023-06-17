@@ -7,4 +7,7 @@ class Consultation(models.Model):
     date_consultation= models.DateField(auto_now=False, auto_now_add=False) 
     symptomes = models.CharField(max_length=500)
     diagnostic = models.CharField(max_length=500)
+
+    class Meta:
+        db_table = 'consultation'
     

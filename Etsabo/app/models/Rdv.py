@@ -7,3 +7,6 @@ class Rdv(models.Model):
     date_rdv = models.DateField( auto_now=False, auto_now_add=False)
     heure_rdv = models.DateTimeField( auto_now=False, auto_now_add=False)
     status = models.IntegerField
+
+    class Meta:
+        db_table = 'rdv'
