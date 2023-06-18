@@ -1,0 +1,182 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+<link href="{% static 'css/boutique.css' %}" rel="stylesheet" type="text/css" />
+<section class="ads">
+  <div class="container">
+    <h2 class="section-title"></h2>
+    <div
+      class="modal fade"
+      id="adsModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="adsModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <section class="profile">
+            <div class="container" style="margin-top: 150px">
+              <div class="row">
+                <div class="col-md-12">
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                      <div class="media">
+                        <img
+                          src="bus.png"
+                          class="rounded-profile mr-3"
+                          alt="Photo de profil"
+                        />
+                        <div class="media-body">
+                          <h5 class="mt-0">Thermometre</h5>
+                          <p>30000 AR</p>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="media">
+                        <img
+                          src="slide1.jpg"
+                          class="rounded-profile mr-3"
+                          alt="Photo de profil"
+                        />
+                        <div class="media-body">
+                          <h5 class="mt-0">Tensiometre</h5>
+                          <p>24000 AR</p>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="filters-container">
+  <div class="filter-icons">
+    <div class="filter-icon">
+      <i src="outils.jpg" class="fas fa-filter"></i>
+    </div>
+    <div class="filter-icon">
+      <i class="fas fa-sort-amount-up"></i>
+    </div>
+    <div class="filter-icon">
+      <i class="fas fa-star"></i>
+    </div>
+    <div class="filter-icon">
+      <i class="fas fa-dollar-sign"></i>
+    </div>
+
+    <a class="nav-link" href="#" data-toggle="modal" data-target="#adsModal">
+      <img
+        src="{% static 'images/panier2.jpg' %}"
+        alt="Filtre 2"
+        class="filter-icon"
+    /></a>
+  </div>
+</div>
+
+<div class="search-container">
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Rechercher un produit"
+    />
+    <div class="input-group-append">
+      <button class="btn btn-primary" type="button">Rechercher</button>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-9 offset-md-3">
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <div class="card mb-4" style="width: 100%">
+            <img src="slide3.jpg" class="card-img-top" alt="Product 1" />
+            <div class="card-body">
+              <h5 class="card-title">Produit 1</h5>
+              <p class="card-text">Prix: $10</p>
+              <div class="rating">
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9734;</span>
+              </div>
+              <button class="btn btn-success btn-block mt-3">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <div class="card mb-4" style="width: 100%">
+            <img src="bus.png" class="card-img-top" alt="Product 2" />
+            <div class="card-body">
+              <h5 class="card-title">Produit 2</h5>
+              <p class="card-text">Prix: $15</p>
+              <div class="rating">
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9734;</span>
+                <span class="star">&#9734;</span>
+                <span class="star">&#9734;</span>
+              </div>
+              <button class="btn btn-success btn-block mt-3">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <div class="card mb-4" style="width: 100%">
+            <img src="busStop.png" class="card-img-top" alt="Product 3" />
+            <div class="card-body">
+              <h5 class="card-title">Produit 3</h5>
+              <p class="card-text">Prix: $20</p>
+              <div class="rating">
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9734;</span>
+                <span class="star">&#9734;</span>
+              </div>
+              <button class="btn btn-success btn-block mt-3">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <div class="card mb-4" style="width: 100%">
+            <img src="slide4.jpg" class="card-img-top" alt="Product 4" />
+            <div class="card-body">
+              <h5 class="card-title">Produit 4</h5>
+              <p class="card-text">Prix: $25</p>
+              <div class="rating">
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9734;</span>
+                <span class="star">&#9734;</span>
+              </div>
+              <button class="btn btn-success btn-block mt-3">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Ajoutez ici d'autres cartes de produits -->
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+{% endblock %}

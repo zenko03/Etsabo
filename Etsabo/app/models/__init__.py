@@ -7,4 +7,15 @@ from .Ordonnance import Ordonnance
 from .Patient import Patient
 from .Rdv import Rdv
 from .Specialite import Specialite
+from .Publicite import Publicite
+from .Famille import Famille
+from .Pharmacie import Pharmacie
+from .Abonnement import Abonnement
+from .TypeAbonnement import TypeAbonnement
+from .PhotoMedecin import PhotoMedecin
+from .PhotoObjet import PhotoObjet
+from .PhotoPatient import PhotoPatient
+from .Objet import Objet
+
+
 
