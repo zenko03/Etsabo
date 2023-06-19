@@ -1,5 +1,60 @@
 {% extends 'base.html' %} {% block content %} {% load static %}
 <link href="{% static 'css/boutique.css' %}" rel="stylesheet" type="text/css" />
+<style>
+  .sort-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .sort-options {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .sort-option {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #f2f2f2;
+    border-radius: 20px;
+    font-weight: bold;
+    color: #333;
+    transition: background-color 0.3s;
+  }
+
+  .sort-option:hover {
+    background-color: #e0e0e0;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .card {
+    margin-bottom: 20px;
+  }
+
+  .card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .card-text {
+    margin-bottom: 10px;
+  }
+
+  .btn-block {
+    width: 100%;
+  }
+</style>
 <section class="ads">
   <div class="container">
     <h2 class="section-title"></h2>
@@ -21,7 +76,7 @@
                     <li class="list-group-item">
                       <div class="media">
                         <img
-                          src="bus.png"
+                          src="{% static 'images/bus.png' %}"
                           class="rounded-profile mr-3"
                           alt="Photo de profil"
                         />
@@ -34,7 +89,7 @@
                     <li class="list-group-item">
                       <div class="media">
                         <img
-                          src="slide1.jpg"
+                          src="{% static 'images/slide1.jpg' %}"
                           class="rounded-profile mr-3"
                           alt="Photo de profil"
                         />
@@ -58,7 +113,7 @@
 <div class="filters-container">
   <div class="filter-icons">
     <div class="filter-icon">
-      <i src="outils.jpg" class="fas fa-filter"></i>
+      <i src="{% static 'images/outils.jpg' %}" class="fas fa-filter"></i>
     </div>
     <div class="filter-icon">
       <i class="fas fa-sort-amount-up"></i>
@@ -75,19 +130,31 @@
         src="{% static 'images/panier2.jpg' %}"
         alt="Filtre 2"
         class="filter-icon"
-    /></a>
+      />
+    </a>
   </div>
 </div>
 
 <div class="search-container">
   <div class="input-group mb-3">
     <input
+      id="search-input"
       type="text"
       class="form-control"
       placeholder="Rechercher un produit"
     />
     <div class="input-group-append">
-      <button class="btn btn-primary" type="button">Rechercher</button>
+      <button id="search-button" class="btn btn-primary" type="button">
+        Rechercher
+      </button>
+    </div>
+  </div>
+  <div class="sort-container">
+    <div class="sort-options">
+      <div class="sort-option" id="sort-alphabetically">
+        Trier par ordre alphabétique
+      </div>
+      <div class="sort-option" id="sort-by-price">Trier par prix</div>
     </div>
   </div>
 </div>
@@ -95,13 +162,20 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-md-9 offset-md-3">
-      <div class="row">
+      <div class="row" id="objet-list">
+        {% for obj in objets %}
         <div class="col-md-6 col-sm-12">
           <div class="card mb-4" style="width: 100%">
-            <img src="slide3.jpg" class="card-img-top" alt="Product 1" />
+            {% for ph in obj.photoobjet_set.all %}
+            <img
+              src="{% static 'images/objets/' %}{{ ph.src }}"
+              class="card-img-top"
+              alt="Product 1"
+            />
+            {% endfor %}
             <div class="card-body">
-              <h5 class="card-title">Produit 1</h5>
-              <p class="card-text">Prix: $10</p>
+              <h5 class="card-title">{{ obj.nom_objet }}</h5>
+              <p class="card-text">Prix: {{ obj.prix }} Ar</p>
               <div class="rating">
                 <span class="star">&#9733;</span>
                 <span class="star">&#9733;</span>
@@ -115,68 +189,85 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-sm-12">
-          <div class="card mb-4" style="width: 100%">
-            <img src="bus.png" class="card-img-top" alt="Product 2" />
-            <div class="card-body">
-              <h5 class="card-title">Produit 2</h5>
-              <p class="card-text">Prix: $15</p>
-              <div class="rating">
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9734;</span>
-                <span class="star">&#9734;</span>
-                <span class="star">&#9734;</span>
-              </div>
-              <button class="btn btn-success btn-block mt-3">
-                Ajouter au panier
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-sm-12">
-          <div class="card mb-4" style="width: 100%">
-            <img src="busStop.png" class="card-img-top" alt="Product 3" />
-            <div class="card-body">
-              <h5 class="card-title">Produit 3</h5>
-              <p class="card-text">Prix: $20</p>
-              <div class="rating">
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9734;</span>
-                <span class="star">&#9734;</span>
-              </div>
-              <button class="btn btn-success btn-block mt-3">
-                Ajouter au panier
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-sm-12">
-          <div class="card mb-4" style="width: 100%">
-            <img src="slide4.jpg" class="card-img-top" alt="Product 4" />
-            <div class="card-body">
-              <h5 class="card-title">Produit 4</h5>
-              <p class="card-text">Prix: $25</p>
-              <div class="rating">
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9734;</span>
-                <span class="star">&#9734;</span>
-              </div>
-              <button class="btn btn-success btn-block mt-3">
-                Ajouter au panier
-              </button>
-            </div>
-          </div>
-        </div>
-        <!-- Ajoutez ici d'autres cartes de produits -->
+        {% endfor %}
       </div>
     </div>
   </div>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("search-input");
+    const searchButton = document.getElementById("search-button");
+
+    searchButton.addEventListener("click", function () {
+      const searchTerm = searchInput.value.trim().toLowerCase();
+
+      // Filtrer les objets en fonction du terme de recherche
+      const objCards = document.querySelectorAll(".card");
+
+      objCards.forEach(function (card) {
+        const title = card
+          .querySelector(".card-title")
+          .textContent.toLowerCase();
+        const cardVisible = title.includes(searchTerm);
+
+        // Afficher ou masquer la carte en fonction du résultat de la recherche
+        card.style.display = cardVisible ? "block" : "none";
+      });
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const alphabeticallyButton = document.getElementById("sort-alphabetically");
+    const priceButton = document.getElementById("sort-by-price");
+    const objetList = document.getElementById("objet-list");
+
+    alphabeticallyButton.addEventListener("click", function () {
+      sortObjects("alphabetically");
+    });
+
+    priceButton.addEventListener("click", function () {
+      sortObjects("price");
+    });
+
+    function sortObjects(sortType) {
+      const objCards = Array.from(objetList.getElementsByClassName("card"));
+
+      objCards.sort(function (a, b) {
+        let valueA, valueB;
+
+        if (sortType === "alphabetically") {
+          valueA = a.querySelector(".card-title").textContent.toLowerCase();
+          valueB = b.querySelector(".card-title").textContent.toLowerCase();
+        } else if (sortType === "price") {
+          valueA = parseFloat(
+            a.querySelector(".card-text").textContent.split(":")[1]
+          );
+          valueB = parseFloat(
+            b.querySelector(".card-text").textContent.split(":")[1]
+          );
+        }
+
+        if (valueA < valueB) {
+          return -1;
+        } else if (valueA > valueB) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+
+      objetList.innerHTML = "";
+
+      objCards.forEach(function (card) {
+        objetList.appendChild(card);
+      });
+    }
+  });
+</script>
 {% endblock %}

@@ -80,3 +80,11 @@ INSERT INTO publicite (titre, description, photo, date_debut, date_fin) VALUES
 INSERT INTO conseils_sanitaire (titre, description, img)
 VALUES
     ('Maintenez une bonne hygiène des mains', 'Lavez-vous régulièrement les mains à l eau et au savon pendant au moins 20 secondes. Utilisez également du désinfectant pour les mains à base d alcool lorsque le lavage des mains n est pas possible.', 'laverMain.jpg');
+
+INSERT INTO objet(nom_objet,prix) VALUES
+    ('Thermometre electronique',12000),
+    ('Tensiometre electronique',35000);
+
+INSERT INTO photo_objet(objet_id, src) VALUES
+    (1, 'obj1.jpg'),
+    (2, 'obj2.jpg');

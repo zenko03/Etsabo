@@ -113,11 +113,13 @@ object-fit: cover;
 font-size: 18px;
 color: #333;
 margin-bottom: 5px;
+margin-left: 14px;
 }
 
 .doctor-specialty {
 font-size: 14px;
 color: #777;
+margin-left: 14px;
 }
 
 /* Conseils sanitaires */
@@ -177,7 +179,6 @@ border-radius: 5px;
 
 /* Barre de navigation */
 .navbar {
-background-color: #007bff;
 padding: 10px 0;
 }
 
@@ -295,4 +296,30 @@ margin-right: 10px;
     overflow: hidden;
     border-right: 2px solid;
     width: 0;
+  }
+  .navbar-nav .nav-item .nav-link {
+    position: relative;
+    color: black;
+    overflow: hidden;
+  }
+
+  .navbar-nav .nav-item .nav-link:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background-color: black;
+    transition: width 0.3s;
+  }
+
+  .navbar-nav .nav-item .nav-link:hover:before {
+    width: 100%;
+  }
+
+  .navbar-nav .nav-item .nav-link.active:before {
+    width: 100%;
+    background-color: blue;
   }

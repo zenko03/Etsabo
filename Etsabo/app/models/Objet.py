@@ -8,4 +8,8 @@ class Objet(models.Model):
     class Meta:
         db_table = 'objet'
 
+    @staticmethod
+    def getAllObjet():
+        return Objet.objects.all().prefetch_related('photoobjet_set')
+
     

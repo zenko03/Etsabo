@@ -9,3 +9,4 @@ class PhotoObjet(models.Model):
         db_table = 'photo_objet'
 
     
+    

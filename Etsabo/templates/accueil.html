@@ -1,20 +1,20 @@
 {% extends 'base.html' %} {% block content %}{% load static %}
 <header class="header">
   <link rel="stylesheet" href="{% static 'css/accueil.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/boutique.css' %}" type="text/css" />
   <div id="headerCarousel" class="carousel slide" data-ride="carousel">
-  <span>E-tsabo</span>
-  <div>
+  <span><img src="{% static '/images/logo.png' %} "  style="width:100px;height:100px;" alt="Health Tip" /></span>
+  {% comment %} <div>
     <span
     id="typingText"
     class="typing-animation"
     style="color: blue; font-size: 30px"
   ></span>
-  </div>
+  </div> {% endcomment %}
 </header>
-<div class="container">
-  <h1 class="logo">
-    
-  </h1>
+<div class="container"  id="back" style="">
+  
 </div>
 <section class="doctors">
   <div class="container">
@@ -27,7 +27,7 @@
               <div class="row">
                 <div class="col-3">
                   <div class="doctor-photo-circle">
-                    <img src="622.png" alt="Doctor" class="doctor-photo" />
+                    <img  src="{% static '/images/rasoa.png' %}" alt="Doctor" class="doctor-photo" />
                   </div>
                 </div>
                 <div class="col-6">
@@ -37,7 +37,7 @@
                   <p class="doctor-specialty">Spécialité: Cardiologie</p>
                 </div>
                 <div class="col-3">
-                  <a href="#" class="btn btn-primary btn-details">Détails</a>
+                  <a href="#" class="btn btn-primary btn-details det" >Détails</a>
                 </div>
               </div>
             </div>
@@ -48,7 +48,7 @@
       </div>
     </div>
     <div class="col-3">
-      <a href="#" id="voirPlusDoc" class="btn btn-primary btn-details">Voir plus</a>
+      <a href="#" id="voirPlusDoc" style="width:355px" class="btn btn-primary btn-details">Voir plus</a>
     </div>
   </div>
 </section>
@@ -69,26 +69,77 @@
   </div>
 </section>
 
+<section class="carousel-section">
+  <h2 class="section-title">Cela pourrait vous interresser</h2>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Contenu des diapositives -->
+    <div class="carousel-inner">
+      {% for pub in pubs %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <div class="card">
+          <img src="{% static '/images/pubs/' %}{{pub.photo}}" class="card-img-top" alt="Slide 1">
+          <div class="card-body">
+            <h5 class="card-title">{{ pub.titre }}</h5>
+            <p class="card-text">{{ pub.description }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Contrôles de navigation -->
+    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Précédent</span>
+    </a>
+    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Suivant</span>
+    </a>
+  </div>
+</section>
+
+
+
 <section class="ads">
   <div class="container">
-    <h2 class="section-title">Boutique</h2>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="ad-card">
-          <img src="ad1.jpg" alt="Advertisement" />
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="ad-card">
-          <img src="ad2.jpg" alt="Advertisement" />
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="ad-card">
-          <img src="ad3.jpg" alt="Advertisement" />
+    <h2 class="section-title">Decouvrez chez nous...</h2>
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-md-9 offset-md-3">
+          <div class="row">
+            <div class="row flex-nowrap overflow-auto">
+            {% for obj in objets %}
+            <div class="col-md-6 col-sm-12">
+              <div class="card mb-4" style="width: 100%">
+            
+                {% for ph in obj.photoobjet_set.all %}
+                <img src="{% static '/images/objets/' %}{{ ph.src }}" class="card-img-top" alt="Product 1" />
+                {% endfor %}
+            
+                <div class="card-body">
+                  <h5 class="card-title">{{ obj.nom_objet }}</h5>
+                  <p class="card-text">Prix: {{ obj.prix }} Ar</p>
+                  <div class="rating">
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9734;</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+            <!-- Ajoutez ici d'autres cartes de produits -->
+          </div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="col-3">
+    <a href="{% url 'boutique' %}" id="voirPlusDoc" style="width:355px" class="btn btn-primary btn-details">Voir plus d'element</a>
   </div>
 </section>
 
