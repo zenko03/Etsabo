@@ -16,6 +16,8 @@ from .PhotoMedecin import PhotoMedecin
 from .PhotoObjet import PhotoObjet
 from .PhotoPatient import PhotoPatient
 from .Objet import Objet
+from .ConseilsSanitaire import ConseilsSanitaire
+from .EtudeDocteur import EtudeDocteur
 
 
 
