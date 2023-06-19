@@ -1,5 +1,5 @@
 -- Table Specialite
-INSERT INTO specialite (nom) VALUES ('Spécialité1'), ('Spécialité2'), ('Spécialité3'), ('Spécialité4');
+    INSERT INTO specialite (nom) VALUES ('Spécialité1'), ('Spécialité2'), ('Spécialité3'), ('Spécialité4');
 
 -- Table TypeAbonnement
 INSERT INTO type_abonnement (nom_abonnement, prix) VALUES ('Abonnement1', 9.99), ('Abonnement2', 19.99), ('Abonnement3', 29.99), ('Abonnement4', 39.99);
@@ -77,3 +77,6 @@ INSERT INTO publicite (titre, description, photo, date_debut, date_fin) VALUES
     ('Publicite3', 'Description3', 'photo3.jpg', '2023-06-18', '2023-12-31'),
     ('Publicite4', 'Description4', 'photo4.jpg', '2023-06-18', '2023-12-31');
 
+INSERT INTO conseils_sanitaire (titre, description, img)
+VALUES
+    ('Maintenez une bonne hygiène des mains', 'Lavez-vous régulièrement les mains à l eau et au savon pendant au moins 20 secondes. Utilisez également du désinfectant pour les mains à base d alcool lorsque le lavage des mains n est pas possible.', 'laverMain.jpg');

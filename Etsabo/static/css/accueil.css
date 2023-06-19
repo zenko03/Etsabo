@@ -1,0 +1,41 @@
+#headerCarousel{
+   
+   
+  height: 180px;
+  margin-top: -130px;
+  color: white;
+  text-align: center;
+    font-size: 22px;
+    position: relative;
+    overflow: hidden;
+    
+    background-color: #307fcf;
+  }
+ 
+#typingText{
+    color: white;
+}
+#doc {
+    display: flex;
+    overflow-x: auto;
+  }
+  
+  .item {
+    flex: 0 0 auto; /* ou utiliser width: <largeur souhaitée>; */
+    height: 200px;
+    margin-right: 10px;
+  
+      
+  }
+  
+
+.doctors{
+    margin-top: -90px;
+}
+.card{
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+#voirPlusDoc{
+    width: 90px;
+}

@@ -1,16 +1,20 @@
 from django.shortcuts import render
 from app.models import Medecin
 from app.models import Publicite
+from app.models import ConseilsSanitaire
 
 
 def home(request):
     medecins = Medecin.objects.all()
     pubs = Publicite.objects.all()
     random_pubs = Publicite.get_random_Pub(pubs, 3)
+    conseil = ConseilsSanitaire.objects.all()[0]
     context = {
         'medecins': medecins,
         'pubs': random_pubs,
+        'conseil':conseil
     }
+    
     return render(request, 'accueil.html',context)
 
 def boutique(request):
