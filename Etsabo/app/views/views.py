@@ -1,12 +1,15 @@
+
+from django.utils import timezone
 from django.shortcuts import render
 from app.models import Medecin
 from app.models import Publicite
 from app.models import ConseilsSanitaire
 from app.models import Objet
 
+
 def home(request):
     medecins = Medecin.objects.all()
-    pubs = Publicite.objects.all()
+    pubs = Publicite.objects.filter(date_fin__gte=timezone.now())
     random_pubs = Publicite.get_random_Pub(pubs, 2)
     
     objets = Objet.getAllObjet()
@@ -36,7 +39,7 @@ def listeDiscu(request):
 
 def profilMedecin(request):
     id_medecin = request.GET.get('idMedecin')
-    medecin = Medecin.objects.get(id=id_medecin)
+    medecin = Medecin.objects.select_related('specialite').get(id=id_medecin)
     context = {'medecin': medecin}
-    return render(request, 'profil.html', context)
+    return render(request, 'ProfilDocteur.html', context)
 

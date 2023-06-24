@@ -23,6 +23,7 @@ urlpatterns = [
     path('', v.home,name='home'),
     path('boutique/',v.boutique,name='boutique'),
     path('listeDiscu/',v.listeDiscu,name='listeDiscu'),
+    path('profilMedecin/',v.profilMedecin,name='profilMedecin'),
     path('chat/', chat.chat, name='chat'),
     path('chat/conversation/', chat.get_current_conversation, name='conversation'),
     path('chat/send/', chat.envoyer_message, name='send'),

@@ -37,7 +37,7 @@
                   <p class="doctor-specialty">Spécialité: Cardiologie</p>
                 </div>
                 <div class="col-3">
-                  <a href="#" class="btn btn-primary btn-details det" >Détails</a>
+                  <a href="{% url 'profilMedecin' %}?idMedecin= {{ medecin.id }} " class="btn btn-primary btn-details det" >Détails</a>
                 </div>
               </div>
             </div>
