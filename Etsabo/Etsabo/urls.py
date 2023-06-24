@@ -15,9 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from app.views import views as v
+from app.views import chat as chat
+from app.views import localisation as localisation
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', v.home,name='home'),
+    path('boutique/',v.boutique,name='boutique'),
+    path('listeDiscu/',v.listeDiscu,name='listeDiscu'),
+    path('chat/', chat.chat, name='chat'),
+    path('chat/conversation/', chat.get_current_conversation, name='conversation'),
+    path('chat/send/', chat.envoyer_message, name='send'),
+    path('localisation/pharmacie/', localisation.pharmacie, name='localisation_pharmacie')
 ]
 
 from django.urls import path
