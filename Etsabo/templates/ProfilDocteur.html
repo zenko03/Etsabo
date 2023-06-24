@@ -1,67 +1,58 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil Docteur</title>
-    <link rel="stylesheet" href="{% static 'css/ProfilDocteur.css' %}">
-    <style>
-        #categorie-container {
-            display: flex;
-            overflow: hidden;
-            width: 100%;
-            white-space: nowrap;
-            margin-top: -10px;
-        }
-
-        .categorie-item {
-            flex: 0 0 auto;
-            width: 150px; 
-            height: 130px; 
-            margin: 10px;
-        }
-    </style>
-</head>
-<body>
-    <div id="cadre">
-    <div id="entete">
-        <div id="bienvenu">
-            <h1 id="identite_nom">Bienvenue Rakoto J.</h1>
-        </div>
-        <div id="photo_I">
-            <img src="{% static '/images/rasoa.png' %}" id="identite_photo">
-        </div>
-    </div>
-    <div id="milieu">
-        <div id="docteurs">
-            <h2 id="mot_docteurs">Docteurs</h2>
-            <div id="photo_D">
-                <img src="{% static '/images/rasoa.png' %}" id="photo_docteur">
+    {% load static %}
+    `   `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Profil Docteur</title>
+        <link rel="stylesheet" href="{% static 'css/ProfilDocteur.css' %}">
+        <style>
+      
+        </style>
+    </head>
+    <body>
+        <div id="cadre">
+            <div id="entete">
+               <div id="petiteInfo">
+                   <center>
+                        <h1 id="NomDocteur">Rakotondramanana Iantenaina</h1>
+                   </center>
+               </div>
             </div>
-            <div id="identite_docteur">
-                <h5 id="nom_docteur">{{ medecin.nom }}</h5>
-                <p id="specialite_docteur">{{ medecin.specialite.nom }}</p>
-                <img src="{% static '/images/etoile.png' %}" width="20px" height="20px" id="etoile">
+            <div id="milieu">
+               <div id="photo">
+                <center>
+                  <img src="{% static '/images/rasoa.png' %}"  id="photoDocteur">
+               </center>
+               </div>
+               <div id="etoile">
+              <center>
+                    <img src="{% static '/images/etoile.png' %}" id="photoEtoile">
+                    <img src="{% static '/images/etoile.png' %}" id="photoEtoile">
+                    <img src="{% static '/images/etoile.png' %}" id="photoEtoile">
+                    <img src="{% static '/images/etoile.png' %}" id="photoEtoile">
+             </center>
+               </div>
+               <div id="infos">
+                <center>
+                  <h2>About Iantenaina</h2>
+                </center>
+               </div>
+               <div id="Information">
+                <h3>Nom:</h3>
+                <h3>Prenom:</h3>  
+                <h3>Specialite:</h3>
+                <h3>Annee d Etude:</h3>
+              </div>
+            </div>
+            <div id="Bouton">
+                <center>
+                  <button id="bt">Contacter</button>
+                </center>
             </div>
         </div>
-    </div>
- 
-</div>
-    <script>
-        const container = document.getElementById('categorie-container');
-
-        container.addEventListener('mousemove', (event) => {
-            const containerWidth = container.offsetWidth;
-            const contentWidth = container.scrollWidth;
-            const scrollOffset = contentWidth - containerWidth;
-
-            const mouseX = event.clientX;
-            const scrollAmount = (mouseX / containerWidth) * scrollOffset;
-
-            container.scrollLeft = scrollAmount;
-        });
-    </script>
-</body>
-</html>
+    
+    </body>
+    </html>
+    
