@@ -21,6 +21,7 @@ from app.views import localisation as localisation
 
 urlpatterns = [
     path('', v.home,name='home'),
+    path('voirplus/',v.voirplus,name='voirplus'),
     path('boutique/',v.boutique,name='boutique'),
     path('listeDiscu/',v.listeDiscu,name='listeDiscu'),
     path('chat/', chat.chat, name='chat'),

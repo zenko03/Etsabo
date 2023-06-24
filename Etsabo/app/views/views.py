@@ -40,3 +40,18 @@ def profilMedecin(request):
     context = {'medecin': medecin}
     return render(request, 'profil.html', context)
 
+def voirplus(request):
+    medecins = Medecin.objects.all()
+    pubs = Publicite.objects.all()
+    random_pubs = Publicite.get_random_Pub(pubs, 2)
+    
+    objets = Objet.getAllObjet()
+
+    conseil = ConseilsSanitaire.objects.all()
+    context = {
+        'medecins': medecins,
+        'pubs': random_pubs,
+        'conseil':conseil,
+        'objets':objets
+    }
+    return render(request, 'voirplus.html', context)
