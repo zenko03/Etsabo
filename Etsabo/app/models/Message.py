@@ -1,4 +1,6 @@
 from django.db import models
+from datetime import datetime
+from . import *
 
 
 class Message(models.Model):
@@ -9,4 +11,21 @@ class Message(models.Model):
     date_envoie = models.DateField(auto_now=False, auto_now_add=False)
 
     class Meta:
-        db_table = 'message'
+        db_table = "Message"
+
+    @staticmethod
+    def get_messages_from(patient : int, medecin : int):
+        messages = Message.objects.filter(patient = patient, medecin = medecin).order_by("date_envoie")
+        return messages
+
+    def send_message_to(self, sender : int, message : str, est_patient : bool):
+        message : Message = Message()
+        message.contenus = message
+        message.type = 1 if not est_patient else 0
+        if est_patient:
+            message.patient = sender
+        else:
+            message.medecin = sender
+        
+        message.save()
+        

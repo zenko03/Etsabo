@@ -18,6 +18,7 @@ from django.urls import path
 
 # Import des views (Controllers)
 from .views import chat, localisation
+from .views import message_test
 
 app_name = "etsabo"
 
@@ -26,4 +27,5 @@ urlpatterns = [
     path('chat/conversation/', chat.get_current_conversation, name='conversation'),
     path('chat/send/', chat.envoyer_message, name='send'),
     path('localisation/pharmacie/', localisation.pharmacie, name='localisation_pharmacie')
+    path('message_test/', message_test)
 ]
