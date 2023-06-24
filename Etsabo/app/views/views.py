@@ -11,7 +11,7 @@ def home(request):
     
     objets = Objet.getAllObjet()
 
-    conseil = ConseilsSanitaire.objects.all()[0]
+    conseil = ConseilsSanitaire.objects.all()
     context = {
         'medecins': medecins,
         'pubs': random_pubs,
