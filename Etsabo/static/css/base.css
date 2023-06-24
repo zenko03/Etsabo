@@ -1,0 +1,325 @@
+body {
+    padding-bottom: 56px; /* Hauteur du navbar */
+  }
+
+  .navbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar-brand {
+    padding: 5px;
+  }
+
+  .navbar-brand img {
+    height: 30px;
+  }
+
+  .navbar-nav {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .nav-item {
+    padding: 10px;
+    text-align: center;
+  }
+
+  .nav-link {
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+  }
+
+  .nav-link:hover {
+    color: #000;
+  }
+  
+  /* Styles généraux */
+body {
+font-family: Arial, sans-serif;
+background-color: #f8f8f8;
+}
+
+.container {
+margin-right: auto;
+margin-left: auto;
+padding-right: 15px;
+padding-left: 15px;
+}
+
+
+.section-title {
+text-align: center;
+margin-bottom: 30px;
+color: #333;
+}
+
+/* En-tête */
+.header {
+background-color:white;
+color: #007bff;
+
+}
+
+.logo {
+color: #fff;
+text-align: center;
+font-size: 24px;
+margin-bottom: 0;
+}
+
+/* Médecins */
+.doctors {
+padding: 50px 0;
+}
+
+.doctor-card {
+background-color: #fff;
+border-radius: 5px;
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+padding: 20px;
+text-align: center;
+margin-bottom: 30px;
+}
+
+.doctor-photo-circle {
+width: 90px;
+height: 90px;
+border-radius: 50%;
+overflow: hidden;
+margin-right: 15px;
+}
+
+.doctor-photo {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+
+.doctor-name {
+font-size: 18px;
+color: #333;
+margin-bottom: 5px;
+margin-left: 14px;
+}
+
+.doctor-specialty {
+font-size: 14px;
+color: #777;
+margin-left: 14px;
+}
+
+/* Conseils sanitaires */
+.health-tips {
+background-color: #f8f8f8;
+padding: 50px 0;
+}
+
+.tip-card {
+background-color: #fff;
+border-radius: 5px;
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+padding: 20px;
+height:400px;
+margin-bottom: 30px;
+}
+
+.tip-card img {
+width: 100%;
+max-height: 400px;
+object-fit: cover;
+border-radius: 5px;
+margin-bottom: 20px;
+}
+
+.tip-title {
+font-size: 18px;
+color: #333;
+margin-bottom: 5px;
+}
+
+.tip-description {
+font-size: 14px;
+color: #777;
+}
+
+/* Publicités */
+.ads {
+padding: 50px 0;
+}
+
+.ad-card {
+background-color: #fff;
+border-radius: 5px;
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+padding: 20px;
+text-align: center;
+margin-bottom: 30px;
+}
+
+.ad-card img {
+width: 100%;
+max-height: 200px;
+object-fit: cover;
+border-radius: 5px;
+}
+
+/* Barre de navigation */
+.navbar {
+padding: 10px 0;
+}
+
+.navbar-brand img {
+height: 30px;
+vertical-align: middle;
+}
+
+.navbar-nav {
+display: inline-flex;
+flex-direction: row;
+align-items: center;
+}
+
+.navbar-nav .nav-item {
+margin-right: 10px;
+}
+
+.navbar-nav .nav-link {
+color: #fff;
+font-size: 14px;
+text-decoration: none;
+transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+color: #eee;
+}
+.carousel-item.slide-out {
+animation: slideOut 0.5s forwards;
+}
+
+.carousel-item.slide-in {
+animation: slideIn 0.5s forwards;
+}
+
+@keyframes slideOut {
+from {
+  opacity: 1;
+  transform: translateX(0);
+}
+to {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+}
+
+@keyframes slideIn {
+from {
+  opacity: 0;
+  transform: translateX(100%);
+}
+to {
+  opacity: 1;
+  transform: translateX(0);
+}
+}
+.card{
+  padding:1%;
+}
+
+.profile-card {
+background-color: #f5f6f7;
+border: 1px solid #dddfe2;
+border-radius: 5px;
+padding: 20px;
+}
+
+.cover-photo img {
+width: 100%;
+height: auto;
+}
+
+.profile-picture img {
+width: 150px;
+height: 150px;
+border-radius: 50%;
+object-fit: cover;
+margin-bottom: 20px;
+}
+
+.profile-name {
+font-size: 24px;
+font-weight: bold;
+margin-bottom: 10px;
+}
+
+.profile-bio {
+font-size: 16px;
+color: #555;
+margin-bottom: 20px;
+}
+
+.profile-buttons a {
+margin-right: 10px;
+}
+
+
+.doctor-photo-circle {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+  }
+
+  .doctor-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .typing-animation {
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid;
+    width: 0;
+  }
+  .navbar-nav .nav-item .nav-link {
+    position: relative;
+    color: black;
+    overflow: hidden;
+  }
+
+  .navbar-nav .nav-item .nav-link:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background-color: black;
+    transition: width 0.3s;
+  }
+
+  .navbar-nav .nav-item .nav-link:hover:before {
+    width: 100%;
+  }
+
+  .navbar-nav .nav-item .nav-link.active:before {
+    width: 100%;
+    background-color: blue;
+  }
