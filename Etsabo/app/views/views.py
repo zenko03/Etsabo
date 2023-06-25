@@ -11,7 +11,8 @@ def home(request):
     
     objets = Objet.getAllObjet()
 
-    conseil = ConseilsSanitaire.objects.all()[0]
+    conseils = ConseilsSanitaire.objects.all() 
+    conseil = conseils[0] if len(conseils) > 0 else None
     context = {
         'medecins': medecins,
         'pubs': random_pubs,

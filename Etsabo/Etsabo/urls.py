@@ -32,7 +32,4 @@ urlpatterns = [
 from django.urls import path
 from app.views import views
 
-urlpatterns = [
-    path('', views.to_Accueil, name='accueil'),
-    path('profil/', views.profilMedecin, name='profilMedecin'),
-]
+
