@@ -12,4 +12,4 @@ class Objet(models.Model):
     def getAllObjet():
         return Objet.objects.all().prefetch_related('photoobjet_set')
 
-    
+ 
