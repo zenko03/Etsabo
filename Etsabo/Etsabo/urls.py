@@ -23,10 +23,12 @@ urlpatterns = [
     path('', v.home,name='home'),
     path('boutique/',v.boutique,name='boutique'),
     path('listeDiscu/',v.listeDiscu,name='listeDiscu'),
+    path('panier/',v.panier,name='panier'),
     path('chat/', chat.chat, name='chat'),
     path('chat/conversation/', chat.get_current_conversation, name='conversation'),
     path('chat/send/', chat.envoyer_message, name='send'),
-    path('localisation/pharmacie/', localisation.pharmacie, name='localisation_pharmacie')
+    path('localisation/pharmacie/', localisation.pharmacie, name='localisation_pharmacie'),
+    path('ajouter-au-panier/<int:objet_id>/', v.ajouter_au_panier, name='ajouter_au_panier'),
 ]
 
 from django.urls import path

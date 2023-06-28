@@ -14,4 +14,4 @@ class Patient(models.Model):
 
     class Meta:
         db_table = 'patient'
-    
+            
