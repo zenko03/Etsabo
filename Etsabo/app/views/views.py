@@ -87,4 +87,8 @@ def ajouter_au_panier(request, objet_id):
     # Rediriger ou renvoyer une réponse appropriée
 
 def panier(request):
-     return render(request, 'panier.html')
+    objets = Objet.getAllObjet()
+    context = {
+        'objets':objets
+    }
+    return render(request, 'panier.html',context)
