@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="{% url 'modificationPatient' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="idPatient" value="{{ patient.id }}">
+  <input type="text" name="adresse" placeholder="{{ patient.adresse }}" value="{% if request.POST.adresse %}{{ request.POST.adresse }}{% else %}{{ patient.adresse }}{% endif %}">
+  <input type="text" name="tel" placeholder="{{ patient.telephone }}" value="{% if request.POST.tel %}{{ request.POST.tel }}{% else %}{{ patient.telephone }}{% endif %}">
+  <input type="text" name="ddn" placeholder="{{ patient.date_de_naissance }}" value="{% if request.POST.ddn %}{{ request.POST.ddn }}{% else %}{{ patient.date_de_naissance|date:'Y-m-d' }}{% endif %}">
+  <input type="text" name="email" placeholder="{{ patient.email }}" value="{% if request.POST.email %}{{ request.POST.email }}{% else %}{{ patient.email }}{% endif %}">
+  <input type="submit" value="Modifier">
+</form>
+</body>
+</html>

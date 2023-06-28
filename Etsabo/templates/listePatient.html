@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  {% for patient in patients %}
+    <p> {{ patient.nom }} {{patient.prenoms }} <a href="{% url 'modifierPatient' %}?idPatient= {{ patient.id }} ">Modifier</a> <a href="">Supprimer</a></p>
+  {% endfor %}
+<form action="{% url 'recherchePatient' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="recherche">
+    <input type="submit" value="Rechercher">
+</form>
+</body>
+</html>
