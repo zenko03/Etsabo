@@ -55,17 +55,6 @@
     width: 100%;
   }
 </style>
-
-{% if 'panier' in request.session %}
-<h2>Panier</h2>
-<ul>
-  {% for key, value in request.session.panier.items %} {% for obj in objets %}
-  {% if obj.id|stringformat:"s" == key %}
-  <li>{{ obj.nom_objet }} - Quantité : {{ value.quantite }}</li>
-  {% endif %} {% endfor %} {% endfor %}
-</ul>
-{% endif %}
-
 <section class="ads">
   <div class="container">
     <h2 class="section-title"></h2>

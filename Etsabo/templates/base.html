@@ -60,11 +60,11 @@
                     <div class="row">
                       <div class="col-lg-4">
                         <div class="profile-card">
-                          <div class="cover-photo">
-                            <img src="merci.jpg" alt="Cover Photo" />
-                          </div>
                           <div class="profile-picture">
-                            <img src="slide1.jpg" alt="Profile Picture" />
+                            <img
+                              src="{% static '/images/logo.png' %}"
+                              alt="Profile Picture"
+                            />
                           </div>
                           <div class="profile-info">
                             <h5 class="profile-name">Rahajarison Rianala</h5>
@@ -116,7 +116,7 @@
         </li>
         <li class="nav-item flex-fill">
           <a class="nav-link" href="{% url 'panier' %}">
-            <span class="fas fa-sms fa-lg mr-2"></span>
+            <span class="fas fa-shopping-cart fa-lg mr-2"></span>
           </a>
         </li>
         <li class="nav-item flex-fill">

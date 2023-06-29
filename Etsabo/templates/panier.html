@@ -5,9 +5,19 @@
   <ul>
     {% for key, value in request.session.panier.items %} {% for obj in objets %}
     {% if obj.id|stringformat:"s" == key %}
-    <li>{{ obj.nom_objet }} - Quantité : {{ value.quantite }}</li>
+    <li>
+      {{ obj.nom_objet }} - Quantité : {{ value.quantite }} - Prix Unitaire:
+      {{obj.prix }}
+
+      <a href="{% url 'suppr' obj.id %}">Supprimer</a>
+    </li>
     {% endif %} {% endfor %} {% endfor %}
+
+    <h2>Totale : {{ tot }}</h2>
   </ul>
+  {% else %}
+  <h2>Panier vide</h2>
   {% endif %}
+  <a href="{% url 'viderPanier' %}">Vider le panier</a>
 </div>
 {% endblock %}

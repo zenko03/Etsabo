@@ -47,3 +47,18 @@ class Objet(models.Model):
         self.delete()
         return 0
 
+    @staticmethod
+    def getTotalPanier(request):
+        total = 0
+        if 'panier' in request.session:
+            panier = request.session['panier']
+        
+        for key, value in panier.items():
+            objet = Objet.objects.get(id=int(key))
+            prix_unitaire = objet.prix
+            quantite = value['quantite']
+            total += prix_unitaire * quantite
+
+        return total
+
+

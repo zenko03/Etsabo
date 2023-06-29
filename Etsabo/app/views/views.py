@@ -65,8 +65,6 @@ def ajouter_au_panier(request, objet_id):
     else:
         # Si l'objet n'est pas encore dans le panier, l'ajouter avec une quantité de 1
         panier[str(objet_id)] = {
-            'objet': objet,
-            'name' : 'rak',
             'quantite': 1
         }
 
@@ -77,18 +75,51 @@ def ajouter_au_panier(request, objet_id):
 
     context = {
         'objets': objets,
+        'objet': objet
     }
 
     return render(request, 'boutique.html', context)
 
 
 
-
     # Rediriger ou renvoyer une réponse appropriée
+
+from django.shortcuts import redirect
+
+def supprimer(request, objet_id):
+    objets = Objet.getAllObjet()
+    context = {
+        'objets': objets
+    }
+    
+    if 'panier' in request.session:
+        panier = request.session['panier']
+        if(  panier[str(objet_id)]['quantite'])>1:
+          if str(objet_id) in panier:
+            panier[str(objet_id)]['quantite'] -= 1
+        else:
+            del panier[str(objet_id)]
+
+    request.session['panier'] = panier  # Mettre à jour la session du panier
+
+    # Rediriger vers la vue panier.html avec le contexte mis à jour
+    return redirect('../../panier', context=context)
+
+
 
 def panier(request):
     objets = Objet.getAllObjet()
+
+    tot = Objet.getTotalPanier(request)
+
     context = {
-        'objets':objets
+        'objets':objets,
+        'tot':tot
     }
     return render(request, 'panier.html',context)
+
+def viderPanier(request):
+    if 'panier' in request.session:
+        del request.session['panier']
+    
+    return render(request,'panier.html')
