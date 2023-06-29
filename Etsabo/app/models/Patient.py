@@ -1,4 +1,7 @@
+from datetime import datetime
+from models import Abonnement
 from django.db import models
+from datetime import timedelta
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
 
@@ -47,3 +50,16 @@ class Patient(models.Model):
             return patient
         except cls.DoesNotExist:
             return None
+
+    @classmethod
+    def do_abonnement(cls, patient_id, type_id, reference):
+        try:
+            patient = cls.objects.get(id=patient_id)
+            date_actuelle = datetime.now()
+            date_dans_30_jours = date_actuelle + timedelta(days=30)
+            Abonnement.insert(patient_id,date_dans_30_jours,reference,type_id)
+        except cls.DoesNotExist:
+            return None
+
+
+        
