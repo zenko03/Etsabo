@@ -6,6 +6,7 @@ class Medecin(models.Model):
     prenoms = models.CharField(max_length=30)
     email = models.CharField(max_length=40)
     password = models.CharField(max_length=40)
+    telephone = models.CharField(max_length=15)
     specialite = models.ForeignKey("Specialite", on_delete=models.CASCADE, null=True)
     
 

@@ -42,11 +42,15 @@ def listeDiscu(request):
 def profilMedecin(request):
     id_medecin = request.GET.get('idMedecin')
     medecin = Medecin.objects.select_related('specialite').get(id=id_medecin)
-    context = {'medecin': medecin}
+    etudedocteurs = medecin.etudedocteur_set.all()
+    context = {
+        'medecin': medecin,
+        'etudes': etudedocteurs
+    }
     return render(request, 'ProfilDocteur.html', context)
 
 def listeMedecin(request):
-    medecins = Medecin.objects.all()
+    medecins = Medecin.objects.select_related('specialite')
     context = {'medecins': medecins}
     return render(request, 'listeMedecin.html', context)
 

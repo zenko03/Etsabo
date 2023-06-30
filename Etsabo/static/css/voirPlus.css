@@ -1,0 +1,76 @@
+#headerCarousel {
+
+    height: 96px;
+    margin-top: -130px;
+    color: white;
+    text-align: center;
+    font-size: 22px;
+    position: relative;
+    overflow: hidden;
+
+    background-color: white;
+}
+
+
+#typingText {
+    color: white;
+}
+
+#doc {
+    /* display: flex; */
+    overflow-x: auto;
+    /* margin-top: 10px; */
+}
+h1{
+    margin-top: 00px;
+    text-align: center;
+}
+
+.item {
+    flex: 0 0 auto;
+    /* ou utiliser width: <largeur souhaitée>; */
+    height: 600px;
+
+    margin-right: 10px;
+
+
+}
+
+
+.doctors {
+    margin-top: -177px;
+
+}
+
+.card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+#voirPlusDoc {
+    width: 355px;
+}
+
+#back {
+    height: 300px;
+    margin-top: -100px;
+    background-color: #005;
+    background-image: url("../images/018.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+
+.doctor-name {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 5px;
+    margin-left: 14px;
+}
+
+.doctor-specialty {
+    font-size: 14px;
+    color: #777;
+    margin-left: 14px;
+}

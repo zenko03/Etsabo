@@ -1,139 +1,52 @@
-
 #cadre{
-    background-color: black;
-    width: 600px;
-    height: 800px;
+    width: 500px;
+    height: 700px;
+    background-color: rgb(4, 4, 9);
 }
 #entete{
-    background-color:rgb(88, 220, 224) ;
+    background-color: rgb(15, 222, 236);
     width:400px;
-    height:200px;
-    border-radius: 40px 40px 0px 0px;
+    height:220px;
+    border-radius: 30px 30px 0px 0px;
 }
-#bienvenu{
-    width:200px;
-    height:200px;
-    float: left;
-    margin-left:20px;
-} 
- 
-#identite_photo{
-    border-radius:50%;
-    width:80px;
-    height:80px;
-    float: right;
-    margin-top:20px;
-    margin-right: 20px;
-}
-#identite_nom{
-    color: white;
-  }
-
-/* ///////////////////////////////////////////////////////////////////////////// */
-#milieu {
-    background-color: rgb(255, 255, 255);
-    width: 400px;
-    height: 500px;
-    border-radius: 30px 30px 40px 40px;
-    margin-bottom: 600px;
-    margin-top: -30px; 
-}
-#recherche{
-    width:400px;
-    height:100px;
-} 
-#taper_recherche{
-    width:300px;
-    height:35px; 
-    margin-top: 10px;
-    border-radius: 20px;
-    box-shadow: 1px 1px 0px rgb(136, 132, 132);
-    border: none;
-}
-/* ///////////////////////////////////////////////////////////////////////////// */
-#mot_categories{
-    margin-left:20px;
-    margin-top: -10px;
-    color: rgb(81, 218, 218);
-}
-#categories{
-    width:400px;
-    height:auto;
-}
-#categorie{
-    background-color: rgb(166, 166, 166);
+#photoDocteur{
+    border-radius: 100px;
     width:150px;
-    height:130px; 
-    border-radius: 20px;
-     margin-left:20px;
-}
-
-.categorie-container {
-    display: flex;
-    position: relative;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    overflow-x: unset;
-}
-/* //////////////////////////////////////////////////////////////////// */
-#docteurs{
-    width:400px;
     height:150px;
+    margin-top:-70px;
 }
-
-
-#photo_D{
-    float:left;
-    margin-left:20px;
-}
-#nom_docteur{
-    float: right;
-    margin-right: 220px;
-    margin-top: -95px;
-    font-size: 20px;
-}
-
-#mot_docteurs{
-    margin-left:20px;
-    color: rgb(81, 218, 218);
-}
-#photo_docteur{
-    border-radius:50%;
-    width:80px;
-    height:80px;
-    float: right;
-    margin-bottom:25px;
-    margin-right: 25px;
-}
-
-#specialite_docteur{
-   color: rgb(3, 3, 4);
-   margin-top: -19px;
-   float: right;
-   margin-right: 208px;
-   margin-top: -70px;
+#photoEtoile{
+    width:20px;
+    height:20px;
 }
 #etoile{
-    margin-top: -19px;
-    float: right;
-    margin-right: 260px;
-    margin-top: -40px;
+    margin-top:20px;
 }
-/* //////////////////////////////////////////////////////////////////// */
-#footer{
-    display: flex;
-    justify-content: space-evenly;
-    /* position: fixed; */
-    gap: 2rem;
-    bottom: 20%;
-    left: 6%;
-    background-color: rgb(88, 220, 224) ;
-    height: 33px;
-    margin-top: 20px;
-    border-radius: 0px 0px 40px 40px;
+#infos{
+    margin-top:50px;
+}
+#milieu{
+    border-radius: 0px 0px 50px 50px;
+    width:400px;
+    height:450px;
+    background-color: white;
 }
 
-#footer p {
-    padding: .5rem 2rem;
-    margin-top: -2px;
+#petiteInfo{
+    padding-top: 20px;
+}
+#Information{
+    margin-left: 20px;
+}
+#Bouton{
+   position: fixed;
+   bottom:80px ;
+   margin-left: 100px;
+}
+#bt{   
+    width:200px;
+    height:30px;
+    border-radius: 60px;
+    background-color:rgb(99, 233, 243);
+    border: none;
 }
