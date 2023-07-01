@@ -57,11 +57,18 @@ INSERT INTO ordonnance (consultation_id, medocs_id, prise) VALUES
     (4, 4, 'Prise4');
 
 -- Table Rdv
-INSERT INTO rdv (medecin_id, patient_id, date_rdv, heure_rdv, status) VALUES 
-    (1, 1, '2023-06-18', '10:00', 1),
-    (2, 2, '2023-06-18', '11:00', 1),
-    (3, 3, '2023-06-18', '12:00', 1),
-    (4, 4, '2023-06-18', '13:00', 1);
+INSERT INTO rdv (medecin_id, patient_id, dateHeure_rdv, status) VALUES
+    (1, 1, '2023-07-18 10:00:00', 0),
+    (2, 2, '2023-07-18 11:00:00', 0),
+    (3, 3, '2023-07-18 12:00:00', 0),
+    (4, 4, '2023-07-18 13:00:00', 0);
+
+INSERT INTO rdv (dateHeure_rdv, status,medecin_id, patient_id) VALUES
+    ('2023-07-18 10:00:00', 0,1, 1),
+    ('2023-07-18 11:00:00', 0,2, 2),
+    ('2023-07-18 12:00:00', 0,3, 3),
+    ('2023-07-18 13:00:00', 0,4, 4);
+
 
 -- Table Pharmacie
 INSERT INTO pharmacie (nom_pharmacie, long, lat) VALUES 

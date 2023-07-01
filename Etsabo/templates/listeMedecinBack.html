@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+     {% for medecin in medecins %}
+         <p> {{ medecin.nom }} {{ medecin.prenoms }} <a href="{% url 'rdvDispoMedecin' %}?idMedecin= {{ medecin.id }} "> demandes de rdv</a> <a href="{% url 'rdvEnCours' %}?idMedecin= {{ medecin.id }} "> rdv en cours</a> </p>
+    {% endfor %}
+</body>
+</html>

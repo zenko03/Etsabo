@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <h3>Demande de rendez-vous</h3>
+  <table>
+      <th>Nom </th>
+      <th>Prenoms</th>
+      <th>Sexe </th>
+      <th>Date et heure de rendez-vous</th>
+      <th> </th>
+      <th> </th>
+  {% for rdv in listeRdv %}
+      <tr>
+          <td>{{ rdv.patient.nom }}</td>
+          <td>{{ rdv.patient.prenoms }}</td>
+          {% if rdv.patient.sexe == 0 %}
+            {% with sexe='homme' %}
+                <td>{{ sexe }}</td>
+            {% endwith %}
+        {% else %}
+            {% with sexe='femme' %}
+                <td>{{ sexe }}</td>
+            {% endwith %}
+        {% endif %}
+          <td>{{ rdv.dateheure_rdv }}</td>
+          <td><a href="{% url 'accepter_rdv' %}?idRdv= {{ rdv.id }}">Accepter</a> </td>
+          <td><a href="{% url 'decliner_rdv' %}?idRdv= {{ rdv.id }}">Décliner</a> </td>
+      </tr>
+    {% endfor %}
+        </table>
+</body>
+</html>

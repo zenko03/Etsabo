@@ -7,6 +7,7 @@ from app.models import Publicite
 from app.models import ConseilsSanitaire
 from app.models import Objet
 from app.models import Patient
+from app.models import Rdv
 import sys
 
 def home(request):
@@ -83,5 +84,39 @@ def recherchePatient(request):
     context = {
         'patients': patients
     }
-
     return render(request, 'recherchePatient.html', context)
+
+def listeMedecinBack(request):
+    medecins = Medecin.objects.select_related('specialite')
+    context = {'medecins': medecins}
+    return render(request,'listeMedecinBack.html',context)
+
+def rdvDispoMedecin(request):
+    id_medecin = request.GET.get('idMedecin')
+    listRdv = Rdv.objects.select_related('patient').filter(status=0, medecin_id=id_medecin,dateheure_rdv__gte=timezone.now())
+    context = {'listeRdv':listRdv}
+    return render(request,'rdvDispo.html',context)
+
+def rdvEnCours(request):
+    id_medecin = request.GET.get('idMedecin')
+    listRdv = Rdv.objects.select_related('patient').filter(status=1, medecin_id=id_medecin, dateheure_rdv__gte=timezone.now())
+    context = {'listeRdv': listRdv}
+    return render(request, 'rdvEnCours.html', context)
+
+def accepter_rdv(request):
+    id_rdv= request.GET.get('idRdv')
+    rdv= Rdv.objects.get(id=id_rdv)
+    rdv.accepter_rdv()
+    return redirect('listeMedecinBack')
+
+def decliner_rdv(request):
+    id_rdv = request.GET.get('idRdv')
+    rdv = Rdv.objects.get(id=id_rdv)
+    rdv.decliner_rdv()
+    return redirect('listeMedecinBack')
+
+def terminer_rdv(request):
+    id_rdv = request.GET.get('idRdv')
+    rdv = Rdv.objects.get(id=id_rdv)
+    rdv.terminer_rdv()
+    return redirect('listeMedecinBack')
