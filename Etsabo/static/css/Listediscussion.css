@@ -310,3 +310,9 @@ margin-right: 10px;
     width: 46px;
     height: 48px;
   }
+
+/* Liste message */
+
+  .container.liste-dernier {
+    margin-top: 10%;
+  }

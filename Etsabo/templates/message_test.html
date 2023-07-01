@@ -2,36 +2,59 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat Test</title>
 
-    <script src="{% static 'jquery/jquery-3.7.0.min.js' %}"></script>
-  </head>
-  <body>
-    <div class="conversation-container" data-estPatient="0">
-      <template data-senderContainer>
-        <div class="sender-message">
-          <p class="info-sender">Nom - Date - Sent</p>
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Chat Test</title>
 
-          <p class="message">Here is message</p>
-        </div>
-      </template>
+	<script src="{% static 'jquery/jquery-3.7.0.min.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'css/chat.css' %}">
+	<link href="{% static '/fontawesome/css/all.min.css' %}" rel="stylesheet" />
+</head>
 
-      <template data-receiverContainer>
-        <div class="receiver-message">
-          <p class="info-receiver">Nom - Date - Received</p>
+<body>
+	<div class="conversation-container" data-estPatient="1">
+		<i class="fas fa-solid fa-arrow-left" id="close-conversation"></i>
 
-          <p class="message">Here is message</p>
-        </div>
-      </template>
-    </div>
-  </body>
+		<div class="receiver-info-container">
+			<img src="{% static 'images/rasoa.png' %}" alt="Profile Picture" srcset="">
+			<p class="full-name">Full Name</p>
 
-  <script>
-    var csrfToken = "{{ csrf_token }}";
-  </script>
-  <script src="{% static 'js/Chat/chat.js' %}"></script>
+			<div class="reveicer-interactions">
+				<span class="fas fa-store fa-lg mr-2"></span>
+				<span class="fas fa-store fa-lg mr-2"></span>
+				<span class="fas fa-store fa-lg mr-2"></span>
+			</div>
+		</div>
+
+		<div class="messages-container">
+			<template data-senderContainer>
+				<div class="sender-message">
+					<img src="{% static 'images/rasoa.png' %}" alt="Profile Picture" srcset="">
+					<p class="message">Here is message</p>
+				</div>
+			</template>
+	
+			<template data-receiverContainer>
+				<div class="receiver-message">
+					<img src="{% static 'images/rasoa.png' %}" alt="Profile Picture" srcset="">
+					<p class="message">Here is message</p>
+				</div>
+			</template>
+		</div>
+
+		<div class="message-sender-container">
+			<input type="text" name="message-sended" id="message-send">
+			<button class="button-send-message"><i class="fas fa-paper-plane fa-lg"></i></button>
+		</div>
+	</div>
+</body>
+
+<script>
+	var csrfToken = "{{ csrf_token }}";
+</script>
+<script src="{% static 'js/Chat/chat.js' %}"></script>
+
 </html>
