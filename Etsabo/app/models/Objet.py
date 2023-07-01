@@ -50,6 +50,8 @@ class Objet(models.Model):
     @staticmethod
     def getTotalPanier(request):
         total = 0
+        
+        panier = None
         if 'panier' in request.session:
             panier = request.session['panier']
         
