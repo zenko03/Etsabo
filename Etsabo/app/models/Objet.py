@@ -50,16 +50,17 @@ class Objet(models.Model):
     @staticmethod
     def getTotalPanier(request):
         total = 0
-        
+
         panier = None
         if 'panier' in request.session:
             panier = request.session['panier']
         
-        for key, value in panier.items():
-            objet = Objet.objects.get(id=int(key))
-            prix_unitaire = objet.prix
-            quantite = value['quantite']
-            total += prix_unitaire * quantite
+        if panier:
+            for key, value in panier.items():
+                objet = Objet.objects.get(id=int(key))
+                prix_unitaire = objet.prix
+                quantite = value['quantite']
+                total += prix_unitaire * quantite
 
         return total
 
