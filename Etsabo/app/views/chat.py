@@ -28,6 +28,6 @@ def envoyer_message(request : HttpResponse):
     medecin_id = request.GET.get('medecin')
     message = request.GET.get('message')
 
-    models.Message.send_message_to(patient_id, medecin_id, message, True if est_patient == 0 else False)
+    models.Message.send_message_to(patient_id, medecin_id, message, True if int(est_patient) == 0 else False)
 
-    return HttpResponse(f"Send Patient: {patient_id} | Medecin: {medecin_id} | Message: {message}")
+    return HttpResponse(f"Send Patient: {patient_id} | Medecin: {medecin_id} | Message: {message} | {est_patient}")

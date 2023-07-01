@@ -83,7 +83,7 @@ $(document).ready(function () {
 
 function sendMessageTo(message) {
     $.ajax({
-        url: `./send?patient=1&medecin=1&est_patient=0&message=${ message }`,
+        url: `./send?patient=1&medecin=1&est_patient=1&message=${ message }`,
         dataType: "json",
         type: 'GET',
         success: (response) => {
