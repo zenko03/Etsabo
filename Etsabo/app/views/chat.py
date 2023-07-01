@@ -6,7 +6,7 @@ from django.http import JsonResponse
 
 
 def chat(request : HttpResponse):
-    return render(request, 'message_test.html')
+    return render(request, 'chat.html')
 
 def get_current_conversation(request : HttpResponse):
     est_patient = request.GET.get('est_patient')
