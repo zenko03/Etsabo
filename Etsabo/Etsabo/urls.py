@@ -32,3 +32,8 @@ urlpatterns = [
     path('ajouter-au-panier/<int:objet_id>/', v.ajouter_au_panier, name='ajouter_au_panier'),
      path('suppr/<int:objet_id>/', v.supprimer, name='suppr'),
 ]
+
+from django.urls import path
+from app.views import views
+
+

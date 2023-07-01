@@ -1,11 +1,8 @@
 // Containers
-var _conversationContainer = document.querySelector(".conversation-container");
-var _messagesContainer = document.querySelector(".messages-container");
+var conversationContainer = document.querySelector(".conversation-container");
 
-var _senderTemplate = document.querySelector("[data-senderContainer]");
-var _receiverTemplate = document.querySelector("[data-receiverContainer]");
-
-var _sendMessageButton = document.querySelector(".button-send-message");
+var senderTemplate = document.querySelector("[data-senderContainer]");
+var receiverTemplate = document.querySelector("[data-receiverContainer]");
 
 var lastMessagesPk = []
 
@@ -35,12 +32,12 @@ function getConverstation(callback) {
 
 //#region Message Adder
 function addSender(data) {
-    let sender = _senderTemplate.content.cloneNode(true);
+    let sender = senderTemplate.content.cloneNode(true);
 
     addMessage(data, sender);
 }
 function addReceiver (data) {
-    let receiver = _receiverTemplate.content.cloneNode(true);
+    let receiver = receiverTemplate.content.cloneNode(true);
 
     addMessage(data, receiver);
 }
@@ -51,7 +48,7 @@ function addMessage(data, node) {
 
     lastMessagesPk.push(data.pk);
 
-    _messagesContainer.appendChild(node);
+    conversationContainer.appendChild(node);
 }
 //#endregion
 
@@ -63,10 +60,9 @@ function populateConversation() {
             let messageData = conversations[i];
             if (lastMessagesPk.includes(messageData.pk)) continue;
 
-            let estPatient = parseInt(_conversationContainer.dataset.estpatient);
+            let estPatient = parseInt(conversationContainer.dataset.estpatient);
     
             let messageSenderType = parseInt(messageData.fields.type);
-            console.log(messageData)
             if (estPatient == messageSenderType) addSender(messageData);
             else addReceiver(messageData); 
         }
@@ -79,27 +75,4 @@ $(document).ready(function () {
             populateConversation();
         }, 1000)
     
-});
-
-function sendMessageTo(message) {
-    $.ajax({
-        url: `./send?patient=1&medecin=1&est_patient=1&message=${ message }`,
-        dataType: "json",
-        type: 'GET',
-        success: (response) => {
-            
-        },
-        error: function(response) {
-
-        }
-    });
-}
-
-$(".button-send-message").click(function (e) { 
-    e.preventDefault();
-    
-    var textMessage = $("#message-send").val();
-    sendMessageTo(textMessage);
-
-    $("#message-send").val("");
 });
