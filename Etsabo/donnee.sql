@@ -95,3 +95,8 @@ INSERT INTO objet(nom_objet,prix) VALUES
 INSERT INTO photo_objet(objet_id, src) VALUES
     (1, 'obj1.jpg'),
     (2, 'obj2.jpg');
+
+INSERT INTO fonction(type,prix,temps) values
+    ('medecin',50000,48),
+    ('pharmacie',100000,24),
+    ('pub',50000,1);

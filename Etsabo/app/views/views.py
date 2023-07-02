@@ -2,12 +2,15 @@ from datetime import datetime
 from django.utils import timezone
 from django.shortcuts import render
 from django.shortcuts import redirect
+
 from app.models import Medecin
 from app.models import Publicite
 from app.models import ConseilsSanitaire
 from app.models import Objet
 from app.models import Patient
 from app.models import Rdv
+from app.models import FonctionCollab
+from app.models import Collaboration
 import sys
 
 def home(request):
@@ -120,3 +123,61 @@ def terminer_rdv(request):
     rdv = Rdv.objects.get(id=id_rdv)
     rdv.terminer_rdv()
     return redirect('listeMedecinBack')
+
+def collaboration(request):
+    fonctions= FonctionCollab.objects.all()
+    context = {'fonctions': fonctions}
+    return render(request, 'collaboration.html', context)
+
+def inserer_collab(request):
+    nom = request.POST.get('nom')
+    prenoms = request.POST.get('prenoms')
+    fonc = request.POST.get('fonction')
+    bio = request.POST.get('bio')
+    fichier = request.FILES.get('fichier')
+    fonction = FonctionCollab.objects.get(id=fonc)
+    if fichier:
+        # Générer un chemin d'enregistrement pour le fichier
+        chemin = 'static/upload/' + fichier.name
+
+        # Écrire le fichier sur le serveur
+        with open(chemin, 'wb') as f:
+            for morceau in fichier.chunks():
+                f.write(morceau)
+        Collaboration.inserer_collaborateur(nom,prenoms,fonction,bio,fichier)
+    return redirect('collaboration')
+
+def collabBack(request):
+    fonctions = FonctionCollab.objects.all()
+    context = {'fonctions': fonctions}
+    return render(request, 'collabBack.html', context)
+
+def demande_collab(request):
+    idFonction = request.GET.get('idFonction')
+    collab = Collaboration.objects.filter(etat=0,fonction=idFonction)
+    context = {
+        'collabs': collab
+    }
+    return render(request, 'demandeCollab.html', context)
+
+def collab_EnCours(request):
+    idFonction = request.GET.get('idFonction')
+    collab = Collaboration.objects.filter(etat=1, fonction=idFonction,date_fin__gte=timezone.now() )
+    context = {
+        'collabs': collab
+    }
+    return render(request, 'collabEnCours.html', context)
+
+def accepter_collab(request):
+    idCollab = request.GET.get('idCollab')
+    collab = Collaboration.objects.select_related('fonction').get(id=idCollab)
+    idFonction = collab.fonction.id
+    fonction = FonctionCollab.objects.get(id=idFonction)
+    collab.accepter_collaboration(fonction)
+    return redirect('demande_collab')
+
+def refuser_collab(request):
+    idCollab = request.GET.get('idCollab')
+    collab = Collaboration.objects.get(id=idCollab)
+    collab.refuser_collaboration()
+    return redirect('demande_collab')

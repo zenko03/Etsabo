@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <form action="{% url 'inserer_collab' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <h3>Devenir collaborateur</h3>
+      <p>Nom: <input type="text" name="nom"></p>
+      <p>Prenoms: <input type="text" name="prenoms"></p>
+      <p><select name="fonction">
+        {% for fonction in fonctions %}
+            <option value="{{ fonction.id }}">{{ fonction.type }}</option>
+        {% endfor %}
+      </select></p>
+      <p>Biographie: <input type="text" name="bio"></p>
+      <p><input type="file" name="fichier"></p>
+      <input type="submit" value="soumettre">
+  </form>
+</body>
+</html>

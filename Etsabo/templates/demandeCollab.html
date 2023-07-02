@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h3>Demandes de collaboration  </h3>
+    <table>
+        <th>Nom</th>
+        <th>Prenoms</th>
+        <th>Biographie</th>
+        <th>Date de soumission</th>
+        <th>Piece jointe</th>
+        <th> </th>
+        <th> </th>
+    </table>
+    {% for collab in collabs %}
+        <tr>
+            <td> {{ collab.nom }}</td>
+            <td> {{ collab.prenoms}} </td>
+            <td> {{ collab.biographie }}</td>
+            <td> {{ collab.date_demande }}</td>
+            <td> <a href=""></a></td>
+            <td><a href="{% url 'accepter_collab' %}?idCollab= {{ collab.id }}">Accepter</a></td>
+            <td><a href="">Refuser</a></td>
+        </tr>
+    {% endfor %}
+</body>
+</html>

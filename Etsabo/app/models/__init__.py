@@ -19,6 +19,8 @@ from .Objet import Objet
 from .ConseilsSanitaire import ConseilsSanitaire
 from .EtudeDocteur import EtudeDocteur
 from .HistoriquePatient import HistoriquePatient
+from .FonctionCollab import FonctionCollab
+from .Collaboration import Collaboration
 
 
 

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+     {% for fonction in fonctions %}
+        <h3> {{ fonction.type }}  </h3>
+        <p><a href="{% url 'demande_collab' %}?idFonction= {{ fonction.id }}"> Demandes de collaboration </a> </p>
+        <p><a href="{% url 'collab_EnCours' %}?idFonction= {{ fonction.id }}"> Collaboration en cours </a> </p>
+    {% endfor %}
+</body>
+</html>
