@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Page</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 400px;
+        margin: 100px auto;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+      }
+
+      .form-group input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      .form-group input[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+
+      .form-group input[type="submit"]:focus {
+        outline: none;
+      }
+
+      .form-group .link {
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      .form-group .link a {
+        color: #007bff;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Registration</h1>
+      <form action="{% url 'inscription-perso' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="nom">Nom</label>
+          <input type="text" id="nom" name="nom" required />
+        </div>
+        <div class="form-group">
+          <label for="prenoms">Prénoms</label>
+          <input type="text" id="prenoms" name="prenoms" required />
+        </div>
+        <div class="form-group">
+          <label for="adresse">Adresse</label>
+          <input type="text" id="adresse" name="adresse" required />
+        </div>
+        <div class="form-group">
+          <label for="telephone">Téléphone</label>
+          <input type="text" id="telephone" name="telephone" required />
+        </div>
+        <div class="form-group">
+          <label for="sexe">Sexe</label>
+          <select name="sexe">
+            <option value="0">Féminin</option>
+            <option value="1">Masculin</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="date_de_naissance">Date de naissance</label>
+          <input type="date" id="date_de_naissance" name="date_de_naissance" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+          <div class="form-group profile-picture">
+            <img id="profile-picture-preview" src="" alt="Profile Picture">
+            <input type="file" id="profile-picture-input" name="profile_picture"  onchange="previewProfilePicture(event)">
+            <label for="profile-picture-input">Choose a profile picture</label>
+         </div>
+        <div class="form-group">
+          <input type="submit" value="Register" />
+        </div>
+      </form>
+      <div class="form-group link">
+        <a href="{% url 'login'%}">Already have an account? Login</a>
+      </div>
+    </div>
+  </body>
+</html>
+ <script>
+    function previewProfilePicture(event) {
+      const input = event.target;
+      const reader = new FileReader();
+
+      reader.onload = function () {
+        const preview = document.getElementById('profile-picture-preview');
+        preview.src = reader.result;
+      }
+
+      if (input.files && input.files[0]) {
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+  </script>

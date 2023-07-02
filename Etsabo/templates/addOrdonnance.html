@@ -1,0 +1,221 @@
+{% extends 'baseDocteur.html' %} {% block content %} {% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 600px;
+        margin-top: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .form-group input[type="text"],
+      .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .form-group .add-medication-button {
+        background-color: #4caf50;
+        color: #fff;
+        cursor: pointer;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+
+      .form-group .add-medication-button:hover {
+        background-color: #45a049;
+      }
+
+      .medication-row {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 10px;
+      }
+
+      .medication-row input[type="text"] {
+        flex: 1;
+      }
+
+      .medication-row .remove-medication-button {
+        background-color: #f44336;
+        color: #fff;
+        cursor: pointer;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+      }
+
+      .medication-row .remove-medication-button:hover {
+        background-color: #d32f2f;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Créer ordonnance et consultation</h2>
+    <div class="container">
+      <form action="" method="post">
+        {% csrf_token %}
+
+      <div class="form-group">
+        <label for="date_consultation">Date de consultation :</label>
+        <input type="date" name="date_consultation" id="date-consultation-input" required />
+      </div>
+      <div class="form-group">
+        <label for="symptomes">Symptômes :</label>
+        <textarea name="symptomes" id="symptomes-input" rows="5" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="diagnostic">Diagnostic :</label>
+        <textarea name="diagnostic" id="diagnostic-input" rows="5" required></textarea>
+      </div>
+          <input type="hidden" id="idPatient" name="idPatient">
+        <div class="form-group">
+          <label for="patient">Patient :</label>
+          <input type="text" name="patient" id="patient-input" required />
+          <ul id="patient-suggestions" class="suggestions"></ul>
+        </div>
+        <div class="form-group">
+          <label for="medocs">Médicaments :</label>
+          <div id="medications-container">
+            <div class="medication-row">
+              <input type="text" name="medocs[]" required />
+              <input type="text" name="prise[]" required />
+              <input type="text" name="remarque[]" required />
+              <button type="button" class="remove-medication-button">Supprimer</button>
+            </div>
+          </div>
+          <button type="button" class="add-medication-button">Ajouter une ligne d'ordonnance</button>
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Enregistrer" />
+        </div>
+      </form>
+    </div>
+
+    <script>
+      var patientInput = document.getElementById("patient-input");
+      var patientId = document.getElementById("idPatient");
+      var patientSuggestions = document.getElementById("patient-suggestions");
+
+      patientInput.addEventListener("input", function () {
+        var inputValue = this.value.trim().toLowerCase();
+
+        if (inputValue.length === 0) {
+          patientSuggestions.innerHTML = "";
+          return;
+        }
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              var suggestions = JSON.parse(xhr.responseText);
+              renderPatientSuggestions(suggestions);
+            } else {
+              console.error("Une erreur s'est produite lors de la récupération des suggestions de patients.");
+            }
+          }
+        };
+
+        xhr.open("GET", "/get_patient_suggestions/?search=" + inputValue, true);
+        xhr.send();
+      });
+
+      function renderPatientSuggestions(suggestions) {
+        patientSuggestions.innerHTML = "";
+
+        suggestions.forEach(function (patient) {
+          var suggestionItem = document.createElement("li");
+          suggestionItem.className = "patient-suggestion";
+          suggestionItem.textContent = patient.nom+"   "+patient.prenoms;
+          suggestionItem.addEventListener("click", function () {
+            patientInput.value = patient.nom+" "+patient.prenoms;
+            patientId.value = patient.id;
+            patientSuggestions.innerHTML = "";
+          });
+
+          patientSuggestions.appendChild(suggestionItem);
+        });
+      }
+
+      var medicationsContainer = document.getElementById("medications-container");
+      var addMedicationButton = document.querySelector(".add-medication-button");
+
+      function createMedicationRow() {
+        var medicationRow = document.createElement("div");
+        medicationRow.className = "medication-row";
+
+        var medicationInput = document.createElement("input");
+        medicationInput.type = "text";
+        medicationInput.name = "medocs[]";
+        medicationInput.required = true;
+
+        var priseInput = document.createElement("input");
+        priseInput.type = "text";
+        priseInput.name = "prise[]";
+        priseInput.required = true;
+
+        var remarqueInput = document.createElement("input");
+        remarqueInput.type = "text";
+        remarqueInput.name = "remarque[]";
+        remarqueInput.required = true;
+
+        var removeButton = document.createElement("button");
+        removeButton.type = "button";
+        removeButton.className = "remove-medication-button";
+        removeButton.innerText = "Supprimer";
+        removeButton.addEventListener("click", function () {
+          medicationRow.remove();
+        });
+
+        medicationRow.appendChild(medicationInput);
+        medicationRow.appendChild(priseInput);
+        medicationRow.appendChild(remarqueInput);
+        medicationRow.appendChild(removeButton);
+
+        return medicationRow;
+      }
+
+      addMedicationButton.addEventListener("click", function () {
+        var medicationRow = createMedicationRow();
+        medicationsContainer.appendChild(medicationRow);
+      });
+    </script>
+  </body>
+</html>
+{% endblock %}

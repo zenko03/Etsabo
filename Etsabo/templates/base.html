@@ -1,4 +1,6 @@
+
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -40,6 +42,8 @@
       background-color: blue;
     }
   </style>
+{% load static %}
+
   <body>
     <main class="content">
       <section class="ads">
@@ -122,9 +126,7 @@
         <li class="nav-item flex-fill">
           <a
             class="nav-link"
-            href="#"
-            data-toggle="modal"
-            data-target="#adsModal"
+            href="{% url 'profil' %}"
           >
             <span class="fas fa-user fa-lg mr-2 animated tada"></span>
           </a>

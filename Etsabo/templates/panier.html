@@ -1,23 +1,27 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% block content %}{% load static %}
+<link rel="stylesheet" href="{% static 'css/panier.css' %}" type="text/css" />
 <div class="container mt-5">
   {% if 'panier' in request.session %}
-  <h2>Panier</h2>
-  <ul>
+  <h2 class="panier-title">Panier</h2>
+  <ul class="panier-list">
     {% for key, value in request.session.panier.items %} {% for obj in objets %}
     {% if obj.id|stringformat:"s" == key %}
-    <li>
-      {{ obj.nom_objet }} - Quantité : {{ value.quantite }} - Prix Unitaire:
-      {{obj.prix }}
-
-      <a href="{% url 'suppr' obj.id %}">Supprimer</a>
+    <li class="panier-item">
+      <div class="item-info">
+        <h3 class="item-name">{{ obj.nom_objet }}</h3>
+        <p class="item-quantite">Quantité: {{ value.quantite }}</p>
+        <p class="item-prix">Prix Unitaire: {{ obj.prix }}</p>
+      </div>
+      <a href="{% url 'suppr' obj.id %}" class="btn btn-supprimer">Supprimer</a>
     </li>
     {% endif %} {% endfor %} {% endfor %}
 
-    <h2>Totale : {{ tot }}</h2>
+    <h2 class="totale">Totale : {{ tot }}</h2>
   </ul>
   {% else %}
-  <h2>Panier vide</h2>
+  <h2 class="panier-vide">Panier vide</h2>
   {% endif %}
-  <a href="{% url 'viderPanier' %}">Vider le panier</a>
+    <a href="{% url 'viderPanier' %}" class="btn btn-vider">Vider le panier</a>
+    <a href="{% url 'livraison' %}" class="btn btn-livrer">Livrer</a>
 </div>
 {% endblock %}

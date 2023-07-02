@@ -53,11 +53,11 @@ class Objet(models.Model):
         if 'panier' in request.session:
             panier = request.session['panier']
         
-        for key, value in panier.items():
-            objet = Objet.objects.get(id=int(key))
-            prix_unitaire = objet.prix
-            quantite = value['quantite']
-            total += prix_unitaire * quantite
+            for key, value in panier.items():
+                objet = Objet.objects.get(id=int(key))
+                prix_unitaire = objet.prix
+                quantite = value['quantite']
+                total += prix_unitaire * quantite
 
         return total
 
