@@ -9,3 +9,6 @@ class Admin(models.Model):
     class Meta:
         db_table = 'admin'
 
+    class Meta:
+        db_table = 'admin'
+

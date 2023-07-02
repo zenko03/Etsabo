@@ -60,11 +60,13 @@
     <div class="row">
       <div class="col-md-8">
         <div class="tip-card">
+          {% if conseil %}
           <img src="{% static '/images/conseilsSanitaire/' %}{{conseil.img}}" alt="Health Tip" />
           <h3 class="tip-title">{{ conseil.titre }}</h3>
           <p class="tip-description">
             {{ conseil.description }}
           </p>
+          {% endif %}
         </div>
       </div>
     </div>

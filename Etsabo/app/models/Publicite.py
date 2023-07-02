@@ -4,7 +4,6 @@ import datetime
 from datetime import datetime
 
 
-
 import random
 
 class Publicite(models.Model):

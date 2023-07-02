@@ -70,3 +70,5 @@ class Medecin(models.Model):
 
 
 
+
+
