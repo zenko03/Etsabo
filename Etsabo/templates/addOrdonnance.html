@@ -88,7 +88,7 @@
   <body>
     <h2>Créer ordonnance et consultation</h2>
     <div class="container">
-      <form action="" method="post">
+      <form action="{% url 'create_consultation' %}" method="post">
         {% csrf_token %}
 
       <div class="form-group">
@@ -113,9 +113,9 @@
           <label for="medocs">Médicaments :</label>
           <div id="medications-container">
             <div class="medication-row">
-              <input type="text" name="medocs[]" required />
-              <input type="text" name="prise[]" required />
-              <input type="text" name="remarque[]" required />
+              <input type="text" name="medocs[]" placeholder="Medicament" required />
+              <input type="text" name="prise[]" placeholder="Prise"  required />
+              <input type="text" name="remarque[]" placeholder="Remarque"  required />
               <button type="button" class="remove-medication-button">Supprimer</button>
             </div>
           </div>

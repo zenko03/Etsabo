@@ -64,7 +64,21 @@ class Medecin(models.Model):
         self.delete()
         return 0
 
+    @staticmethod
+    def checkLogin(email, password):
+        try:
+            medecin = Medecin.objects.get(email=email, password=password)
+            return True
+        except Medecin.DoesNotExist:
+            return False
 
+    @staticmethod
+    def getMedecin(email, password):
+        try:
+            medecin = Medecin.objects.get(email=email, password=password)
+            return medecin
+        except Medecin.DoesNotExist:
+            return None
 
 
 

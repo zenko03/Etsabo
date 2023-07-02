@@ -53,5 +53,9 @@ urlpatterns = [
     path('ordonnance/', v.ordonnance, name='ordonnance'),
     path('get_patient_suggestions/', v.get_patient_suggestions, name='get_patient_suggestions'),
     path('loginDocteur/', v.loginDocteur, name='loginDocteur'),
+    path('checkDocteur/',v.checkLoginDoc,name='checkLoginDoc'),
+    path('create_consultation/',v.create_consultation,name='create_consultation')
+
+
 ]
 

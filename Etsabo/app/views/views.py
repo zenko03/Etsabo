@@ -2,7 +2,7 @@ import json
 from datetime import datetime, timedelta, timezone
 
 from django.shortcuts import render
-from app.models import Medecin, Livraison, ObjetALivrer
+from app.models import Medecin, Livraison, ObjetALivrer, Consultation, Ordonnance
 from app.models import Publicite
 from app.models import ConseilsSanitaire
 from app.models import Objet
@@ -431,3 +431,44 @@ def get_patient_suggestions(request):
     patients = Patient.objects.filter(nom__icontains=search_query).values('id','nom', 'prenoms')
     suggestions = list(patients)
     return JsonResponse(suggestions, safe=False)
+
+def checkLoginDoc(request):
+    email = request.POST.get('email')
+    password = request.POST.get('password')
+
+    if Medecin.checkLogin(email, password):
+        d = Medecin.getMedecin(email,password)
+        request.session['idSessionDoc'] = d.id
+        return homeDocteur(request)
+
+    return loginDocteur(request)
+
+from django.shortcuts import render, redirect
+
+
+def create_consultation(request):
+    if request.method == 'POST':
+        # Récupérer les données du formulaire
+        date_consultation = request.POST.get('date_consultation')
+        symptomes = request.POST.get('symptomes')
+        diagnostic = request.POST.get('diagnostic')
+        idP = request.POST.get('idPatient')
+        medocs = request.POST.getlist('medocs[]')
+        prises = request.POST.getlist('prise[]')
+        remarques = request.POST.getlist('remarque[]')
+
+
+        patient = Patient.objects.get(id=idP)
+        idDoc = request.session['idSessionDoc']
+        docteur = Medecin.objects.get(id=idDoc)
+        # Créer une instance de Consultation et l'enregistrer dans la base de données
+        consultation = Consultation.objects.create(medecin=docteur,date_consultation=date_consultation, symptomes=symptomes, diagnostic=diagnostic, patient=patient)
+
+        # Créer des instances d'Ordonnance et les lier à la consultation
+        for i in range(len(medocs)):
+            ordonnance = Ordonnance.objects.create(consultation=consultation, medocs=medocs[i], prise=prises[i], remarque=remarques[i])
+
+        # Rediriger vers une page de succès ou faire autre chose
+
+    return homeDocteur(request)
+
