@@ -31,6 +31,7 @@ urlpatterns = [
     path('localisation/pharmacie/', localisation.pharmacie, name='localisation_pharmacie'),
     path('ajouter-au-panier/<int:objet_id>/', v.ajouter_au_panier, name='ajouter_au_panier'),
      path('suppr/<int:objet_id>/', v.supprimer, name='suppr'),
+     path('collaborer', v.collaborer, name='collaborer')
 ]
 
 from django.urls import path

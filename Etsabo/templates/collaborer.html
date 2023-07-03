@@ -1,0 +1,77 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collabateur</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/collaborer.css' %}" type="text/css" />
+</head>
+
+<style>
+    .banner-collab {
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.562), rgba(0,0,0,0.0)), url({% static 'images/collab/collab_banner.jpg' %});
+    }
+</style>
+
+<body>
+    <div class="container collab-container">
+        <div class="banner-collab">
+            <h3 class="banner-title">Rejoignez-nous!</h3>
+
+            <div class="liste-specialiste-container">
+                <h5>Nos specialistes</h5>
+
+                <div class="liste-specialiste">
+                    <div class="docteur"></div>
+                    <div class="docteur"></div>
+                    <div class="docteur"></div>
+                    <div class="docteur"></div>
+                    <div class="docteur"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="collab-form-container">
+            <div class="collab-form-holder">
+
+                <h3>Collaborons</h3>
+    
+                <form action="" method="post" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="form-group col-md-5">
+                            <label class="font-weight-bold" for="nom">Nom</label>
+                            <input type="text" class="form-control" name="nom" id="nom">
+                        </div>
+                        <div class="form-group col-md-7">
+                            <label class="font-weight-bold" for="prenom">Prenom</label>
+                            <input type="text" class="form-control" name="prenom" id="prenom">
+                        </div>
+                    </div>
+    
+                    <div class="form-group">
+                        <label class="font-weight-bold" for="fonctions">Fonctions</label>
+                        <input type="text" class="form-control" name="fonctions" id="fonctions">
+                    </div>
+    
+                    <div class="form-group">
+                        <label class="font-weight-bold" for="biographie">Biographie</label>
+                        <textarea name="biographie" class="form-control" id="biographie" cols="30" rows="4"></textarea>
+                    </div>
+    
+                    <div class="form-group">
+                        <label class="font-weight-bold" for="piece">Ajouter piece Jointe (Requis)</label>
+                        <input type="file" class="form-control" name="piece" id="piece[]" multiple>
+                    </div>
+                    <div class="form-group d-flex">
+                        <input type="submit" class="btn btn-primary" value="Envoyer">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

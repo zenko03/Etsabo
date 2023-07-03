@@ -124,3 +124,6 @@ def viderPanier(request):
         del request.session['panier']
     
     return render(request,'panier.html')
+
+def collaborer(request):
+    return render(request, "collaborer.html");
