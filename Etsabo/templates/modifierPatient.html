@@ -1,3 +1,5 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,14 +7,18 @@
     <title>Title</title>
 </head>
 <body>
-<form action="{% url 'modificationPatient' %}" method="post">
-    {% csrf_token %}
-    <input type="hidden" name="idPatient" value="{{ patient.id }}">
-  <input type="text" name="adresse" placeholder="{{ patient.adresse }}" value="{% if request.POST.adresse %}{{ request.POST.adresse }}{% else %}{{ patient.adresse }}{% endif %}">
-  <input type="text" name="tel" placeholder="{{ patient.telephone }}" value="{% if request.POST.tel %}{{ request.POST.tel }}{% else %}{{ patient.telephone }}{% endif %}">
-  <input type="text" name="ddn" placeholder="{{ patient.date_de_naissance }}" value="{% if request.POST.ddn %}{{ request.POST.ddn }}{% else %}{{ patient.date_de_naissance|date:'Y-m-d' }}{% endif %}">
-  <input type="text" name="email" placeholder="{{ patient.email }}" value="{% if request.POST.email %}{{ request.POST.email }}{% else %}{{ patient.email }}{% endif %}">
-  <input type="submit" value="Modifier">
-</form>
+    <form action="{% url 'modificationPatient' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" class="form-control" name="idPatient" value="{{ patient.id }}">
+        <label for="adresse">Adresse : </label>
+        <input type="text" class="form-control" name="adresse" placeholder="{{ patient.adresse }}" value="{% if request.POST.adresse %}{{ request.POST.adresse }}{% else %}{{ patient.adresse }}{% endif %}">
+        <label for="tel">Telephone : </label>
+        <input type="text" class="form-control" name="tel" placeholder="{{ patient.telephone }}" value="{% if request.POST.tel %}{{ request.POST.tel }}{% else %}{{ patient.telephone }}{% endif %}">
+        <label for="ddn">Date de naissance : </label>
+        <input type="text" class="form-control" name="ddn" placeholder="{{ patient.date_de_naissance }}" value="{% if request.POST.ddn %}{{ request.POST.ddn }}{% else %}{{ patient.date_de_naissance|date:'Y-m-d' }}{% endif %}">
+        <button class="btn-logout" style="margin-bottom: 20px;background-color: #44ff07;color: white">Modifier</button>
+    </form>
 </body>
 </html>
+
+{% endblock %}

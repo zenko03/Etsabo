@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Choose Account Type</title>
+    <link
+      href="{% static 'css/choice.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Choose Account Type</h1>
+
+      <form action="{% url 'next-choice' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label>Account Type:</label>
+          <div class="account-options">
+            <div class="account-option" data-value="0">
+              <img
+                src="{% static 'images/choix/user.png' %}"
+                alt="Personal Account"
+              />
+              <span>Personal Account</span>
+            </div>
+            <div class="account-option" data-value="10">
+              <img
+                src="{% static 'images/choix/fam.jpg' %}"
+                alt="Family Account"
+              />
+              <span>Family Account</span>
+            </div>
+          </div>
+          <input
+            type="hidden"
+            name="account-type"
+            id="account-type-input"
+            value=""
+          />
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Next" class="btn" />
+        </div>
+      </form>
+    </div>
+
+    <script>
+      const accountOptions = document.querySelectorAll(".account-option");
+      const accountTypeInput = document.getElementById("account-type-input");
+
+      accountOptions.forEach((option) => {
+        option.addEventListener("click", () => {
+          accountOptions.forEach((opt) => opt.classList.remove("selected"));
+          option.classList.add("selected");
+          accountTypeInput.value = option.dataset.value;
+        });
+      });
+    </script>
+  </body>
+</html>

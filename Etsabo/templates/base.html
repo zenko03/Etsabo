@@ -1,4 +1,6 @@
+
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -39,14 +41,9 @@
       width: 100%;
       background-color: blue;
     }
-
-     input{
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    background-color: #f5f6f7;
-  }
   </style>
+{% load static %}
+
   <body>
     <main class="content">
       <section class="ads">
@@ -67,11 +64,11 @@
                     <div class="row">
                       <div class="col-lg-4">
                         <div class="profile-card">
-                          <div class="cover-photo">
-                            <img src="merci.jpg" alt="Cover Photo" />
-                          </div>
                           <div class="profile-picture">
-                            <img src="slide1.jpg" alt="Profile Picture" />
+                            <img
+                              src="{% static '/images/logo.png' %}"
+                              alt="Profile Picture"
+                            />
                           </div>
                           <div class="profile-info">
                             <h5 class="profile-name">Rahajarison Rianala</h5>
@@ -83,37 +80,7 @@
                                 style="background-color: red; border: red"
                                 >Déconnexion</a
                               >
-                              <a href="#" data-toggle="modal" data-target="#adsModal1" class="btn btn-primary" style="background-color: rgb(81, 255, 0); border: rgb(81, 255, 0)">Modifier</a>
                             </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-              </div>
-            </div>
-          </div>
-
-          <div class="modal fade" id="adsModal1" tabindex="-1" role="dialog" aria-labelledby="adsModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <section class="profile">
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-lg-4">
-                        <div class="profile-card">
-                          <div class="cover-photo">
-                            <a href="#upload"><img src="merci.jpg" alt="Cover Photo" /></a>
-                          </div>
-                          <div class="profile-picture">
-                            <a href="#upload"><img src="slide1.jpg" alt="Profile Picture" /></a>
-                          </div>
-                          <div class="profile-info">
-
-                            <p class="profile-bio">Email <input type="text" name="modif_email"></p>
-                            <p class="profile-bio">Telephone <input type="text" name="modif_telephone"></p>
-                            <p class="profile-bio">Adresse <input type="text" name="modif_adresse"></p>
                           </div>
                         </div>
                       </div>
@@ -152,11 +119,14 @@
           </a>
         </li>
         <li class="nav-item flex-fill">
+          <a class="nav-link" href="{% url 'panier' %}">
+            <span class="fas fa-shopping-cart fa-lg mr-2"></span>
+          </a>
+        </li>
+        <li class="nav-item flex-fill">
           <a
             class="nav-link"
-            href="#"
-            data-toggle="modal"
-            data-target="#adsModal"
+            href="{% url 'profil' %}"
           >
             <span class="fas fa-user fa-lg mr-2 animated tada"></span>
           </a>

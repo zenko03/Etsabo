@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 600px;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .cards {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .card {
+        flex: 0 0 300px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        background-color: #fff;
+        cursor: pointer;
+        transition: box-shadow 0.3s;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .card:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .card h3 {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+
+      .card p {
+        margin-top: 0;
+        margin-bottom: 20px;
+      }
+
+      .selected-card {
+        background-color: #eaf7f7;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .form-group input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .form-group input[type="submit"] {
+        background-color: #4caf50;
+        color: #fff;
+        cursor: pointer;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+
+      .form-group input[type="submit"]:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+
+      .form-group input[type="submit"]:hover:not([disabled]) {
+        background-color: #45a049;
+      }
+
+      @media only screen and (max-width: 600px) {
+        body {
+          padding: 10px;
+        }
+
+        .card {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Ajouter un abonnement</h2>
+    <div class="container">
+      <div class="cards">
+        {% for type_abonnement in type %}
+        <div class="card" data-id="{{ type_abonnement.id }}">
+          <h3>{{ type_abonnement.nom_abonnement }}</h3>
+          <p>Prix: {{ type_abonnement.prix }}</p>
+        </div>
+        {% endfor %}
+      </div>
+      <form
+        id="abonnement-form"
+        action="{% url 'addAbonnement' %}"
+        method="post"
+      >
+        {% csrf_token %}
+        <input
+          type="hidden"
+          id="type_abonnement_input"
+          name="type_abonnement"
+          required
+        />
+          <div class="form-group">
+              <label>Reference:</label>
+           <input type="text" name="ref">
+        </div>
+
+        <div class="form-group">
+          <input type="submit" value="Ajouter" disabled />
+        </div>
+      </form>
+    </div>
+
+    <script>
+      var cards = document.querySelectorAll(".card");
+      var typeAbonnementInput = document.getElementById(
+        "type_abonnement_input"
+      );
+      var submitButton = document.querySelector('input[type="submit"]');
+
+      cards.forEach(function (card) {
+        card.addEventListener("click", function () {
+          cards.forEach(function (card) {
+            card.classList.remove("selected-card");
+          });
+          this.classList.add("selected-card");
+          typeAbonnementInput.value = this.getAttribute("data-id");
+          submitButton.removeAttribute("disabled");
+        });
+      });
+    </script>
+  </body>
+</html>
