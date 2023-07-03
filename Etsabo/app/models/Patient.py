@@ -6,6 +6,7 @@ class Patient(models.Model):
     prenoms = models.CharField(max_length=30)
     adresse = models.CharField(max_length=30)
     telephone = models.CharField(max_length=15)
+    sexe = models.IntegerField()
     date_de_naissance =models.DateTimeField(null=True, blank=True)
     email = models.CharField(max_length=40)
     password = models.CharField(max_length=40)
@@ -14,4 +15,23 @@ class Patient(models.Model):
 
     class Meta:
         db_table = 'patient'
-            
+
+    @staticmethod  
+    def checkLogin(email, password):
+        try:
+            patient = Patient.objects.get(email=email, password=password)
+            return True
+        except Patient.DoesNotExist:
+            return False
+
+    @staticmethod
+    def getPatient(email,password):
+        try:
+            patient = Patient.objects.get(email=email, password=password)
+            return patient
+        except Patient.DoesNotExist:
+            return None
+
+
+        
+    
