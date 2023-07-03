@@ -12,26 +12,32 @@ class Patient(models.Model):
     password = models.CharField(max_length=40)
     famille =  models.ForeignKey("Famille", on_delete=models.CASCADE) #1 si simple
     is_actif = models.IntegerField() #0 si pas abonné et 1 si abonné
-    etat = models.IntegerField() #1 ra efa supprimé
 
     class Meta:
         db_table = 'patient'
 
-    def modifierPatient(patient,adresse,telephone,ddn,email):
+    @staticmethod  
+    def checkLogin(email, password):
+        try:
+            patient = Patient.objects.get(email=email, password=password)
+            return True
+        except Patient.DoesNotExist:
+            return False
+
+    @staticmethod
+    def getPatient(email,password):
+        try:
+            patient = Patient.objects.get(email=email, password=password)
+            return patient
+        except Patient.DoesNotExist:
+            return None
+
+    def modifierPatient(patient,adresse,telephone,ddn):
         patient.adresse=adresse
         patient.telephone=telephone
         patient.date_de_naissance=ddn
-        patient.email=email
         patient.save()
 
-    def supprimerPatient(idPatient):
-        patient = Patient.objects.get(id=idPatient)
-        patient.etat=1
-        patient.save()
 
-    def rechercherPatient(mot):
-        patient = Patient.objects.filter(nom__icontains=mot) | Patient.objects.filter(prenoms__icontains=mot)
-        patients= list(patient)
-        return patients
-
+        
     

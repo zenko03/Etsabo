@@ -15,11 +15,11 @@ INSERT INTO famille (nom_famille, adresse, email, password) VALUES
 INSERT INTO medicament (nom) VALUES ('Medicament1'), ('Medicament2'), ('Medicament3'), ('Medicament4');
 
 -- Table Patient
-INSERT INTO patient (nom, prenoms, adresse, telephone, date_de_naissance, email, password, famille_id, is_actif) VALUES 
-    ('Patient1', 'Prenoms1', 'Adresse1', '123456789', '2000-01-01', 'patient1@example.com', 'patient1pass', 1, 1),
-    ('Patient2', 'Prenoms2', 'Adresse2', '987654321', '2000-02-02', 'patient2@example.com', 'patient2pass', 1, 0),
-    ('Patient3', 'Prenoms3', 'Adresse3', '555555555', '2000-03-03', 'patient3@example.com', 'patient3pass', 2, 1),
-    ('Patient4', 'Prenoms4', 'Adresse4', '999999999', '2000-04-04', 'patient4@example.com', 'patient4pass', 3, 0);
+INSERT INTO patient (nom, prenoms, sexe,adresse, telephone, date_de_naissance, email, password, famille_id, is_actif) VALUES
+    ('Patient1', 'Prenoms1', 0,'Adresse1', '123456789', '2000-01-01', 'patient1@example.com', 'patient1pass', 1, 1),
+    ('Patient2', 'Prenoms2', 1,'Adresse2', '987654321', '2000-02-02', 'patient2@example.com', 'patient2pass', 1, 0),
+    ('Patient3', 'Prenoms3', 0,'Adresse3', '555555555', '2000-03-03', 'patient3@example.com', 'patient3pass', 2, 1),
+    ('Patient4', 'Prenoms4', 1,'Adresse4', '999999999', '2000-04-04', 'patient4@example.com', 'patient4pass', 3, 0);
 
 -- Table Medecin
 INSERT INTO medecin (nom, prenoms, email, password, specialite_id) VALUES 
@@ -36,11 +36,11 @@ INSERT INTO message (medecin_id, patient_id, type, contenus, date_envoie) VALUES
     (4, 4, 0, 'Contenu4', '2023-06-18');
 
 -- Table Abonnement
-INSERT INTO abonnement (patient_id, date_fin, type_id) VALUES 
-    (1, '2023-12-31', 1),
-    (2, '2023-12-31', 2),
-    (3, '2023-12-31', 3),
-    (4, '2023-12-31', 4);
+INSERT INTO abonnement (patient_id, date_fin, type_id,reference) VALUES
+    (1, '2023-12-31', 1,1234),
+    (2, '2023-12-31', 2,4561),
+    (3, '2023-12-31', 3,7894),
+    (4, '2023-12-31', 4,1478);
 
 -- Table Consultation
 INSERT INTO consultation (medecin_id, patient_id, date_consultation, symptomes, diagnostic) VALUES 
@@ -62,13 +62,6 @@ INSERT INTO rdv (medecin_id, patient_id, dateHeure_rdv, status) VALUES
     (2, 2, '2023-07-18 11:00:00', 0),
     (3, 3, '2023-07-18 12:00:00', 0),
     (4, 4, '2023-07-18 13:00:00', 0);
-
-INSERT INTO rdv (dateHeure_rdv, status,medecin_id, patient_id) VALUES
-    ('2023-07-18 10:00:00', 0,1, 1),
-    ('2023-07-18 11:00:00', 0,2, 2),
-    ('2023-07-18 12:00:00', 0,3, 3),
-    ('2023-07-18 13:00:00', 0,4, 4);
-
 
 -- Table Pharmacie
 INSERT INTO pharmacie (nom_pharmacie, long, lat) VALUES 
