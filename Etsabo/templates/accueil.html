@@ -1,0 +1,193 @@
+{% extends 'base.html' %} {% block content %}{% load static %}
+
+
+<header class="header">
+  <link rel="stylesheet" href="{% static 'css/accueil.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/boutique.css' %}" type="text/css" />
+  <div id="headerCarousel" class="carousel slide" data-ride="carousel">
+  <span><img src="{% static '/images/logo.png' %} "  style="width:100px;height:100px;" alt="Health Tip" /></span>
+  {% comment %} <div>
+    <span
+    id="typingText"
+    class="typing-animation"
+    style="color: blue; font-size: 30px"
+  ></span>
+  </div> {% endcomment %}
+</header>
+<div class="container"  id="back" style="">
+  
+</div>
+<section class="doctors">
+  <div class="container">
+    <div class="container" id="doc">
+      <div class="row flex-nowrap overflow-auto">
+        {% for medecin in medecins %}
+        <div class="col-lg-4 col-md-6 item">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-3">
+                  <div class="doctor-photo-circle">
+                    <img  src="{% static '/images/rasoa.png' %}" alt="Doctor" class="doctor-photo" />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <h3 class="doctor-name">
+                    Dr {{ medecin.nom }} {{ medecin.prenoms }}
+                  </h3>
+                  <p class="doctor-specialty">Spécialité: Cardiologie</p>
+                </div>
+                <div class="col-3">
+                  <a href="{% url 'profilMedecin' %}?idMedecin= {{ medecin.id }} " class="btn btn-primary btn-details det" >Détails</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <!-- Ajoutez les autres éléments de la liste des docteurs ici -->
+      </div>
+    </div>
+    <div class="col-3">
+      <a href="{% url 'listeMedecin' %}" id="voirPlusDoc" style="width:355px" class="btn btn-primary btn-details">Voir plus</a>
+    </div>
+  </div>
+</section>
+
+<section class="health-tips">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="tip-card">
+          {% if conseil %}
+          <img src="{% static '/images/conseilsSanitaire/' %}{{conseil.img}}" alt="Health Tip" />
+          <h3 class="tip-title">{{ conseil.titre }}</h3>
+          <p class="tip-description">
+            {{ conseil.description }}
+          </p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="carousel-section">
+  <h2 class="section-title">Cela pourrait vous interresser</h2>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Contenu des diapositives -->
+    <div class="carousel-inner">
+      {% for pub in pubs %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <div class="card">
+          <img src="{% static '/images/pubs/' %}{{pub.photo}}" class="card-img-top" alt="Slide 1">
+          <div class="card-body">
+            <h5 class="card-title">{{ pub.titre }}</h5>
+            <p class="card-text">{{ pub.description }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Contrôles de navigation -->
+    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Précédent</span>
+    </a>
+    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Suivant</span>
+    </a>
+  </div>
+</section>
+
+
+
+<section class="ads">
+  <div class="container">
+    <h2 class="section-title">Decouvrez chez nous...</h2>
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-md-9 offset-md-3">
+          <div class="row">
+            <div class="row flex-nowrap overflow-auto">
+            {% for obj in objets %}
+            <div class="col-md-6 col-sm-12">
+              <div class="card mb-4" style="width: 100%">
+            
+                {% for ph in obj.photoobjet_set.all %}
+                <img src="{% static '/images/objets/' %}{{ ph.src }}" class="card-img-top" alt="Product 1" />
+                {% endfor %}
+            
+                <div class="card-body">
+                  <h5 class="card-title">{{ obj.nom_objet }}</h5>
+                  <p class="card-text">Prix: {{ obj.prix }} Ar</p>
+                  <div class="rating">
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9734;</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+            <!-- Ajoutez ici d'autres cartes de produits -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <a href="{% url 'boutique' %}" id="voirPlusDoc" style="width:355px" class="btn btn-primary btn-details">Voir plus d'element</a>
+  </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var text = "Bienvenue";
+    var typingElement = document.getElementById("typingText");
+    var delay = 100; // Délai entre chaque caractère (en millisecondes)
+
+    function typeWriter(text, index) {
+      typingElement.textContent += text.charAt(index);
+      index++;
+      if (index < text.length) {
+        setTimeout(function () {
+          typeWriter(text, index);
+        }, delay);
+      } else {
+        setTimeout(function () {
+          eraseText();
+        }, 2000); // Délai avant d'effacer le texte
+      }
+    }
+
+    function eraseText() {
+      var textLength = typingElement.textContent.length;
+      if (textLength > 0) {
+        typingElement.textContent = typingElement.textContent.slice(
+          0,
+          textLength - 1
+        );
+        setTimeout(eraseText, delay);
+      } else {
+        setTimeout(function () {
+          typeWriter(text, 0);
+        }, delay);
+      }
+    }
+
+    typeWriter(text, 0);
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+{% endblock %}

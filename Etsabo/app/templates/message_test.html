@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Test</title>
+
+    <script src="{% static 'jquery/jquery-3.7.0.min.js' %}"></script>
+</head>
+<body>
+    <div class="conversation-container" data-estPatient="0">
+        <template data-senderContainer>
+            <div class="sender-message">
+                <p class="info-sender">
+                    Nom - Date - Sent
+                </p>
+        
+                <p class="message">
+                    Here is message
+                </p>
+            </div>
+        </template>
+    
+        <template data-receiverContainer>
+            <div class="receiver-message">
+                <p class="info-receiver">
+                    Nom - Date - Received
+                </p>
+        
+                <p class="message">
+                    Here is message
+                </p>
+            </div>
+        </template>
+    </div>
+</body>
+
+<script>
+    var csrfToken = '{{ csrf_token }}';
+</script>
+<script src="{% static 'js/Chat/chat.js' %}"></script>
+
+</html>

@@ -1,46 +1,88 @@
-from django.db import models
-from django.contrib.auth.hashers import make_password
-from django.contrib.auth.hashers import check_password
-
+from django.core.exceptions import ValidationError
+from django.db import models, IntegrityError
+from .Specialite import Specialite
 
 class Medecin(models.Model):
     nom = models.CharField(max_length=30)
     prenoms = models.CharField(max_length=30)
-    email = models.EmailField(default="",unique=True)
-    password = models.CharField(max_length=30,default="")
-    specialite = models.ForeignKey("Specialite", on_delete=models.CASCADE)
+    email = models.CharField(max_length=40)
+    password = models.CharField(max_length=40)
+    specialite = models.ForeignKey("Specialite", on_delete=models.CASCADE, null=True)
+    
 
     class Meta:
-        db_table = "Medecin"
+        db_table = 'medecin'
 
-    def __init__(self, nom, prenoms, email, password, specialite, *args, **kwargs):
-        super(Medecin, self).__init__(*args, **kwargs)
+    def set_nom(self,nom):
         self.nom = nom
+
+    def set_prenoms(self,prenoms):
         self.prenoms = prenoms
+
+    def set_email(self,email):
         self.email = email
+
+    def set_password(self,password):
         self.password = password
+
+    def set_specialite(self,specialite):
         self.specialite = specialite
 
-    @classmethod
-    def inscription(cls, nom, prenoms, email, password, specialite):
-        medecin = cls(nom=nom, prenoms=prenoms, email=email, password=make_password(password), specialite=specialite)
-        medecin.save()
+    @staticmethod
+    def getAll():
+        return Medecin.objects.all()
+
+    @staticmethod
+    def create(nom, prenoms, email, password, specialite):
+        medecin = Medecin()
+        medecin.set_nom(nom)
+        medecin.set_prenoms(prenoms)
+        medecin.set_email(email)
+        medecin.set_password(password)
+        medecin.set_specialite(nom)
+        medecin.clean_fields()
+        try:
+            medecin.save()
+        except IntegrityError:
+            raise ValidationError("Le medecin " + str(nom) + " " + str(prenoms) + " existe déjà")
         return medecin
 
-    @classmethod
-    def login(cls, email, password):
+    def update(self, nom, prenoms, email, password, specialite):
+        self.set_nom(nom)
+        self.set_prenoms(prenoms)
+        self.set_email(email)
+        self.set_password(password)
+        self.set_specialite(nom)
+        self.clean_fields()
         try:
-            medecin = cls.objects.get(email=email)
-            if check_password(password, medecin.password):
-                return medecin
-        except cls.DoesNotExist:
-            pass
-        return None
+            self.save()
+        except IntegrityError:
+            raise ValidationError("Le medecin " + str(nom) + " " + str(prenoms) + " existe déjà")
+        return self
 
-    @classmethod
-    def get_by_id(cls, medecin_id):
+    def remove(self):
+        self.delete()
+        return 0
+
+    @staticmethod
+    def checkLogin(email, password):
         try:
-            medecin = cls.objects.get(id=medecin_id)
+            medecin = Medecin.objects.get(email=email, password=password)
+            return True
+        except Medecin.DoesNotExist:
+            return False
+
+    @staticmethod
+    def getMedecin(email, password):
+        try:
+            medecin = Medecin.objects.get(email=email, password=password)
             return medecin
-        except cls.DoesNotExist:
+        except Medecin.DoesNotExist:
             return None
+
+
+
+
+
+
+

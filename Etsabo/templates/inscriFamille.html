@@ -1,0 +1,38 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Famille Inscription</title>
+    <link rel="stylesheet" href="{% static 'css/inscriFamille.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Famille Inscription</h1>
+      <form action="{% url 'inscription-famille' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="nom_famille">Nom de Famille:</label>
+          <input type="text" name="nom_famille" id="nom_famille" required />
+        </div>
+        <div class="form-group">
+          <label for="adresse">Adresse:</label>
+          <input type="text" name="adresse" id="adresse" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" name="email" id="email" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Mot de passe:</label>
+          <input type="password" name="password" id="password" required />
+        </div>
+        <div class="form-group">
+          <input type="submit" value="S'inscrire" class="btn" />
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

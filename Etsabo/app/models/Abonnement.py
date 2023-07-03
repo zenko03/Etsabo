@@ -1,26 +1,49 @@
+from datetime import datetime
+from django.utils import timezone
+
 from django.db import models
+
+from app.models import Patient
 
 
 class Abonnement(models.Model):
     patient = models.ForeignKey("Patient", on_delete=models.CASCADE)
     date_fin = models.DateTimeField(null=True, blank=True)
-    reference = models.CharField(max_length=15)
     type = models.ForeignKey("TypeAbonnement", on_delete=models.CASCADE)
+    reference = models.CharField(max_length=15)
 
     class Meta:
         db_table = 'abonnement'
 
-    def __init__(self, patient, date_fin, reference, type, *args, **kwargs):
-        super(Abonnement, self).__init__(*args, **kwargs)
-        self.patient = patient
-        self.date_fin = date_fin
-        self.reference = reference
-        self.type = type
+    from datetime import datetime
 
-    @classmethod
-    def insert(cls,patient,date_fin,reference,type):
-        abonnement = cls(patient=patient,date_fin=date_fin,reference=reference,type=type)
-        abonnement.save()
-        return abonnement
+    @staticmethod
+    def estAbonner(patient):
+        current_datetime = datetime.now()
+        latest_subscription = Abonnement.get_latest_subscription(patient)
+        if latest_subscription and latest_subscription.date_fin and latest_subscription.date_fin > current_datetime:
+            return True
+        else:
+            return False
+    @staticmethod
+    def get_latest_subscription(patient):
+        try:
+            latest_subscription = Abonnement.objects.filter(patient=patient).latest('date_fin')
+            return latest_subscription
+        except Abonnement.DoesNotExist:
+            return None
 
-    
+    @staticmethod
+    def verifierAbonnement():
+        current_datetime = timezone.localtime()
+        patients = Patient.objects.all()
+        for patient in patients:
+            latest_subscription = Abonnement.get_latest_subscription(patient)
+            if not latest_subscription:
+                patient.is_actif = 0
+                patient.save(update_fields=['is_actif'])
+            if latest_subscription and latest_subscription.date_fin and latest_subscription.date_fin <= current_datetime:
+                patient.is_actif = 0
+                patient.save(update_fields=['is_actif'])
+
+
