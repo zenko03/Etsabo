@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,26 +12,26 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="{% static 'assets_back/img/favicon.png' %}" rel="icon">
+    <link href="{% static 'assets_back/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com' %}" rel="preconnect">
     <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+      ' %}  rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <link href="{% static 'assets_back/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets_back/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'assets_back/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets_back/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+    <link href="{% static 'assets_back/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+    <link href="{% static 'assets_back/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+    <link href="{% static 'assets_back/vendor/simple-datatables/style.css' %}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="{% static 'assets_back/css/style.css' %}" rel="stylesheet">
 
     <!-- =======================================================
   * Template Name: NiceAdmin
@@ -69,9 +71,16 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="index.html">
+                <a class="nav-link collapsed" href="../../depenses">
                     <i class="bi bi-grid"></i>
-                    <span>Liste des achats</span>
+                    <span>Liste Des Charges</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="../../recettes">
+                    <i class="bi bi-grid"></i>
+                    <span>Liste Des Recettes</span>
                 </a>
             </li>
 
@@ -93,22 +102,23 @@
                         <h5 class="card-title">Ajouter depense</h5>
     
                         <!-- Vertical Form -->
-                        <form class="row g-3">
+                        <form class="row g-3" method="POST" action="{% url 'ajout_depense' %}">
+                            {% csrf_token %}
                             <div class="col-12">
-                                <label for="inputNanme4" class="form-label">---</label>
-                                <input type="text" class="form-control" id="inputNanme4">
+                                <label for="date" class="form-label">Date</label>
+                                <input type="date" class="form-control" id="date" name="date">
                             </div>
                             <div class="col-12">
-                                <label for="inputEmail4" class="form-label">---</label>
-                                <input type="email" class="form-control" id="inputEmail4">
+                                <label for="designation" class="form-label">Designation</label>
+                                <input type="text" class="form-control" id="designation" name="designation">
                             </div>
                             <div class="col-12">
-                                <label for="inputPassword4" class="form-label">Prix</label>
-                                <input type="text" class="form-control" id="inputPassword4">
+                                <label for="prix_unitaire" class="form-label">Prix Unitaire</label>
+                                <input type="number" class="form-control" id="prix_unitaire" name="prix_unitaire">
                             </div>
                             <div class="col-12">
-                                <label for="inputAddress" class="form-label">Date</label>
-                                <input type="date" class="form-control" id="inputAddress">
+                                <label for="quantite" class="form-label">Quantite</label>
+                                <input type="number" class="form-control" id="quantite" name="quantite">
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary">Ajouter</button>
@@ -143,17 +153,17 @@
             class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
-    <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/chart.js/chart.umd.js"></script>
-    <script src="assets/vendor/echarts/echarts.min.js"></script>
-    <script src="assets/vendor/quill/quill.min.js"></script>
-    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="{% static 'assets_back/vendor/apexcharts/apexcharts.min.js' %}"></script>
+    <script src="{% static 'assets_back/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets_back/vendor/chart.js/chart.umd.js' %}"></script>
+    <script src="{% static 'assets_back/vendor/echarts/echarts.min.js' %}"></script>
+    <script src="{% static 'assets_back/vendor/quill/quill.min.js' %}"></script>
+    <script src="{% static 'assets_back/vendor/simple-datatables/simple-datatables.js' %}"></script>
+    <script src="{% static 'assets_back/vendor/tinymce/tinymce.min.js' %}"></script>
+    <script src="{% static 'assets_back/vendor/php-email-form/validate.js' %}"></script>
 
     <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
+    <script src="{% static 'assets_back/js/main.js' %}"></script>
 
 </body>
 

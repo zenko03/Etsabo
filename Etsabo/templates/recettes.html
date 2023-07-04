@@ -56,6 +56,9 @@
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
 
+        
+
+
     </header><!-- End Header -->
 
     <!-- ======= Sidebar ======= -->
@@ -64,23 +67,16 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="../../depenses">
                     <i class="bi bi-grid"></i>
                     <span>Liste Des Charges</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="../recettes">
+                <a class="nav-link collapsed" href="#">
                     <i class="bi bi-grid"></i>
                     <span>Liste Des Recettes</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="ajout">
-                    <i class="bi bi-grid"></i>
-                    <span>Ajouter</span>
                 </a>
             </li>
 
@@ -95,7 +91,7 @@
                         <h5 class="card-title">Choisissez : </h5>
         
                         <!-- General Form Elements -->
-                        <form method="POST" action="{% url 'statistique' %}">
+                        <form method="POST" action="{% url 'recettes' %}">
                             {% csrf_token %}
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Mois</label>
@@ -134,8 +130,7 @@
                                     <button type="submit" class="btn btn-primary">Valider</button>
                                 </div>
                             </div>
-                        </form>
-                        <!-- End General Form Elements -->
+                        </form><!-- End General Form Elements -->
         
                     </div>
                 </div>
@@ -149,7 +144,7 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Liste Des Depenses</h5>
+                            <h5 class="card-title">Recettes : </h5>
 
                             <!-- Default Table -->
                             <table class="table">
@@ -165,13 +160,13 @@
                                 </thead>
 
                                 <tbody>
-                                    {% for statistique in statistiques %}
-                                        <td>{{ statistique.date }}</td>
-                                        <td>{{ statistique.designation }}</td>
-                                        <td>{{ statistique.prix_unitaire }}</td>
-                                        <td>{{ statistique.quantite }}</td>
-                                        <td>{{ statistique.montant }}</td>
-                                        <td><a href="{% url 'remove_statistique' statistique_id=statistique.id %}"><i class="bi bi-trash" style="color: crimson;"></i></a></td>
+                                    {% for recette in recettes %}
+                                        <td>{{ recette.date }}</td>
+                                        <td>{{ recette.designation }}</td>
+                                        <td>{{ recette.prix_unitaire }}</td>
+                                        <td>{{ recette.quantite }}</td>
+                                        <td>{{ recette.montant }}</td>
+                                        <td><a href="{% url 'remove_recette' recette_id=recette.id %}"><i class="bi bi-trash" style="color: crimson;"></i></a></td>
                                     </tr>
                                     {% endfor %}
 
@@ -180,7 +175,7 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <th>Total Depenses : {{ total_depenses }}</th>
+                                        <th>Total Recettes : {{ total_recettes }}</th>
                                         <td></td>
                                         <td></td>
 
@@ -191,7 +186,7 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <th>Total Caisse : {{ caisse.montant }} </th>
+                                        <th>Total Caisse : {{ caisse.montant }}</th>
                                         <td></td>
                                         <td></td>
 

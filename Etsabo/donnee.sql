@@ -98,3 +98,7 @@ INSERT INTO type_statistique (nom) VALUES
 INSERT INTO statistique (type_id, date, designation, prix_unitaire, quantite, montant) VALUES
     (1, '2023-01-01', 'Achat de fournitures', 10.5, 5, 52.5),
     (2, '2023-02-01', 'Vente de produits', 20.0, 3, 60.0);
+    (2, '2023-07-01', 'Vente', 20.0, 3, 60.0);
+
+
+INSERT INTO caisse (date , montant) VALUES ('2023-01-01', 5000000);

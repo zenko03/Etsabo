@@ -27,7 +27,7 @@ class Statistique(models.Model):
         self.designation=designation
     
     def set_prix(self, prix):
-        self.prix=prix
+        self.prix_unitaire=prix
     
     def set_quantite(self, quantite):
         self.quantite=quantite
@@ -52,9 +52,23 @@ class Statistique(models.Model):
         return Statistique.get_statistiques_par_type(id_type=2)
 
     @staticmethod
-    def create(id_type, date, designation, prix_unitaire, quantite, montant):
+    def create(id_type, date, designation, prix_unitaire, quantite):
         statistique = Statistique()
+        montant = prix_unitaire * quantite
         type_statistique = TypeStatistique.objects.get(id=id_type)
+
+        nouveau_caisse = Caisse()
+        caisse = Caisse.get_last()
+
+        if id_type == 1:
+            nouveau_caisse.set_date(date)
+            nouveau_caisse.set_montant(caisse.montant - montant)
+            nouveau_caisse.save()
+        else:
+            caisse.set_date(date)
+            caisse.set_montant(caisse.montant + montant)
+            caisse.save()
+
         statistique.set_type(type_statistique)
         statistique.set_date(date)
         statistique.set_designation(designation)
@@ -65,8 +79,9 @@ class Statistique(models.Model):
         try:
             statistique.save()
         except IntegrityError:
-            raise ValidationError("Ce statistique existe deja")
-        return statistique
+            raise ValidationError("Cette statistique existe déjà")
+        return statistique, caisse
+
 
     def update(self, date, designation, prix_unitaire, quantite, montant):
         self.set_date(date)
@@ -100,4 +115,4 @@ class Statistique(models.Model):
         return statistiques, total_recettes
 
 
- 
+    

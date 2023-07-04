@@ -58,6 +58,11 @@ urlpatterns = [
     path('create_consultation/',v.create_consultation,name='create_consultation'),
 
     #-----------------Statistique back-office
-    path('depenses/', stat.statistiques_depenses, name='statistique')
+    path('depenses/', stat.statistiques_depenses, name='statistique'),
+    path('depenses/ajout/', stat.ajout_depense, name='ajout_depense'),
+    path('recettes', stat.statistiques_recettes, name='recettes'),
+    path('statistiques/remove/<int:statistique_id>/', stat.remove_statistique, name='remove_statistique'),
+    path('recettes/remove/<int:recette_id>/', stat.remove_recette, name='remove_recette')
+
 ]
 
