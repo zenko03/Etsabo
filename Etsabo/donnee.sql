@@ -88,3 +88,13 @@ INSERT INTO objet(nom_objet,prix) VALUES
 INSERT INTO photo_objet(objet_id, src) VALUES
     (1, 'obj1.jpg'),
     (2, 'obj2.jpg');
+
+-- Table TypeStatistique
+INSERT INTO type_statistique (nom) VALUES
+    ('Depense'),
+    ('Recette');
+
+-- Table Statistique
+INSERT INTO statistique (type_id, date, designation, prix_unitaire, quantite, montant) VALUES
+    (1, '2023-01-01', 'Achat de fournitures', 10.5, 5, 52.5),
+    (2, '2023-02-01', 'Vente de produits', 20.0, 3, 60.0);

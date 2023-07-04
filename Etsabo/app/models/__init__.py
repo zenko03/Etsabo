@@ -20,5 +20,7 @@ from .ConseilsSanitaire import ConseilsSanitaire
 from .EtudeDocteur import EtudeDocteur
 from .Livraison import Livraison
 from .ObjetALivrer import ObjetALivrer
+from .Statistique import Statistique
+from .TypeStatistique import TypeStatistique
 
 
