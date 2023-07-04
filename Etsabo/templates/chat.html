@@ -15,7 +15,7 @@
 </head>
 
 <body>
-	<div class="conversation-container" data-estPatient="1">
+	<div class="conversation-container" data-estPatient="0">
 		<i class="fas fa-solid fa-arrow-left" id="close-conversation"></i>
 
 		<div class="receiver-info-container">
@@ -54,6 +54,10 @@
 
 <script>
 	var csrfToken = "{{ csrf_token }}";
+</script>
+<script>
+	var medecin = {{ medecin }};
+	var patient = {{ patient }};
 </script>
 <script src="{% static 'js/Chat/chat.js' %}"></script>
 

@@ -10,7 +10,7 @@ class Patient(models.Model):
     date_de_naissance =models.DateTimeField(null=True, blank=True)
     email = models.CharField(max_length=40)
     password = models.CharField(max_length=40)
-    famille =  models.ForeignKey("Famille", on_delete=models.CASCADE) #1 si simple
+    famille =  models.ForeignKey("Famille", on_delete=models.CASCADE, null=True) #1 si simple
     is_actif = models.IntegerField() #0 si pas abonné et 1 si abonné
 
     class Meta:

@@ -6,11 +6,20 @@ from django.http import JsonResponse
 
 
 def chat(request : HttpResponse):
-    return render(request, 'chat.html')
+    medecin = request.GET.get('medecin')
+    patient = request.session['idSession']
+
+    context = {
+        "medecin": medecin,
+        "patient": patient
+    }
+
+    return render(request, 'chat.html', context=context)
 
 def get_current_conversation(request : HttpResponse):
     est_patient = request.GET.get('est_patient')
     patient_id = request.GET.get('patient')
+    
     medecin_id = request.GET.get('medecin')
 
     conversation = serializers.serialize("json", models.Message.get_messages_from(patient_id, medecin_id))
@@ -24,9 +33,11 @@ def get_current_conversation(request : HttpResponse):
 
 def envoyer_message(request : HttpResponse):
     est_patient = request.GET.get('est_patient')
-    patient_id = request.GET.get('patient')
+    patient_id = request.session['idSession']
     medecin_id = request.GET.get('medecin')
     message = request.GET.get('message')
+
+    print("huhu" + str(medecin_id))
 
     models.Message.send_message_to(patient_id, medecin_id, message, True if int(est_patient) == 0 else False)
 

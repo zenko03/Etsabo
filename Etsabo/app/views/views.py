@@ -11,6 +11,7 @@ from app.models import Patient
 from app.models import PhotoPatient
 from app.models import TypeAbonnement
 from app.models import Abonnement
+from app.models import Message
 from django.contrib.sessions.models import Session
 
 
@@ -107,7 +108,7 @@ def inscription_perso(request):
         password = request.POST.get('password')
 
         patient = Patient(nom=nom, prenoms=prenom, adresse=adresse, telephone=telephone, sexe=sexe,
-                          date_de_naissance=dtn, email=email, password=password, is_actif=1, famille_id=1)
+                          date_de_naissance=dtn, email=email, password=password, is_actif=1, famille_id=None)
         patient.save()
 
         if 'profile_picture' in request.FILES:
@@ -270,7 +271,23 @@ def abonnement(request):
 
 
 def listeDiscu(request):
-    return render(request, 'Listediscussion.html')
+    medecins = Medecin.objects.all()
+
+    # Dernier message
+    last_message_dict = {}
+    for medecin in medecins:
+        last_message_dict.update(
+            {
+                medecin.id: Message.get_last_message_from(request.session['idSession'], medecin.id)
+            }
+        )
+
+    context = {
+        "medecins": medecins,
+        "last_message": last_message_dict
+    }
+
+    return render(request, 'Listediscussion.html', context=context)
 
 def profilMedecin(request):
     id_medecin = request.GET.get('idMedecin')
