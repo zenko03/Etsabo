@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Détails du collaborateur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        .collaborator-details {
+            margin-bottom: 10px;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+        }
+
+        .collaborator-details p {
+            margin: 0;
+        }
+
+        .collaborator-details a {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Détails du collaborateur</h2>
+        <div class="collaborator-details">
+            <h3 id="collaborator-name"></h3>
+            <p><strong>Prénom:</strong> <span id="collaborator-firstname"></span></p>
+            <p><strong>Fonction:</strong> <span id="collaborator-function"></span></p>
+            <p><strong>Pièce jointe:</strong></p>
+            <a id="attachment-link" href="#" target="_blank"></a>
+        </div>
+    </div>
+
+    <script>
+        var selectedCollaborator = localStorage.getItem("selectedCollaborator");
+        if (selectedCollaborator) {
+            document.getElementById("collaborator-name").textContent = selectedCollaborator;
+            // Remplacez les lignes suivantes avec les détails réels du collaborateur
+            document.getElementById("collaborator-firstname").textContent = "John";
+            document.getElementById("collaborator-function").textContent = "Ingénieur";
+            document.getElementById("attachment-link").href = "chemin_vers_piece_jointe"; // Remplacez par le chemin réel de la pièce jointe
+            document.getElementById("attachment-link").textContent = "Télécharger la pièce jointe";
+            // Ajoutez d'autres détails ici
+        } else {
+            // Si aucun collaborateur n'est sélectionné, redirigez vers la page 1
+            window.location.href = "page1.html";
+        }
+    </script>
+</body>
+
+</html>
