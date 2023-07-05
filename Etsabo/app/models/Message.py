@@ -31,4 +31,10 @@ class Message(models.Model):
             message.patient = model.Patient.objects.get(pk=receiver) 
         
         message.save()
+    
+    @staticmethod
+    def get_last_message_from(patient : int, medecin : int):
+        last_message = Message.objects.filter(models.Q(medecin__exact = medecin) & models.Q(patient__exact = patient)).order_by("-date_envoie").first()
+
+        return last_message
         

@@ -2,7 +2,7 @@ import json
 from datetime import datetime, timedelta, timezone
 
 from django.shortcuts import render
-from app.models import Medecin, Livraison, ObjetALivrer, Consultation, Ordonnance
+from app.models import Medecin, Livraison, ObjetALivrer, Consultation, Ordonnance, Rdv
 from app.models import Publicite
 from app.models import ConseilsSanitaire
 from app.models import Objet
@@ -11,6 +11,7 @@ from app.models import Patient
 from app.models import PhotoPatient
 from app.models import TypeAbonnement
 from app.models import Abonnement
+from app.models import Message
 from django.contrib.sessions.models import Session
 
 
@@ -31,6 +32,45 @@ def home(request):
     }
 
     return render(request, 'accueil.html', context)
+#Login et inscription
+
+def rdv(request,doc_id):
+    context ={
+        'idDoc':doc_id
+    }
+    return render(request, 'priseRdv.html',context)
+
+def prendre_rdv(request):
+    if request.method == 'POST':
+        p = Patient.objects.get(id=request.session['idSession'])
+        medecin_id = request.POST.get('idDoc')
+        patient_id = p.id
+        date_rdv = request.POST.get('date')
+        heure_rdv = request.POST.get('time')
+
+        print(heure_rdv)
+        print(date_rdv)
+
+        # Créer une instance de Rdv avec les données récupérées
+        datetime_rdv = datetime.combine(datetime.strptime(date_rdv, '%Y-%m-%d').date(),
+                                        datetime.strptime(heure_rdv, '%H:%M').time())
+
+        print(datetime_rdv)
+        rdv = Rdv(
+            medecin_id=medecin_id,
+            patient_id=patient_id,
+            date_rdv=date_rdv,
+            heure_rdv=datetime_rdv,
+            status=0
+        )
+
+        rdv.save()
+
+
+
+    return listeMedecin(request)
+
+
 #Login et inscription
 
 def login(request):
@@ -58,6 +98,23 @@ def profil(request):
     else:
         return render(request, 'login.html')
 
+
+def rdvPatient(request):
+    p = Patient.objects.get(id=request.session['idSession'])
+    now = datetime.now()
+    rendezvous = Rdv.objects.filter(patient=p,status=0,date_rdv__gt=now).select_related('patient', 'medecin')
+
+    rdv2 =  Rdv.objects.filter(patient=p,status=1,date_rdv__gt=now).select_related('patient', 'medecin')
+
+    rdv3 = Rdv.objects.filter(patient=p, status=10, date_rdv__gt=now).select_related('patient', 'medecin')
+
+    context = {
+        'enCours':rendezvous,
+        'acc':rdv2,
+        'faite':rdv3
+    }
+
+    return render(request,'rdvPatient.html',context)
 # Views.py
 def deconnexion(request):
     if 'idSession' in request.session:
@@ -107,7 +164,9 @@ def inscription_perso(request):
         password = request.POST.get('password')
 
         patient = Patient(nom=nom, prenoms=prenom, adresse=adresse, telephone=telephone, sexe=sexe,
-                          date_de_naissance=dtn, email=email, password=password, is_actif=1, famille_id=1)
+
+        date_de_naissance=dtn, email=email, password=password, is_actif=0, famille_id=1)
+
         patient.save()
 
         if 'profile_picture' in request.FILES:
@@ -270,7 +329,23 @@ def abonnement(request):
 
 
 def listeDiscu(request):
-    return render(request, 'Listediscussion.html')
+    medecins = Medecin.objects.all()
+
+    # Dernier message
+    last_message_dict = {}
+    for medecin in medecins:
+        last_message_dict.update(
+            {
+                medecin.id: Message.get_last_message_from(request.session['idSession'], medecin.id)
+            }
+        )
+
+    context = {
+        "medecins": medecins,
+        "last_message": last_message_dict
+    }
+
+    return render(request, 'Listediscussion.html', context=context)
 
 def profilMedecin(request):
     id_medecin = request.GET.get('idMedecin')
@@ -361,6 +436,8 @@ def viderPanier(request):
     
     return render(request,'panier.html')
 
+def collaborer(request):
+    return render(request, "collaborer.html");
 # def profilMedecin(request):
 #     id_medecin = request.GET.get('idMedecin')
 #     medecin = Medecin.objects.select_related('specialite').get(id=id_medecin)
@@ -411,6 +488,7 @@ def ajouter_abonnement(request):
         except (TypeAbonnement.DoesNotExist, Patient.DoesNotExist):
             return render(request, 'abonnement.html')
     return render(request, 'abonnement.html', context)
+
 
 
 #--------------------------------------------------DOCTEUR BACK OFFICE--------------------------------------------
@@ -471,4 +549,72 @@ def create_consultation(request):
         # Rediriger vers une page de succès ou faire autre chose
 
     return homeDocteur(request)
+
+
+
+def rdvDocteur(request):
+    d = Medecin.objects.get(id=request.session['idSessionDoc'])
+    now = datetime.now()
+    demande = Rdv.objects.filter(medecin=d, status=0, date_rdv__gt=now).select_related('patient', 'medecin')
+
+    rdv2 = Rdv.objects.filter(medecin=d,status=1,date_rdv__gt=now).select_related('patient', 'medecin')
+
+    rdv3 = Rdv.objects.filter(medecin=d, status=10, date_rdv__gt=now).select_related('patient', 'medecin')
+
+    context = {
+        'enCours':demande,
+        'acc':rdv2,
+        'faite':rdv3
+    }
+
+    return render(request,'rdvDocteur.html',context)
+
+def accepterRdv(request,rdvId):
+    rdv = Rdv.objects.get(id=rdvId)
+    rdv.status = 1
+    rdv.save()
+
+    return rdvDocteur(request)
+
+def refuserRdv(request,rdvId):
+    rdv = Rdv.objects.get(id=rdvId)
+    rdv.status = -1
+    rdv.save()
+
+    return rdvDocteur(request)
+
+def terminerRdv(request,rdvId):
+    rdv = Rdv.objects.get(id=rdvId)
+    rdv.status = 10
+    rdv.save()
+
+    return rdvDocteur(request)
+
+def chatDocteur(request):
+    patient = -1
+    allPatient = Patient.objects.all()
+    
+    if 'patientMessage' in request.session:
+        patient = request.session['patientMessage']
+    elif len(allPatient) > 0:
+        patient = 1
+    
+    current_patient = None
+    if patient >= 0:
+        current_patient = Patient.objects.get(id=patient)
+
+    context = {
+        'medecin': request.session['idSessionDoc'],
+        'patients': allPatient,
+        'patient': current_patient
+    }
+
+    return render(request, "chatDocteur.html", context=context)
+
+def changeChatDocteur(request):
+    patient_id = int(request.GET.get('patient'))
+
+    request.session['patientMessage'] = patient_id
+
+    return chatDocteur(request)
 
