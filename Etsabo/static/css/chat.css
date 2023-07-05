@@ -1,0 +1,173 @@
+* {
+    font-family: 'Arial';
+}
+
+body {
+    height: 100%;
+
+    margin: 0;
+}
+
+#close-conversation {
+    color: #007BFF;
+
+    position: relative;
+    left: 1rem;
+    top: 1rem;
+
+    float: left;
+}
+
+.conversation-container {
+    background-color: #F8F8F8;
+    min-height: calc(100vh - 20px);
+
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+
+    margin-top: 20px;
+
+    box-shadow: -3px 0px 10px rgba(155, 155, 155, 0.281);
+}
+
+.conversation-container .receiver-info-container {
+    display: flex;
+    justify-content: center;
+    align-items:  center;
+    flex-direction: column;
+
+    padding: 1rem;
+
+    border-bottom: 2px solid white;
+}
+
+.conversation-container .receiver-info-container > .full-name {
+    font-weight: bold;
+
+    margin-bottom: 0;
+}
+
+.conversation-container .receiver-info-container > img {
+    width: 3rem;
+    height: 3rem;
+
+    border-radius: 50%;
+}
+
+.conversation-container .receiver-info-container .reveicer-interactions {
+    display: flex;
+    gap: 4px;
+}
+
+.conversation-container .receiver-info-container .reveicer-interactions span {
+    color: white;
+    background-color: #007BFF;
+
+    padding: .4rem;
+
+    font-size: .4rem;
+
+    border-radius: 50%;
+
+    margin-top: 8px;
+}
+
+/* Messages */
+.receiver-message {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    padding: 1rem;
+
+    min-width: 200px;
+}
+
+.receiver-message > img {
+    width: 2rem;
+    height: 2rem;
+
+    border-radius: 50%;
+}
+
+.receiver-message > .message {
+    margin: 0;
+
+    background-color: rgb(40, 167, 69);
+
+    color: white;
+
+    padding: .5rem;
+
+    border-radius: 10px;
+}
+
+
+.sender-message {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row-reverse;
+    gap: 10px;
+
+    padding: 1rem;
+
+    min-width: 200px;
+}
+
+.sender-message > img {
+    width: 2rem;
+    height: 2rem;
+
+    border-radius: 50%;
+}
+
+.sender-message > .message {
+    margin: 0;
+
+    background-color: #007BFF;
+
+    color: white;
+
+    padding: .5rem;
+
+    border-radius: 10px;
+}
+
+/* Messages container */
+.messages-container {
+    height: calc(100vh - 230px);
+
+    overflow-y: scroll;
+}
+
+/* Send message container */
+.message-sender-container {
+    display: flex;
+
+    gap: .5rem;
+    
+    height: 2.5rem;
+
+    padding: 1rem;
+}
+
+.message-sender-container > input {
+    width: 100%;
+
+    border-radius: 25px;
+    border: none;
+
+    text-indent: 1rem;
+}
+
+.message-sender-container > button {
+    width: 2.5rem;
+
+    border: none;
+    border-radius: 50%;
+
+    color: white;
+    background-color: #007BFF;
+
+    padding: .3rem;
+}

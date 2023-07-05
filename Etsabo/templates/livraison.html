@@ -1,0 +1,129 @@
+    {% extends 'base.html' %}
+    {% block content %}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style type="text/css">
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            h2 {
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            .container {
+                width: 100%;
+                max-width: 600px;
+                margin-top: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                padding: 20px;
+                background-color: #fff;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            .form-group input {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            .form-group input[type="submit"] {
+                background-color: #4CAF50;
+                color: #fff;
+                cursor: pointer;
+            }
+
+            @media only screen and (max-width: 600px) {
+                body {
+                    padding: 10px;
+                }
+            }
+        </style>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+        <script type="text/javascript">
+            var carte;
+            var marqueur;
+
+            function initialize() {
+                var mapOptions = {
+                    center: new google.maps.LatLng(-18.986021, 47.532735),
+                    zoom: 20,
+                    mapTypeId: google.maps.MapTypeId.SATELLITE
+                };
+
+                carte = new google.maps.Map(document.getElementById("carteId"), mapOptions);
+
+                google.maps.event.addListener(carte, 'click', function (event) {
+                    if (marqueur) {
+                        marqueur.setPosition(event.latLng);
+                    } else {
+                        marqueur = new google.maps.Marker({
+                            position: event.latLng,
+                            map: carte,
+                            icon: {
+
+                                scaledSize: new google.maps.Size(60, 60)
+                            }
+                        });
+                    }
+
+                    document.getElementById('latitude').value = event.latLng.lat();
+                    document.getElementById('longitude').value = event.latLng.lng();
+                });
+            }
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+    </head>
+    <body>
+        <h2>Ajouter une livraison</h2>
+        <div class="container">
+            <div id="carteId" style="width: 100%; height: 200px; margin-bottom: 20px;"></div>
+            <form action="{% url 'ajouter_livraison' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="datetime_livraison">Date et heure de livraison:</label>
+                    <input type="datetime-local" name="datetime_livraison" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="adresse">Adresse:</label>
+                    <input type="text" name="adresse" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <input type="text" name="description" required>
+                </div>
+
+                <input type="hidden" id="latitude" name="latitude">
+                <input type="hidden" id="longitude" name="longitude">
+
+                <input type="submit" value="Ajouter">
+            </form>
+        </div>
+    </body>
+    </html>
+    {% endblock %}

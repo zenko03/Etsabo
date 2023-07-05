@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Famille</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        form {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        #profile-picture-preview {
+            max-width: 200px;
+            max-height: 200px;
+            margin-bottom: 10px;
+        }
+
+        #profile-picture-input {
+            display: none;
+        }
+
+        .profile-picture label {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .logout-button {
+            margin-top: 20px;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 480px) {
+            form {
+                padding: 10px;
+            }
+
+            input[type="submit"] {
+                width: 100%;
+            }
+
+            #profile-picture-preview {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Membres de la famille</h1>
+    <ul>
+        {% for membre in membres %}
+            <li>{{ membre.nom }} {{ membre.prenoms }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Ajouter un nouveau membre</h2>
+    <form action="{% url 'ajouter-membre' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="nom">Nom:</label>
+        <input type="text" name="nom" required>
+
+        <label for="prenoms">Prénoms:</label>
+        <input type="text" name="prenoms" required>
+
+        <label for="adresse">Adresse:</label>
+        <input type="text" name="adresse" required>
+
+        <label for="telephone">Téléphone:</label>
+        <input type="text" name="telephone" required>
+
+        <label for="sexe">Sexe:</label>
+        <select name="sexe" required>
+            <option value="0">Féminin</option>
+            <option value="1">Masculin</option>
+        </select>
+
+        <label for="date_de_naissance">Date de naissance:</label>
+        <input type="date" name="date_de_naissance">
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" required>
+
+        <label for="password">Mot de passe:</label>
+        <input type="password" name="password" required>
+
+        <div class="form-group profile-picture">
+            <img id="profile-picture-preview" src="" alt="Profile Picture">
+            <input type="file" id="profile-picture-input" name="profile_picture" onchange="previewProfilePicture(event)">
+            <label for="profile-picture-input">Choisir une photo de profil</label>
+        </div>
+
+        <input type="submit" value="Ajouter">
+    </form>
+
+    <a class="logout-button" href="{% url 'deconnecter' %}">Déconnexion</a>
+
+    <script>
+        function previewProfilePicture(event) {
+            const input = event.target;
+            const reader = new FileReader();
+
+            reader.onload = function () {
+                const preview = document.getElementById('profile-picture-preview');
+                preview.src = reader.result;
+            }
+
+            if (input.files && input.files[0]) {
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+</body>
+</html>

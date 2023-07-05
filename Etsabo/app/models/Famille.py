@@ -9,4 +9,19 @@ class Famille(models.Model):
 
     class Meta:
         db_table = 'famille'
-    
+
+    @staticmethod
+    def checkLogin(email, password):
+        try:
+            famille = Famille.objects.get(email=email, password=password)
+            return True
+        except Famille.DoesNotExist:
+            return False
+
+    @staticmethod
+    def getFamille(email, password):
+        try:
+            famille = Famille.objects.get(email=email, password=password)
+            return famille
+        except Famille.DoesNotExist:
+            return None
