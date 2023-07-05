@@ -498,7 +498,7 @@ def chatDocteur(request):
     if 'patientMessage' in request.session:
         patient = request.session['patientMessage']
     elif len(allPatient) > 0:
-        patient = 1
+        patient = allPatient[0].id
     
     current_patient = None
     if patient >= 0:
