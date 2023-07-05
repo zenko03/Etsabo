@@ -1,0 +1,256 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+
+    <title>Tables / General - NiceAdmin Bootstrap Template</title>
+
+    <!-- Favicons -->
+    <link href="{% static 'assets_back/img/favicon.png' %}" rel="icon">
+    <link href="{% static 'assets_back/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets_back/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets_back/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'assets_back/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets_back/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+    <link href="{% static 'assets_back/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+    <link href="{% static 'assets_back/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+    <link href="{% static 'assets_back/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets_back/css/style.css' %}" rel="stylesheet">
+
+    <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: May 30 2023 with Bootstrap v5.3.0
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo d-flex align-items-center">
+                <img src="#" alt="">
+                <span class="d-none d-lg-block">E-TSABO</span>
+            </a>
+            <i class="bi bi-list toggle-sidebar-btn"></i>
+        </div><!-- End Logo -->
+
+        
+
+
+    </header><!-- End Header -->
+
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
+
+        <ul class="sidebar-nav" id="sidebar-nav">
+
+             <li class="nav-item">
+                <a class="nav-link collapsed" href="{% url 'statistique' %}">
+                    <i class="bi bi-grid"></i>
+                    <span>Liste Des Charges</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{% url 'recettes' %}">
+                    <i class="bi bi-grid"></i>
+                    <span>Liste Des Recettes</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{% url 'ajout_depense' %}">
+                    <i class="bi bi-grid"></i>
+                    <span>Ajouter</span>
+                </a>
+            </li>
+
+             <li class="nav-item">
+                <a class="nav-link collapsed" href="{% url 'demandeAb' %}">
+                    <i class="bi bi-grid"></i>
+                    <span>Liste Demande</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{% url 'ajouterObjet' %}">
+                    <i class="bi bi-grid"></i>
+                    <span>Liste Demande</span>
+                </a>
+            </li>
+
+    </aside><!-- End Sidebar-->
+
+    <main id="main" class="main">
+        <div class="pagetitle">
+            <div class="col-lg-6">
+        
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Choisissez : </h5>
+        
+                        <!-- General Form Elements -->
+                        <form method="POST" action="{% url 'recettes' %}">
+                            {% csrf_token %}
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">Mois</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" name="mois" aria-label="Default select example">
+                                        <option selected>Janvier</option>
+                                        <option value="Janvier">Janvier</option>
+                                        <option value="Fevrier">Fevrier</option>
+                                        <option value="Mars">Mars</option>
+                                        <option value="Avril">Avril</option>
+                                        <option value="Mai">Mai</option>
+                                        <option value="Juin">Juin</option>
+                                        <option value="Juillet">Juillet</option>
+                                        <option value="Aout">Aout</option>
+                                        <option value="Septembre">Septembre</option>
+                                        <option value="Octobre">Octobre</option>
+                                        <option value="Novembre">Novembre</option>
+                                        <option value="Decembre">Decembre</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">Annee</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" name="annee" aria-label="Default select example">
+                                        <option selected>2000</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2022">2022</option>
+                                    </select>
+                                </div>
+                            </div>
+                        
+                            <div class="row mb-3">
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Valider</button>
+                                </div>
+                            </div>
+                        </form><!-- End General Form Elements -->
+        
+                    </div>
+                </div>
+        
+            </div>
+        </div><!-- End Page Title -->
+
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-6">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Recettes : </h5>
+
+                            <!-- Default Table -->
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Designation</th>
+                                        <th scope="col">Prix Unitaire</th>
+                                        <th scope="col">Quantite</th>
+                                        <th scope="col">Montant</th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for recette in recettes %}
+                                        <td>{{ recette.date }}</td>
+                                        <td>{{ recette.designation }}</td>
+                                        <td>{{ recette.prix_unitaire }}</td>
+                                        <td>{{ recette.quantite }}</td>
+                                        <td>{{ recette.montant }}</td>
+                                        <td><a href="{% url 'remove_recette' recette_id=recette.id %}"><i class="bi bi-trash" style="color: crimson;"></i></a></td>
+                                    </tr>
+                                    {% endfor %}
+
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <th>Total Recettes : {{ total_recettes }}</th>
+                                        <td></td>
+                                        <td></td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <th>Total Caisse : {{ caisse.montant }}</th>
+                                        <td></td>
+                                        <td></td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- End Default Table Example -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+        
+        <div class="credits">
+            <!-- All the links in the footer should remain intact. -->
+            <!-- You can delete the links only if you purchased the pro version. -->
+            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+    </footer><!-- End Footer -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'assets_back/vendor/apexcharts/apexcharts.min.js' %}"></script>
+    <script src="{% static 'assets_back/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets_back/vendor/chart.js/chart.umd.js' %}"></script>
+    <script src="{% static 'assets_back/vendor/echarts/echarts.min.js' %}"></script>
+    <script src="{% static 'assets_back/vendor/quill/quill.min.js' %}"></script>
+    <script src="{% static 'assets_back/vendor/simple-datatables/simple-datatables.js' %}"></script>
+    <script src="{% static 'assets_back/vendor/tinymce/tinymce.min.js' %}"></script>
+    <script src="{% static 'assets_back/vendor/php-email-form/validate.js' %}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{% static 'assets_back/js/main.js' %}"></script>
+
+</body>
+
+</html>

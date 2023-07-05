@@ -1,141 +1,43 @@
-{% extends 'base.html' %} {% block content %}{% load static %}
+{% extends 'base.html' %}
+{% block content %}{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profil Docteur</title>
-    <link rel="stylesheet" href="{% static 'css/ProfilDocteur.css' %}" />
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f2f2f2;
-        margin: 0;
-        padding: 0;
-      }
-
-      #cadre {
-        max-width: 800px;
-        margin: 20px auto;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-
-      #entete {
-        display: flex;
-        align-items: center;
-        padding: 20px;
-        border-bottom: 1px solid #ddd;
-      }
-
-      #bienvenu {
-        flex: 1;
-      }
-
-      #identite_nom {
-        font-size: 24px;
-        color: #333;
-      }
-
-      #photo_I {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        overflow: hidden;
-        margin-left: 20px;
-      }
-
-      #identite_photo {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      #milieu {
-        padding: 20px;
-      }
-
-      #docteurs {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-      }
-
-      #mot_docteurs {
-        font-size: 18px;
-        color: #333;
-        margin-right: 10px;
-      }
-
-      #photo_D {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        overflow: hidden;
-      }
-
-      #photo_docteur {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      #identite_docteur {
-        margin-left: 20px;
-      }
-
-      #nom_docteur {
-        font-size: 18px;
-        color: #333;
-        margin: 0;
-      }
-
-      #specialite_docteur {
-        font-size: 14px;
-        color: #777;
-        margin: 0;
-      }
-
-      #etoile {
-        margin-top: 5px;
-      }
-
-      /* Ajoutez vos autres styles personnalisés ici */
-
-      /* ... */
-    </style>
-  </head>
-  <body>
-    <div id="cadre">
-      <div id="entete">
-        <div id="bienvenu">
-          <h1 id="identite_nom">Bienvenue Rakoto J.</h1>
-        </div>
-        <div id="photo_I">
-          <img src="{% static '/images/rasoa.png' %}" id="identite_photo" />
-        </div>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil Docteur</title>
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/ProfilDocteur.css' %}">
+</head>
+<body>
+  <div class="container">
+    <div class="card mt-5">
+      <div class="card-header d-flex align-items-center justify-content-between">
+        <h4 class="card-title">Profil Docteur</h4>
+        <img src="{% static '/images/rasoa.png' %}" alt="Photo Identité" class="rounded-circle" width="80" height="80">
       </div>
-      <div id="milieu">
-        <div id="docteurs">
-          <h2 id="mot_docteurs">Docteurs</h2>
-          <div id="photo_D">
-            <img src="{% static '/images/rasoa.png' %}" id="photo_docteur" />
-          </div>
-          <div id="identite_docteur">
-            <h5 id="nom_docteur">{{ medecin.nom }}</h5>
-            <p id="specialite_docteur">{{ medecin.specialite.nom }}</p>
-            <img
-              src="{% static '/images/etoile.png' %}"
-              width="20px"
-              height="20px"
-              id="etoile"
-            />
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-9">
+            <h2 class="mb-4"></h2>
+            <div class="d-flex align-items-center mb-3">
+              <img src="{% static '/images/rasoa.png' %}" alt="Photo Docteur" class="rounded-circle" width="80" height="80">
+              <div class="ms-3">
+                <h5 class="card-title">Nom: {{ medecin.nom }}</h5>
+                <p class="card-text">Specialite: {{ medecin.specialite.nom }}</p>
+              </div>
+            </div>
+            <!-- Ajout du bouton Prendre rendez-vous -->
+            <div class="text-center">
+              <a href="{% url 'rdv' medecin.id %}"><button class="btn btn-primary">Prendre rendez-vous</button></a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
 </html>
 {% endblock %}

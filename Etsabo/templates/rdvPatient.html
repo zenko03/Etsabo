@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block content %}{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liste des rendez-vous</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f9f9f9;
+      font-weight: bold;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    tbody tr:hover {
+      background-color: #e3e3e3;
+    }
+
+    td {
+      vertical-align: middle;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h4>Liste des rendez-vous en demande</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Médecin</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for a in enCours %}
+        <tr>
+          <td>{{ a.medecin.nom }} {{ a.medecin.prenoms }}</td>
+          <td>{{ a.heure_rdv }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  <h4>Liste des rendez-vous accepter</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Médecin</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for a in acc %}
+        <tr>
+          <td>{{ a.medecin.nom }} {{ a.medecin.prenoms }}</td>
+          <td>{{ a.heure_rdv }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+  <h4>Liste des rendez-vous passé</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Médecin</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for a in faite %}
+        <tr>
+          <td>{{ a.medecin.nom }} {{ a.medecin.prenoms }}</td>
+          <td>{{ a.heure_rdv }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>
+
+{% endblock %}

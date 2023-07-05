@@ -2,6 +2,7 @@ from datetime import datetime
 from django.utils import timezone
 
 from django.db import models
+from django.utils.timezone import now
 
 from app.models import Patient
 
@@ -45,5 +46,18 @@ class Abonnement(models.Model):
             if latest_subscription and latest_subscription.date_fin and latest_subscription.date_fin <= current_datetime:
                 patient.is_actif = 0
                 patient.save(update_fields=['is_actif'])
+
+    from django.utils import timezone
+    @staticmethod
+    def getAbonnementEncours():
+        abonnements_en_cours = Abonnement.objects.filter(patient__is_actif=0).select_related('patient', 'type')
+        allAb = []
+        for ab in abonnements_en_cours:
+            if ab.patient.is_actif==0:
+                allAb.append(ab)
+
+
+        return allAb
+
 
 
