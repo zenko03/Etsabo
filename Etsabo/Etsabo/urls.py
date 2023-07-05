@@ -18,6 +18,7 @@ from django.urls import path
 from app.views import views as v
 from app.views import chat as chat
 from app.views import localisation as localisation
+from app.views import statistique as stat
 
 urlpatterns = [
     path('',v.login,name='login'),
@@ -54,8 +55,14 @@ urlpatterns = [
     path('get_patient_suggestions/', v.get_patient_suggestions, name='get_patient_suggestions'),
     path('loginDocteur/', v.loginDocteur, name='loginDocteur'),
     path('checkDocteur/',v.checkLoginDoc,name='checkLoginDoc'),
-    path('create_consultation/',v.create_consultation,name='create_consultation')
+    path('create_consultation/',v.create_consultation,name='create_consultation'),
 
+    #-----------------Statistique back-office
+    path('depenses/', stat.statistiques_depenses, name='statistique'),
+    path('depenses/ajout/', stat.ajout_depense, name='ajout_depense'),
+    path('recettes', stat.statistiques_recettes, name='recettes'),
+    path('statistiques/remove/<int:statistique_id>/', stat.remove_statistique, name='remove_statistique'),
+    path('recettes/remove/<int:recette_id>/', stat.remove_recette, name='remove_recette')
 
 ]
 
