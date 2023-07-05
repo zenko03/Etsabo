@@ -491,3 +491,30 @@ def create_consultation(request):
 
     return homeDocteur(request)
 
+def chatDocteur(request):
+    patient = -1
+    allPatient = Patient.objects.all()
+    
+    if 'patientMessage' in request.session:
+        patient = request.session['patientMessage']
+    elif len(allPatient) > 0:
+        patient = 1
+    
+    current_patient = None
+    if patient >= 0:
+        current_patient = Patient.objects.get(id=patient)
+
+    context = {
+        'medecin': request.session['idSessionDoc'],
+        'patients': allPatient,
+        'patient': current_patient
+    }
+
+    return render(request, "chatDocteur.html", context=context)
+
+def changeChatDocteur(request):
+    patient_id = int(request.GET.get('patient'))
+
+    request.session['patientMessage'] = patient_id
+
+    return chatDocteur(request)

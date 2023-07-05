@@ -13,7 +13,7 @@ function getConverstation(callback) {
     var data = [];
 
     $.ajax({
-        url: `./conversation/?patient=${patient}&medecin=${medecin}&est_patient=0`,
+        url: `../chat/conversation/?patient=${patient}&medecin=${medecin}&est_patient=${orientation}`,
         dataType: "json",
         type: 'GET',
         headers: {
@@ -83,7 +83,7 @@ $(document).ready(function () {
 
 function sendMessageTo(message) {
     $.ajax({
-        url: `./send?patient=${ patient }&medecin=${ medecin }&est_patient=0&message=${ message }`,
+        url: `../chat/send?patient=${ patient }&medecin=${ medecin }&est_patient=${orientation}&message=${ message }`,
         dataType: "json",
         type: 'GET',
         success: (response) => {

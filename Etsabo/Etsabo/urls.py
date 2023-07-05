@@ -56,8 +56,8 @@ urlpatterns = [
     path('get_patient_suggestions/', v.get_patient_suggestions, name='get_patient_suggestions'),
     path('loginDocteur/', v.loginDocteur, name='loginDocteur'),
     path('checkDocteur/',v.checkLoginDoc,name='checkLoginDoc'),
-    path('create_consultation/',v.create_consultation,name='create_consultation')
-
-
+    path('create_consultation/',v.create_consultation,name='create_consultation'),
+    path('chatDocteur/', v.chatDocteur, name='chatDocteur'),
+    path('changeChatDocteur/', v.changeChatDocteur, name='changeChatDocteur')
 ]
 

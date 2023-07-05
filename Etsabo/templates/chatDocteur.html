@@ -1,0 +1,110 @@
+{% extends 'baseDocteur.html' %} {% block content %} {% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<script src="{% static 'jquery/jquery-3.7.0.min.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'css/chat.css' %}">
+	<link href="{% static 'css/Listediscussion.css' %}" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="{% static 'css/chatDocteur.css' %}">
+	<link href="{% static '/fontawesome/css/all.min.css' %}" rel="stylesheet" />
+</head>
+
+<body>
+	<div class="liste-converstation-container">
+
+		<div class="liste-discussion">
+			<!-- <div class="search-container">
+	  <div class="input-group mb-3">
+		<input
+		  type="text"
+		  class="form-control"
+		  placeholder="Rechercher un docteur"
+		/>
+		<div class="input-group-append">
+		  <button class="btn btn-primary" type="button"></button>
+		</div>
+	  </div>
+	</div> -->
+			<div class="container liste-dernier">
+				<h4>Messages</h4>
+				<div class="row">
+					<div class="col-md-12" id="liste-messages-dernier">
+						<ul class="list-group">
+							{% for patient in patients %}
+							<a href="../changeChatDocteur?patient={{ patient.id }}">
+								<li class="list-group-item">
+									<div class="media d-flex align-center">
+										<img id="liste-photo-profile" src="{% static 'images/rasoa.png' %}" class="rounded-profile mr-3" alt="Photo de profil" />
+										<div class="media-body">
+											<h5 class="mt-0">{{ patient.nom }} {{ patient.prenom }}</h5>
+	
+										</div>
+									</div>
+								</li>
+							</a>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+		</div>
+	
+		<div class="conversation-container" data-estPatient="1">
+			{% if patient %}
+			<i class="fas fa-solid fa-arrow-left" id="close-conversation"></i>
+	
+			<div class="receiver-info-container">
+				<img src="{% static 'images/rasoa.png' %}" alt="Profile Picture" srcset="">
+				<p class="full-name">{{ patient.nom }} {{ patient.prenom }}</p>
+	
+				<div class="reveicer-interactions">
+					<span class="fas fa-store fa-lg mr-2"></span>
+					<span class="fas fa-store fa-lg mr-2"></span>
+					<span class="fas fa-store fa-lg mr-2"></span>
+				</div>
+			</div>
+	
+			<div class="messages-container">
+				<template data-senderContainer>
+					<div class="sender-message">
+						<img src="{% static 'images/rasoa.png' %}" alt="Profile Picture" srcset="">
+						<p class="message">Here is message</p>
+					</div>
+				</template>
+	
+				<template data-receiverContainer>
+					<div class="receiver-message">
+						<img src="{% static 'images/rasoa.png' %}" alt="Profile Picture" srcset="">
+						<p class="message">Here is message</p>
+					</div>
+				</template>
+			</div>
+	
+			<div class="message-sender-container">
+				<input type="text" name="message-sended" id="message-send">
+				<button class="button-send-message"><i class="fas fa-paper-plane fa-lg"></i></button>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+</body>
+
+{% if patient %}
+<script>
+	var csrfToken = "{{ csrf_token }}";
+</script>
+<script>
+	var medecin = {{ medecin }};
+	var patient = {{ patient.id }};
+	var orientation = 1;
+</script>
+<script src="{% static 'js/Chat/chat.js' %}"></script>
+{% endif %}
+
+</html>
+{% endblock %}
