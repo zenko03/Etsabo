@@ -39,6 +39,8 @@ urlpatterns = [
     path('chat/send/', chat.envoyer_message, name='send'),
     path('localisation/pharmacie/', localisation.pharmacie, name='localisation_pharmacie'),
     path('ajouter-au-panier/<int:objet_id>/', v.ajouter_au_panier, name='ajouter_au_panier'),
+     path('suppr/<int:objet_id>/', v.supprimer, name='suppr'),
+     path('collaborer', v.collaborer, name='collaborer'),
     path('suppr/<int:objet_id>/', v.supprimer, name='suppr'),
     path('profilMedecin/',v.profilMedecin,name='profilMedecin'),
     path('listeMedecin/',v.listeMedecin,name='listeMedecin'),
@@ -60,6 +62,7 @@ urlpatterns = [
     path('loginDocteur/', v.loginDocteur, name='loginDocteur'),
     path('checkDocteur/',v.checkLoginDoc,name='checkLoginDoc'),
     path('create_consultation/',v.create_consultation,name='create_consultation'),
+
     path('rdvDocteur/',v.rdvDocteur,name='rdvDocteur'),
     path('accepterRdv/<int:rdvId>', v.accepterRdv, name='accepterRdv'),
     path('refuserRdv/<int:rdvId>', v.refuserRdv, name='refuserRdv'),
@@ -73,5 +76,9 @@ urlpatterns = [
     path('activerCompte/<int:patientId>/', stat.activerCompte, name='activerCompte'),
     path('ajouterObjet/', stat.addObjet, name='ajouterObjet'),
     path('creerObjet/', stat.creerObjet, name='creerObjet'),
+
+    path('chatDocteur/', v.chatDocteur, name='chatDocteur'),
+    path('changeChatDocteur/', v.changeChatDocteur, name='changeChatDocteur')
+
 ]
 

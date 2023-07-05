@@ -10,5 +10,3 @@ VALUES
     ('pub4', 'descri4', 'sary4'),
     ('pub5', 'descri5', 'sary5'),
     ('pub6', 'descri6', 'sary6');
-
-

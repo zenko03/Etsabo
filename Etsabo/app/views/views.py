@@ -11,6 +11,7 @@ from app.models import Patient
 from app.models import PhotoPatient
 from app.models import TypeAbonnement
 from app.models import Abonnement
+from app.models import Message
 from django.contrib.sessions.models import Session
 
 
@@ -163,7 +164,9 @@ def inscription_perso(request):
         password = request.POST.get('password')
 
         patient = Patient(nom=nom, prenoms=prenom, adresse=adresse, telephone=telephone, sexe=sexe,
-                          date_de_naissance=dtn, email=email, password=password, is_actif=0, famille_id=1)
+
+        date_de_naissance=dtn, email=email, password=password, is_actif=0, famille_id=1)
+
         patient.save()
 
         if 'profile_picture' in request.FILES:
@@ -326,7 +329,23 @@ def abonnement(request):
 
 
 def listeDiscu(request):
-    return render(request, 'Listediscussion.html')
+    medecins = Medecin.objects.all()
+
+    # Dernier message
+    last_message_dict = {}
+    for medecin in medecins:
+        last_message_dict.update(
+            {
+                medecin.id: Message.get_last_message_from(request.session['idSession'], medecin.id)
+            }
+        )
+
+    context = {
+        "medecins": medecins,
+        "last_message": last_message_dict
+    }
+
+    return render(request, 'Listediscussion.html', context=context)
 
 def profilMedecin(request):
     id_medecin = request.GET.get('idMedecin')
@@ -417,6 +436,8 @@ def viderPanier(request):
     
     return render(request,'panier.html')
 
+def collaborer(request):
+    return render(request, "collaborer.html");
 # def profilMedecin(request):
 #     id_medecin = request.GET.get('idMedecin')
 #     medecin = Medecin.objects.select_related('specialite').get(id=id_medecin)
@@ -530,6 +551,7 @@ def create_consultation(request):
     return homeDocteur(request)
 
 
+
 def rdvDocteur(request):
     d = Medecin.objects.get(id=request.session['idSessionDoc'])
     now = datetime.now()
@@ -567,3 +589,32 @@ def terminerRdv(request,rdvId):
     rdv.save()
 
     return rdvDocteur(request)
+
+def chatDocteur(request):
+    patient = -1
+    allPatient = Patient.objects.all()
+    
+    if 'patientMessage' in request.session:
+        patient = request.session['patientMessage']
+    elif len(allPatient) > 0:
+        patient = 1
+    
+    current_patient = None
+    if patient >= 0:
+        current_patient = Patient.objects.get(id=patient)
+
+    context = {
+        'medecin': request.session['idSessionDoc'],
+        'patients': allPatient,
+        'patient': current_patient
+    }
+
+    return render(request, "chatDocteur.html", context=context)
+
+def changeChatDocteur(request):
+    patient_id = int(request.GET.get('patient'))
+
+    request.session['patientMessage'] = patient_id
+
+    return chatDocteur(request)
+
