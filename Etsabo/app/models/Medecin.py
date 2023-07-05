@@ -24,6 +24,9 @@ class Medecin(models.Model):
 
     def set_password(self,password):
         self.password = password
+    
+    def set_photo(self,photo):
+        self.photo = photo
 
     def set_specialite(self,specialite):
         self.specialite = specialite
@@ -33,13 +36,13 @@ class Medecin(models.Model):
         return Medecin.objects.all()
 
     @staticmethod
-    def create(nom, prenoms, email, password, specialite):
+    def create(nom, prenoms, email, password,specialite):
         medecin = Medecin()
         medecin.set_nom(nom)
         medecin.set_prenoms(prenoms)
         medecin.set_email(email)
         medecin.set_password(password)
-        medecin.set_specialite(nom)
+        medecin.set_specialite(specialite)
         medecin.clean_fields()
         try:
             medecin.save()
@@ -52,7 +55,7 @@ class Medecin(models.Model):
         self.set_prenoms(prenoms)
         self.set_email(email)
         self.set_password(password)
-        self.set_specialite(nom)
+        self.set_specialite(specialite)
         self.clean_fields()
         try:
             self.save()

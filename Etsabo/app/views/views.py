@@ -121,11 +121,14 @@ def inscription_perso(request):
             filename = str(patient.id) + '.' + profile_picture.name.split('.')[-1]  # Nouveau nom de fichier
             photo_patient = PhotoPatient(patient=patient, src=filename)
             photo_patient.save()
-
             # Enregistrez l'image dans un dossier approprié avec le nouveau nom de fichier
             with open('static/images/patient/' + filename, 'wb+') as destination:
                 for chunk in profile_picture.chunks():
                     destination.write(chunk)
+        else:
+            photo_patient = PhotoPatient(patient=patient, src='user.png')
+            photo_patient.save()
+
 
         return render(request, 'login.html')
 
@@ -260,6 +263,11 @@ def ajouter_membre(request):
                 with open('static/images/patient/' + filename, 'wb+') as destination:
                     for chunk in profile_picture.chunks():
                         destination.write(chunk)
+            else:
+                photo_patient = PhotoPatient(patient=patient, src='user.png')
+                photo_patient.save()
+
+
 
     return familleV(request)
 
