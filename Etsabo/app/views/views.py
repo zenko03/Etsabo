@@ -107,7 +107,7 @@ def inscription_perso(request):
         password = request.POST.get('password')
 
         patient = Patient(nom=nom, prenoms=prenom, adresse=adresse, telephone=telephone, sexe=sexe,
-                          date_de_naissance=dtn, email=email, password=password, is_actif=1, famille_id=1)
+                          date_de_naissance=dtn, email=email, password=password, is_actif=0, famille_id=1)
         patient.save()
 
         if 'profile_picture' in request.FILES:

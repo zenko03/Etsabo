@@ -106,9 +106,10 @@ def statistiques_recettes(request):
 def remove_statistique(request, statistique_id):
     statistique = Statistique.objects.get(id=statistique_id)
     statistique.delete()
-    return render(request, 'statistique.html')
+    return redirect('statistique')
+
 
 def remove_recette(request, recette_id):
     statistique = Statistique.objects.get(id=recette_id)
     statistique.delete()
-    return render(request, 'recettes.html')
+    return redirect('recettes')

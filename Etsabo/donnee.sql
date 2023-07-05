@@ -1,8 +1,8 @@
 -- Table Specialite
-    INSERT INTO specialite (nom) VALUES ('Spécialité1'), ('Spécialité2'), ('Spécialité3'), ('Spécialité4');
+    INSERT INTO specialite (nom) VALUES ('Generaliste'), ('Pediatre');
 
 -- Table TypeAbonnement
-INSERT INTO type_abonnement (nom_abonnement, prix) VALUES ('Abonnement1', 9.99), ('Abonnement2', 19.99), ('Abonnement3', 29.99), ('Abonnement4', 39.99);
+INSERT INTO type_abonnement (nom_abonnement, prix) VALUES ('Abonnement Basique', 30.000), ('Abonnement Premium', 50.000);
 
 -- Table Famille
 INSERT INTO famille (nom_famille, adresse, email, password) VALUES 
@@ -12,7 +12,7 @@ INSERT INTO famille (nom_famille, adresse, email, password) VALUES
     ('Famille4', 'Adresse4', 'famille4@example.com', 'pass4');
 
 -- Table Medicament
-INSERT INTO medicament (nom) VALUES ('Medicament1'), ('Medicament2'), ('Medicament3'), ('Medicament4');
+INSERT INTO medicament (nom) VALUES ('Paracetamol'), ('Magne B6'), ('Revitalose'), ('Amoxycoline');
 
 -- Table Patient
 INSERT INTO patient (nom, prenoms, adresse, telephone, date_de_naissance, email, password, famille_id, is_actif) VALUES 
