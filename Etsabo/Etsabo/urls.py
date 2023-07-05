@@ -18,6 +18,7 @@ from django.urls import path
 from app.views import views as v
 from app.views import chat as chat
 from app.views import localisation as localisation
+from app.views import statistique as stat
 
 urlpatterns = [
     path('',v.login,name='login'),
@@ -47,6 +48,10 @@ urlpatterns = [
     path('ajouter_livraison/', v.ajouter_livraison, name='ajouter_livraison'),
     path('abonnement/',v.abonnement,name='abonnement'),
     path('addAbonnement/',v.ajouter_abonnement,name='addAbonnement'),
+    path('rdv/<int:doc_id>/', v.rdv, name='rdv'),
+    path('prendreRdv/', v.prendre_rdv, name='prendreRdv'),
+    path('rdvPatient/', v.rdvPatient, name='rdvPatient'),
+
 
     #-----------------Docteur back office
     path('baseDocteur/',v.homeDocteur,name='baseDocteur'),
@@ -54,8 +59,19 @@ urlpatterns = [
     path('get_patient_suggestions/', v.get_patient_suggestions, name='get_patient_suggestions'),
     path('loginDocteur/', v.loginDocteur, name='loginDocteur'),
     path('checkDocteur/',v.checkLoginDoc,name='checkLoginDoc'),
-    path('create_consultation/',v.create_consultation,name='create_consultation')
+    path('create_consultation/',v.create_consultation,name='create_consultation'),
+    path('rdvDocteur/',v.rdvDocteur,name='rdvDocteur'),
+    path('accepterRdv/<int:rdvId>', v.accepterRdv, name='accepterRdv'),
+    path('refuserRdv/<int:rdvId>', v.refuserRdv, name='refuserRdv'),
 
-
+    path('depenses/', stat.statistiques_depenses, name='statistique'),
+    path('depenses/ajout/', stat.ajout_depense, name='ajout_depense'),
+    path('recettes', stat.statistiques_recettes, name='recettes'),
+    path('statistiques/remove/<int:statistique_id>/', stat.remove_statistique, name='remove_statistique'),
+    path('recettes/remove/<int:recette_id>/', stat.remove_recette, name='remove_recette'),
+    path('demandeAb/', stat.demandeAb, name='demandeAb'),
+    path('activerCompte/<int:patientId>/', stat.activerCompte, name='activerCompte'),
+    path('ajouterObjet/', stat.addObjet, name='ajouterObjet'),
+    path('creerObjet/', stat.creerObjet, name='creerObjet'),
 ]
 

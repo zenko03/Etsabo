@@ -2,7 +2,7 @@ import json
 from datetime import datetime, timedelta, timezone
 
 from django.shortcuts import render
-from app.models import Medecin, Livraison, ObjetALivrer, Consultation, Ordonnance
+from app.models import Medecin, Livraison, ObjetALivrer, Consultation, Ordonnance, Rdv
 from app.models import Publicite
 from app.models import ConseilsSanitaire
 from app.models import Objet
@@ -33,6 +33,45 @@ def home(request):
     return render(request, 'accueil.html', context)
 #Login et inscription
 
+def rdv(request,doc_id):
+    context ={
+        'idDoc':doc_id
+    }
+    return render(request, 'priseRdv.html',context)
+
+def prendre_rdv(request):
+    if request.method == 'POST':
+        p = Patient.objects.get(id=request.session['idSession'])
+        medecin_id = request.POST.get('idDoc')
+        patient_id = p.id
+        date_rdv = request.POST.get('date')
+        heure_rdv = request.POST.get('time')
+
+        print(heure_rdv)
+        print(date_rdv)
+
+        # Créer une instance de Rdv avec les données récupérées
+        datetime_rdv = datetime.combine(datetime.strptime(date_rdv, '%Y-%m-%d').date(),
+                                        datetime.strptime(heure_rdv, '%H:%M').time())
+
+        print(datetime_rdv)
+        rdv = Rdv(
+            medecin_id=medecin_id,
+            patient_id=patient_id,
+            date_rdv=date_rdv,
+            heure_rdv=datetime_rdv,
+            status=0
+        )
+
+        rdv.save()
+
+
+
+    return listeMedecin(request)
+
+
+#Login et inscription
+
 def login(request):
     Abonnement.verifierAbonnement()
     return render(request,'login.html')
@@ -58,6 +97,23 @@ def profil(request):
     else:
         return render(request, 'login.html')
 
+
+def rdvPatient(request):
+    p = Patient.objects.get(id=request.session['idSession'])
+    now = datetime.now()
+    rendezvous = Rdv.objects.filter(patient=p,status=0,date_rdv__gt=now).select_related('patient', 'medecin')
+
+    rdv2 =  Rdv.objects.filter(patient=p,status=1,date_rdv__gt=now).select_related('patient', 'medecin')
+
+    rdv3 = Rdv.objects.filter(patient=p, status=10, date_rdv__gt=now).select_related('patient', 'medecin')
+
+    context = {
+        'enCours':rendezvous,
+        'acc':rdv2,
+        'faite':rdv3
+    }
+
+    return render(request,'rdvPatient.html',context)
 # Views.py
 def deconnexion(request):
     if 'idSession' in request.session:
@@ -107,7 +163,7 @@ def inscription_perso(request):
         password = request.POST.get('password')
 
         patient = Patient(nom=nom, prenoms=prenom, adresse=adresse, telephone=telephone, sexe=sexe,
-                          date_de_naissance=dtn, email=email, password=password, is_actif=1, famille_id=1)
+                          date_de_naissance=dtn, email=email, password=password, is_actif=0, famille_id=1)
         patient.save()
 
         if 'profile_picture' in request.FILES:
@@ -413,6 +469,7 @@ def ajouter_abonnement(request):
     return render(request, 'abonnement.html', context)
 
 
+
 #--------------------------------------------------DOCTEUR BACK OFFICE--------------------------------------------
 
 
@@ -472,3 +529,41 @@ def create_consultation(request):
 
     return homeDocteur(request)
 
+
+def rdvDocteur(request):
+    d = Medecin.objects.get(id=request.session['idSessionDoc'])
+    now = datetime.now()
+    demande = Rdv.objects.filter(medecin=d, status=0, date_rdv__gt=now).select_related('patient', 'medecin')
+
+    rdv2 = Rdv.objects.filter(medecin=d,status=1,date_rdv__gt=now).select_related('patient', 'medecin')
+
+    rdv3 = Rdv.objects.filter(medecin=d, status=10, date_rdv__gt=now).select_related('patient', 'medecin')
+
+    context = {
+        'enCours':demande,
+        'acc':rdv2,
+        'faite':rdv3
+    }
+
+    return render(request,'rdvDocteur.html',context)
+
+def accepterRdv(request,rdvId):
+    rdv = Rdv.objects.get(id=rdvId)
+    rdv.status = 1
+    rdv.save()
+
+    return rdvDocteur(request)
+
+def refuserRdv(request,rdvId):
+    rdv = Rdv.objects.get(id=rdvId)
+    rdv.status = -1
+    rdv.save()
+
+    return rdvDocteur(request)
+
+def terminerRdv(request,rdvId):
+    rdv = Rdv.objects.get(id=rdvId)
+    rdv.status = 10
+    rdv.save()
+
+    return rdvDocteur(request)
