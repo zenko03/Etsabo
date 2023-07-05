@@ -51,6 +51,12 @@ urlpatterns = [
     path('modificationPatient/', v.modificationPatient, name='modificationPatient'),
     path('collaboration/',v.collaboration,name='collaboration'),
     path('inserer_collab/',v.inserer_collab,name='inserer_collab'),
+    path('inserer_docteur/',v.inserer_docteur,name='inserer_docteur'),
+    path('collabBack/', v.collabBack, name='collabBack'),
+    path('demande_collab/', v.demande_collab, name='demande_collab'),
+    path('collab_EnCours/', v.collab_EnCours, name='collab_EnCours'),
+    path('accepter_collab/', v.accepter_collab, name='accepter_collab'),
+    path('refuser_collab/', v.refuser_collab, name='refuser_collab'),
 
     #-----------------Docteur back office
     path('baseDocteur/',v.homeDocteur,name='baseDocteur'),

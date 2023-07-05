@@ -1,6 +1,6 @@
 import json
 from datetime import datetime, timedelta, timezone
-
+from django.utils import timezone
 from django.shortcuts import render
 from app.models import Medecin, Livraison, ObjetALivrer, Consultation, Ordonnance
 from app.models import Publicite
@@ -14,11 +14,13 @@ from app.models import Abonnement
 from django.contrib.sessions.models import Session
 from app.models import Collaboration
 from app.models import FonctionCollab
+from app.models import Specialite
+from app.models import DemandeDocteur
 
 
 def home(request):
     medecins = Medecin.objects.all()
-    pubs = Publicite.objects.all()
+    pubs= Publicite.objects.filter(date_fin__gte=timezone.now())
     random_pubs = Publicite.get_random_Pub(pubs, 2)
 
     objets = Objet.getAllObjet()
@@ -451,7 +453,63 @@ def inserer_collab(request):
             for morceau in fichier.chunks():
                 f.write(morceau)
         Collaboration.inserer_collaborateur(nom,prenoms,fonction,bio,fichier)
+    collab= Collaboration.objects.latest('id')
+    if fonc=='1':
+        specialite = Specialite.objects.all()
+        context = {
+                    'specialites' : specialite,
+                    'collab' : collab
+                  }
+        return render(request, 'formDocteur.html',context)
+    else:
+        return redirect('collaboration')
+    return HttpResponse(fonc)
+def inserer_docteur(request):
+    idCollab = request.POST.get('collab')
+    collab = Collaboration.objects.get(id=idCollab)
+    email = request.POST.get('email')
+    pwd = request.POST.get('pwd')
+    idSpe = request.POST.get('specialite')
+    specialite = Specialite.objects.get(id=idSpe)
+    DemandeDocteur.inserer_demande(collab,email,pwd,specialite)
     return redirect('collaboration')
+def collabBack(request):
+    fonctions = FonctionCollab.objects.all()
+    context = {'fonctions': fonctions}
+    return render(request, 'collabBack.html', context)
+
+def demande_collab(request):
+    idFonction = request.GET.get('idFonction')
+    collab = Collaboration.objects.filter(etat=0,fonction=idFonction)
+    context = {
+        'collabs': collab
+    }
+    return render(request, 'demandeCollab.html', context)
+
+def collab_EnCours(request):
+    idFonction = request.GET.get('idFonction')
+    collab = Collaboration.objects.filter(etat=1, fonction=idFonction,date_fin__gte=timezone.now() )
+    context = {
+        'collabs': collab
+    }
+    return render(request, 'collabEnCours.html', context)
+
+def accepter_collab(request):
+    idCollab = request.GET.get('idCollab')
+    collab = Collaboration.objects.select_related('fonction').get(id=idCollab)
+    idFonction = collab.fonction.id
+    fonction = FonctionCollab.objects.get(id=idFonction)
+    collab.accepter_collaboration(fonction)
+    demande = DemandeDocteur.objects.get(collaboration_id=idCollab)
+    Medecin.create(collab.nom,collab.prenoms,demande.email,demande.password,demande.specialite)
+    demande.update()
+    return redirect('demande_collab')
+
+def refuser_collab(request):
+    idCollab = request.GET.get('idCollab')
+    collab = Collaboration.objects.get(id=idCollab)
+    collab.refuser_collaboration()
+    return redirect('demande_collab')
 
 #--------------------------------------------------DOCTEUR BACK OFFICE--------------------------------------------
 

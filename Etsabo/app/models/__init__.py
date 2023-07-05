@@ -22,5 +22,6 @@ from .Livraison import Livraison
 from .ObjetALivrer import ObjetALivrer
 from .Collaboration import Collaboration
 from .FonctionCollab import FonctionCollab
+from .DemandeDocteur import DemandeDocteur
 
 

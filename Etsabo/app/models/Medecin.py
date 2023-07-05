@@ -39,7 +39,7 @@ class Medecin(models.Model):
         medecin.set_prenoms(prenoms)
         medecin.set_email(email)
         medecin.set_password(password)
-        medecin.set_specialite(nom)
+        medecin.set_specialite(specialite)
         medecin.clean_fields()
         try:
             medecin.save()

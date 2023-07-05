@@ -1,28 +1,50 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" type="text/css">
+    <style>
+        h3 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-    <h3>Collaboration en cours </h3>
-    <table>
-        <th>Nom</th>
-        <th>Prenoms</th>
-        <th>Biographie</th>
-        <th>Date de debut</th>
-        <th>Date de fin</th>
-        <th>Piece jointe</th>
-    </table>
-    {% for collab in collabs %}
-        <tr>
-            <td> {{ collab.nom }}</td>
-            <td> {{ collab.prenoms}} </td>
-            <td> {{ collab.biographie }}</td>
-            <td> {{ collab.date_demande }}</td>
-            <td> {{ collab.date_fin }}</td>
-            <td> <a href=""></a></td>
-        </tr>
-    {% endfor %}
+    <div class="container">
+        <h3>Collaboration en cours</h3>
+        <table>
+            <tr>
+                <th>Nom</th>
+                <th>Prénoms</th>
+                <th>Biographie</th>
+                <th>Date de début</th>
+                <th>Date de fin</th>
+            </tr>
+            {% for collab in collabs %}
+                <tr>
+                    <td>{{ collab.nom }}</td>
+                    <td>{{ collab.prenoms }}</td>
+                    <td>{{ collab.biographie }}</td>
+                    <td>{{ collab.date_demande }}</td>
+                    <td>{{ collab.date_fin }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 </body>
 </html>

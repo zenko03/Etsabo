@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Liste des collaborateurs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .collaborator-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .collaborator-list li {
+            margin-bottom: 10px;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .collaborator-list li:hover {
+            background-color: #f2f2f2;
+        }
+
+        .collaborator-list li a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .view-details-button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .view-details-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Liste des collaborateurs</h2>
+        <ul class="collaborator-list">
+            <li>
+                <a href="details.html">John Doe</a>
+                <button class="view-details-button" onclick="viewDetails('John Doe')">Voir les détails</button>
+            </li>{{ 
+            <li>
+                <a href="details.html">Jane Smith</a>
+                <button class="view-details-button" onclick="viewDetails('Jane Smith')">Voir les détails</button>
+            </li>
+            <!-- Ajoutez d'autres collaborateurs ici -->
+        </ul>
+    </div>
+
+    <script>
+        function viewDetails(collaboratorName) {
+            localStorage.setItem("selectedCollaborator", collaboratorName);
+        }
+    </script>
+</body>
+</html>
+

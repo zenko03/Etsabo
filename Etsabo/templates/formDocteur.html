@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Collabateur</title>
 
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/collaboration.css' %}" type="text/css" />
 </head>
 
@@ -39,38 +39,29 @@
         <div class="collab-form-container">
             <div class="collab-form-holder">
 
-                <h3>Collaborons</h3>
+                <h3>Vos informations</h3>
 
-                 <form action="{% url 'inserer_collab' %}" method="post" enctype="multipart/form-data">
+                 <form action="{% url 'inserer_docteur' %}" method="post">
                      {% csrf_token %}
+                     <input type="hidden" name="collab" value="{{ collab.id }} ">
                     <div class="form-row">
                         <div class="form-group col-md-5">
-                            <label class="font-weight-bold" for="nom">Nom</label>
-                            <input type="text" class="form-control" name="nom" id="nom">
+                            <label class="font-weight-bold" for="email">Email</label>
+                            <input type="text" class="form-control" name="email" id="email">
                         </div>
                         <div class="form-group col-md-7">
-                            <label class="font-weight-bold" for="prenoms">Prenom</label>
-                            <input type="text" class="form-control" name="prenoms" id="prenom">
+                            <label class="font-weight-bold" for="pwd">Mot de passe</label>
+                            <input type="text" class="form-control" name="pwd" id="pwd">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="font-weight-bold" for="fonction">Fonctions</label>
-                        <select name="fonction" class="form-control">
-                            {% for fonction in fonctions %}
-                                <option value="{{ fonction.id }}">{{ fonction.type }}</option>
+                        <label class="font-weight-bold" for="specialite">Specialite</label>
+                         <select name="specialite" class="form-control">
+                            {% for specialite in specialites %}
+                                <option value="{{ specialite.id }}">{{ specialite.nom }}</option>
                             {% endfor %}
                           </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="font-weight-bold" for="biographie">Biographie</label>
-                        <textarea name="bio" class="form-control" id="biographie" cols="30" rows="4"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="font-weight-bold" for="piece">Ajouter piece Jointe (Requis)</label>
-                        <input type="file" class="form-control" name="fichier" id="piece[]" multiple>
                     </div>
                     <div class="form-group d-flex">
                         <input type="submit" class="btn btn-primary" value="Envoyer">

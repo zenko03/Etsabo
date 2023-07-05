@@ -1,14 +1,33 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" type="text/css">
+    <style>
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .btn-details {
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-     {% for fonction in fonctions %}
-        <h3> {{ fonction.type }}  </h3>
-        <p><a href="{% url 'demande_collab' %}?idFonction= {{ fonction.id }}"> Demandes de collaboration </a> </p>
-        <p><a href="{% url 'collab_EnCours' %}?idFonction= {{ fonction.id }}"> Collaboration en cours </a> </p>
-    {% endfor %}
+    <div class="container">
+        <h1 class="title">Collaborations</h1>
+        {% for fonction in fonctions %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h4>{{ fonction.type }}</h4>
+                    <a href="{% url 'demande_collab' %}?idFonction={{ fonction.id }}" class="btn btn-primary btn-details">Demandes de collaboration</a>
+                    <a href="{% url 'collab_EnCours' %}?idFonction={{ fonction.id }}" class="btn btn-primary btn-details">Collaboration en cours</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 </body>
 </html>
