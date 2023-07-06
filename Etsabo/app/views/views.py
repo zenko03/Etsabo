@@ -511,6 +511,9 @@ def refuser_collab(request):
     collab.refuser_collaboration()
     return redirect('demande_collab')
 
+def accueilSite(request):
+    return render(request,'pagesite.html')
+
 #--------------------------------------------------DOCTEUR BACK OFFICE--------------------------------------------
 
 
