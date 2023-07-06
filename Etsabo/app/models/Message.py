@@ -23,12 +23,8 @@ class Message(models.Model):
         message : Message = Message()
         message.contenus = message_str
         message.type = 1 if not est_patient else 0
-        if est_patient:
-            message.patient = model.Patient.objects.get(pk=sender) 
-            message.medecin = model.Medecin.objects.get(pk=receiver) 
-        else:
-            message.medecin = model.Medecin.objects.get(pk=sender) 
-            message.patient = model.Patient.objects.get(pk=receiver) 
+        message.patient = model.Patient.objects.get(pk=sender) 
+        message.medecin = model.Medecin.objects.get(pk=receiver) 
         
         message.save()
     
