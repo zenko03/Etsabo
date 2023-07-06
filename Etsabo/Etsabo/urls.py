@@ -54,6 +54,7 @@ urlpatterns = [
     path('prendreRdv/', v.prendre_rdv, name='prendreRdv'),
     path('rdvPatient/', v.rdvPatient, name='rdvPatient'),
 
+    path('accueilSite/', v.accueilSite, name='accueilSite'),
 
     #-----------------Docteur back office
     path('baseDocteur/',v.homeDocteur,name='baseDocteur'),

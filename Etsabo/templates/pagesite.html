@@ -1,0 +1,510 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>E-tsabo</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="{% static 'pagesite/assets/img/favicon.png' %}" rel="icon" type="text/css" />
+    <link href="{% static 'pagesite/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon" type="text/css"/>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="{% static 'pagesite/assets/vendor/fontawesome-free/css/all.min.css' %}"
+      rel="stylesheet"
+    />
+    <link href="{% static 'pagesite/assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet" />
+    <link
+      href="{% static 'pagesite/assets/vendor/bootstrap/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'pagesite/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}"
+      rel="stylesheet"
+    />
+    <link href="{% static 'pagesite/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet" />
+    <link
+      href="{% static 'pagesite/assets/vendor/glightbox/css/glightbox.min.css' %}"
+      rel="stylesheet"
+    />
+    <link href="{% static 'pagesite/assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet" />
+    <link href="{% static 'pagesite/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'pagesite/assets/css/style.css' %}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+      <div class="container d-flex align-items-center">
+        <h1 class="logo me-auto"><a href="index.html">e-Tsabo</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+        <nav id="navbar" class="navbar order-last order-lg-0">
+          <ul>
+            <li>
+              <a class="nav-link scrollto active" href="#hero">Accueil</a>
+            </li>
+            <li>
+              <a class="nav-link scrollto" href="#services">Pourquoi nous?</a>
+            </li>
+            <li>
+              <a class="nav-link scrollto" href="#departments">Nos services</a>
+            </li>
+            <li><a class="nav-link scrollto" href="#tarif">Nos tarifs</a></li>
+
+            <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+        <!-- .navbar -->
+
+        <a href="#appointment" class="appointment-btn scrollto"
+          ><span class="d-none d-md-inline">Sign in</a
+        >
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex align-items-center">
+      <div class="container">
+        <h1>Bienvenue sur e-Tsabo</h1>
+        <h2>Telecharger gratuitement l'application ici</h2>
+        <a href="#about" class="btn-get-started scrollto">DOWNLOAD</a>
+      </div>
+    </section>
+    <!-- End Hero -->
+
+    <main id="main">
+      <section id="why-us" class="why-us">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4 d-flex align-items-stretch">
+              <div class="content">
+                <h3>C'est quoi e-tsabo?</h3>
+                <p>
+                  E-tsabo est une <span style="color:red;">*</span>application mobile, qui vous permetra de
+                  <span style="color:red;">*</span>consulter vos meilleurs docteurs <br />
+                  et de trouver des conseils sanitaires en ligne. <br />De plus,
+                  vous pouvez trouvez des fournitures sanitaires et vos
+                  pharmacies à <span style="color:red;">*</span>proximité.
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-8 d-flex align-items-stretch">
+              <div class="icon-boxes d-flex flex-column justify-content-center">
+                <div class="row">
+                  <div class="col-xl-4 d-flex align-items-stretch">
+                    <div class="icon-box mt-4 mt-xl-0">
+                      <i class="bx bx-receipt"></i>
+                      <h4>Application mobile</h4>
+                      <p>Pour plus de flexibilité et plus pratique en cas d'urgence.</p>
+                    </div>
+                  </div>
+                  <div class="col-xl-4 d-flex align-items-stretch">
+                    <div class="icon-box mt-4 mt-xl-0">
+                      <i class="bx bx-cube-alt"></i>
+                      <h4>Consulter</h4>
+                      <p>
+                          Demandez ou en parlez à votre docteur vos problèmes sanitaires.Trouvez des produits sanitaires chez nous.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="col-xl-4 d-flex align-items-stretch">
+                    <div class="icon-box mt-4 mt-xl-0">
+                      <i class="bx bx-images"></i>
+                      <h4>Proximité</h4>
+                      <p>
+                        Intelligence de suivi par rapport à votre emplacement.Et restez connecté.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End .content-->
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Why Us Section -->
+
+      <!-- ======= Services Section ======= -->
+      <section id="services" class="services">
+        <div class="container">
+          <div class="section-title">
+            <h2>Pourquoi nous?</h2>
+            <p>
+              Vous pouvez constater qu' aller au medecin soit parfois pas facile
+              surtout nous ici à Madagascar.<br />
+              Nous pouvons vous offrir ces opportunitées:
+            </p>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+              <div class="icon-box">
+                <div class="icon">
+                  <img src="{% static 'pagesite/assets/img/gps.png' %}" class="ic" />
+                </div>
+                <h4><a href="">Accessibilité</a></h4>
+                <p>
+                  Accessible partout où vous êtes tant que vous soyez connécté.
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0"
+            >
+              <div class="icon-box">
+                <div class="icon">
+                  <img src="{% static 'pagesite/assets/img/time.png' %}" class="ic" />
+                </div>
+                <h4><a href="">Rapidité</a></h4>
+                <p>
+                  Plus de perte de temps dans les embouteillages ou la queus au
+                  cabinet
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0"
+            >
+              <div class="icon-box">
+                <div class="icon">
+                  <img src="{% static 'pagesite/assets/img/confort.png' %}" class="ic" />
+                </div>
+                <h4><a href="">Confort</a></h4>
+                <p>Consultez votre docteur dans votre zone de confort</p>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+              <div class="icon-box">
+                <div class="icon">
+                  <img src="{% static 'pagesite/assets/img/confi.png' %}" class="ic" />
+                </div>
+                <h4><a href="">Confidentialité</a></h4>
+                <p>Gardez votre problème entre vous et votre docteur</p>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+              <div class="icon-box">
+                <div class="icon">
+                  <img src="{% static 'pagesite/assets/img/tarif.png' %}" class="ic" />
+                </div>
+                <h4><a href="">Tarif abordable</a></h4>
+                <p>Nos tarifs restent abordable malgrés tout.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Services Section -->
+
+      <!-- ======= Departments Section ======= -->
+      <section id="departments" class="departments">
+        <div class="container">
+          <div class="section-title">
+            <h2>Que proposons nous?</h2>
+            <p>E-tsabo vous propose plusieur option de fonctionnalité</p>
+          </div>
+
+          <div class="row gy-4">
+            <div class="col-lg-3">
+              <ul class="nav nav-tabs flex-column">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active show"
+                    data-bs-toggle="tab"
+                    href="#tab-1"
+                    >Consultation en ligne</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-bs-toggle="tab" href="#tab-2"
+                    >Intelligence de suivi</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-bs-toggle="tab" href="#tab-3"
+                    >Conseil sanitaire</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-bs-toggle="tab" href="#tab-4"
+                    >Option de suivi</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-bs-toggle="tab" href="#tab-5"
+                    >Achat de produits sanitaires</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="col-lg-9">
+              <div class="tab-content">
+                <div class="tab-pane active show" id="tab-1">
+                  <div class="row gy-4">
+                    <div class="col-lg-8 details order-2 order-lg-1">
+                      <h3>Consultation en ligne</h3>
+                      <p class="fst-italic">
+                        Vous pouvez consulter votre docteur où que vous soyez
+                        dans votre zone de confort.
+                      </p>
+                    </div>
+                    <div class="col-lg-4 text-center order-1 order-lg-2">
+                      <img
+                        src="{% static 'pagesite/assets/img/enLigne.jpg' %}"
+                        alt=""
+                        class="img-fluid"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tab-2">
+                  <div class="row gy-4">
+                    <div class="col-lg-8 details order-2 order-lg-1">
+                      <h3>Intelligence de suivi</h3>
+                      <p class="fst-italic">
+                        Vous pouvez donner vos symptomes, nous intervennons.Nous
+                        proposons les pharmacies a vos proximité.
+                      </p>
+                    </div>
+                    <div class="col-lg-4 text-center order-1 order-lg-2">
+                      <img
+                        src="{% static 'pagesite/assets/img/intelliSuivi.jpg' %}"
+                        alt=""
+                        class="img-fluid"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tab-3">
+                  <div class="row gy-4">
+                    <div class="col-lg-8 details order-2 order-lg-1">
+                      <h3>Conseil sanitaire</h3>
+                      <p class="fst-italic">
+                        Restez en forme grace a nos conseils sanitaires
+                      </p>
+                    </div>
+                    <div class="col-lg-4 text-center order-1 order-lg-2">
+                      <img
+                        src="{% static 'pagesite/assets/img/conseil.jpg' %}"
+                        alt=""
+                        class="img-fluid"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tab-4">
+                  <div class="row gy-4">
+                    <div class="col-lg-8 details order-2 order-lg-1">
+                      <h3>Option de suivi</h3>
+                      <p class="fst-italic">
+                        Nous pouvons vous rappeller ce que vous devriez suivre.
+                      </p>
+                    </div>
+                    <div class="col-lg-4 text-center order-1 order-lg-2">
+                      <img
+                        src="{% static 'pagesite/assets/img/intelliSuivi.jpg' %}"
+                        alt=""
+                        class="img-fluid"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tab-5">
+                  <div class="row gy-4">
+                    <div class="col-lg-8 details order-2 order-lg-1">
+                      <h3>Achat de produit sanitaire</h3>
+                      <p class="fst-italic">
+                        Nous proposons une boutique pour vos achats à récuperer ou à livrer
+                      </p>
+                    </div>
+                    <div class="col-lg-4 text-center order-1 order-lg-2">
+                      <img src="{% static 'pagesite/assets/img/shop.jpg' %}" alt="" class="img-fluid" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Departments Section -->
+
+      <section id="tarif" class="services">
+        <div class="container">
+          <div class="section-title">
+            <h2>Nos tarifs</h2>
+            <p>Nous proposons des tarifs pour tous</p>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+              <div class="icon-box">
+                <div class="icon">
+                  <img src="{% static 'pagesite/assets/img/celiba.png' %}" class="ic" />
+                </div>
+                <h4><a href="">SIMPLE</a></h4>
+                <p>
+                  Vous voulez avoir votre un abonnement pour vous seul.Ceci est
+                  faite pour vous.
+                </p>
+                <div class="prix"><h2>30 000 Ar</h2></div>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0"
+            >
+              <div class="icon-box">
+                <div class="icon">
+                  <img src="{% static 'pagesite/assets/img/famille.png' %}" class="ic" />
+                </div>
+                <h4><a href="">FAMILIALE</a></h4>
+                <p>
+                  Choisissez ceci si vous voulez un abonnement pour votre
+                  famille à 5 personnes.
+                </p>
+                <div class="prix"><h2>30 000 Ar</h2></div>
+                <h2>
+                  <span class="text-muted text-decoration-line-through"
+                    >35 000 Ar</span
+                  >
+                </h2>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0"
+            >
+              <div class="icon-box">
+                <div class="icon">
+                  <img src="{% static 'pagesite/assets/img/collab.png' %}" class="ic" />
+                </div>
+                <h4><a href="">COLLABORATEUR</a></h4>
+                <p>
+                  Vous pouvez travailler avec nous en nous proposons vos
+                  produits.
+                </p>
+                <div class="prix"><h2>50 000 Ar</h2></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Services Section -->
+
+      <!-- ======= Contact Section ======= -->
+      <section id="contact" class="contact">
+        <div class="container">
+          <div class="section-title">
+            <h2>Contact</h2>
+            <p>Vous pouvez nous trouver à cette adresse.</p>
+          </div>
+        </div>
+
+        <div>
+          <div id="carteId" />
+        </div>
+
+        <div class="container">
+          <div class="row mt-5">
+            <div class="col-lg-4">
+              <div class="info">
+                <div class="address">
+                  <i class="bi bi-geo-alt"></i>
+                  <h4>Location:</h4>
+                  <p>ITU Andoharanofotsy Mandrimena</p>
+                </div>
+
+
+                <div class="email">
+                  <i class="bi bi-envelope"></i>
+                  <h4>Email:</h4>
+                  <p>etsabo@gmail.com</p>
+                </div>
+
+                <div class="phone">
+                  <i class="bi bi-phone"></i>
+                  <h4>Tel:</h4>
+                  <p>+261 34 00 666 12</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Contact Section -->
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+      <div class="footer-top"></div>
+    </footer>
+    <!-- End Footer -->
+
+    <div id="preloader"></div>
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'pagesite/assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'pagesite/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'pagesite/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'pagesite/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'pagesite/assets/vendor/php-email-form/validate.js' %}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{% static 'pagesite/assets/js/main.js' %}"></script>
+
+    <script
+      type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?sensor=false"
+    ></script>
+    <script type="text/javascript">
+      function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng(-18.986021, 47.532735),
+          zoom: 20,
+          mapTypeId: google.maps.MapTypeId.SATELLITE,
+        };
+        var carte = new google.maps.Map(
+          document.getElementById("carteId"),
+          mapOptions
+        );
+        var location = new google.maps.LatLng(-18.986021, 47.532735);
+        var marker = new google.maps.Marker({
+          position: location,
+          draggable: false,
+          map: carte,
+        });
+      }
+      google.maps.event.addDomListener(window, "load", initialize);
+    </script>
+  </body>
+</html>

@@ -618,3 +618,7 @@ def changeChatDocteur(request):
 
     return chatDocteur(request)
 
+
+def accueilSite(request):
+    return render(request,'pagesite.html')
+
